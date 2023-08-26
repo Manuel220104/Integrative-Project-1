@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { AcentosPage } from './pages/AcentosPage';
-import { AcentosFormPage } from './pages/AcentosFormPage';
+import { BooksPage } from './pages/BooksPage';
+import { BooksFormPage } from './pages/BooksFormPage';
 import { Navigation } from './components/Navigation';
 
 function App(){
@@ -8,9 +8,9 @@ function App(){
     <BrowserRouter>
     <Navigation/>
     <Routes>
-      <Route path="/" element={<Navigate to="/Acentos" />} />
-      <Route path="/Acentos" element={<AcentosPage/>} />
-      <Route path="/Acentos-create" element={<AcentosFormPage/>} />
+      <Route path="/" element={<Navigate to="/Books" />} />
+      <Route path="/Books" element={<BooksPage/>} />
+      <Route path="/Books-create" element={<BooksFormPage/>} />
     </Routes>
     </BrowserRouter>
   )

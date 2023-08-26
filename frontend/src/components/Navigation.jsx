@@ -5,10 +5,10 @@ export function Navigation(){
     return(
         <div>
             <img src={Logo}/>
-            <Link to="/Acentos">
-            <h1>Acentos App</h1>
+            <Link to="/Books">
+            <h1>Books App</h1>
             </Link>
-            <Link to="/Acentos-create"> create task</Link>
+            <Link to="/Books-create"> create task</Link>
         </div>
 
 

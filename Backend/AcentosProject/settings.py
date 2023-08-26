@@ -40,7 +40,12 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'coreapi',
-    'Acentos',
+    'Products',
+    'Books',
+    'Musical_Instruments',
+    'Table_Games',
+    'Technologys',
+    
     
 ]
 
