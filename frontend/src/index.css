@@ -1,4 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --color1: #737373;
+  --color2: #5ABCF4;
+  --fuentePrincipal: 'Inter';
+  --fuenteSecundaria: 'Open Sans';
+}  
+
 body {
   background: white;
-  color: Blue;
+  font-family: 'Inter', sans-serif;
+}
+
+
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  height: 100px;
+  margin: 0 30px;
+}
+
+.navbar-items{
+  display: flex;
+  align-items: center;
+}
+
+.navbar-search{
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo{
+  margin: 0 30px;
+  width: 165px;
+  height: 56px;
+}
+
+.navbar-item{
+  margin-right: 15px;
+  text-align: center;
+}
+
+.navbar-item a{
+  text-decoration: none !important;
+  color: var(--color1) !important;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+a:hover {
+  border-bottom: none;
+  color: var(--color2); /* Hereda el color del texto del elemento padre */
+  text-decoration: none;
+}
+
+.login{
+  display: flex;
+  text-align: center;
+  color: var(--color2);
+  align-items: center;
+  justify-content: center;
+}
+
+.login img{
+  margin-right: 10px;
+}
+
+.search-icon, .cart-icon, .login-icon, .like-icon{
+  width: 16px;
+  height: 16px;
+}
+
+.search-bar{
+  width: 250px;
+  height: 35px;
+  border: 1px solid var(--color2); 
+  border-radius: 25px; 
+  color: var(--color1); 
+}
+
+.search-bar:focus {
+  outline: none; 
+  border-color: var(--color2); 
+}
+
+
+.search-bar:valid {
+  border-color: var(--color2); 
+}
+
+/* CustomCarousel.css */
+.carousel-item {
+  max-height: 450px;
+  /* Otros estilos personalizados si es necesario */
+}
+
+
+.containermodules{
+  margin-top: 20px;
+  display: grid;
+
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Cambia el tamaño mínimo según tus necesidades */
+  /* grid-template-columns: 1fr 1fr 1fr 1fr;  */
+  column-gap: 2rem;
+  row-gap: 2rem ;
+}
+
+/* .containermodules {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+  grid-gap: 1rem;
+} */
+
+.module {
+  height: 100px;
+  border-radius: 20px;
+  border: 2px solid var(--color2); 
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.module:hover {
+  transform: scale(1.01); 
+  background-color: #96bde9; 
+  border-color: var(--color2); 
+  color: white; 
 }

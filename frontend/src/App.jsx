@@ -1,16 +1,28 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { BooksPage } from './pages/BooksPage';
-import { BooksFormPage } from './pages/BooksFormPage';
+import { Main } from './pages/Main';
+import { AboutUs } from './pages/AboutUs';
+import { ProductPage } from './pages/ProductPage';
+import { Admin } from './pages/Admin';
+import { Liked } from './pages/Liked';
+import { CreateProduct } from './pages/CreateProduct'
 import { Navigation } from './components/Navigation';
+
 
 function App(){
   return(
     <BrowserRouter>
     <Navigation/>
     <Routes>
-      <Route path="/" element={<Navigate to="/Books" />} />
-      <Route path="/Books" element={<BooksPage/>} />
-      <Route path="/Books-create" element={<BooksFormPage/>} />
+      {/* redirect to url element={<Navigate to="/Books" />} */}
+      <Route path="/" element={<Main/>} />
+      <Route path="/Productos" element={<ProductPage/>} />
+      <Route path="/Crear-Productos" element={<CreateProduct/>} />
+      <Route path="/Mis-MeGusta" element={<Liked/>} />
+      <Route path="/Nosotros" element={<AboutUs/>} />
+      <Route path="/Admin" element={<Admin/>} />
+
+      
+
     </Routes>
     </BrowserRouter>
   )
