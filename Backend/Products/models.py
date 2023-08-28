@@ -8,7 +8,6 @@ class Product(models.Model):
     ImageUrl = models.URLField(blank = False, max_length=500)
     Quantity = models.PositiveIntegerField(default=1)
     Discount = models.PositiveIntegerField(default=False)
-    Availability = models.BooleanField(default=False)
     PRODUCT_TYPE =[
         ("Book", "Book"),
         ("MusicalInstrument", "Musical Instrument"),
@@ -16,4 +15,8 @@ class Product(models.Model):
         ("Technology", "Technology")
     ]
     ProductType = models.CharField(max_length = 20, choices=PRODUCT_TYPE, default=False)
+
+
     
+    def __str__(self):
+        return str(self.ProductId)

@@ -3,6 +3,7 @@ from Products.models import Product
 
 class Musical_Instrument(models.Model):
     Musical_InstrumentId = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
+    Name = models.CharField(max_length=50)
     MUSICAL_INSTRUMENT_TYPE =[
         ("Viento", "Viento"),
         ("Cuerda", "Cuerda"),
@@ -11,4 +12,9 @@ class Musical_Instrument(models.Model):
         ("Idiófonos", "Idiófonos")
     ]
     ProductType = models.CharField(max_length = 20, choices=MUSICAL_INSTRUMENT_TYPE, default=False)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    Brand = models.CharField(max_length =40, default=False)
+    Model = models.CharField(max_length =30, default=False)
+    Product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return (self.Name)

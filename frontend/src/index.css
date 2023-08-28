@@ -133,3 +133,17 @@ a:hover {
   border-color: var(--color2); 
   color: white; 
 }
+
+.burguer{
+  @media(min-width: 768px){
+    display: none;
+  }
+}
+
+
+.Links{
+  
+  display: flex;
+  justify-content: space-between;
+}
+
