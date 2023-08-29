@@ -11,4 +11,4 @@ class Technology(models.Model):
     
     def __str__(self):
         return (self.Name)
-    
+

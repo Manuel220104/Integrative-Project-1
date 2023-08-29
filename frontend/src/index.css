@@ -36,6 +36,7 @@ body {
 
 .navbar-logo{
   margin: 0 30px;
+  margin-left: -25px;
   width: 165px;
   height: 56px;
 }
@@ -148,6 +149,7 @@ a:hover {
 @media(max-width: 1300px){
   .ocultar{
     display: none;
+    flex-direction: co;
   }
   
 }
