@@ -22,11 +22,13 @@ body {
   margin: 0 30px;
 }
 
+
+
 .navbar-items{
   display: flex;
   align-items: center;
+  
 }
-
 .navbar-search{
   display: flex;
   align-items: center;
@@ -60,11 +62,13 @@ a:hover {
 }
 
 .login{
+  
   display: flex;
   text-align: center;
   color: var(--color2);
   align-items: center;
   justify-content: center;
+  
 }
 
 .login img{
@@ -76,12 +80,17 @@ a:hover {
   height: 16px;
 }
 
+
+  
+
 .search-bar{
+  
   width: 250px;
   height: 35px;
-  border: 1px solid var(--color2); 
-  border-radius: 25px; 
-  color: var(--color1); 
+  border: 1px solid var(--color2);
+  border-radius: 25px;
+  color: var(--color1);
+  
 }
 
 .search-bar:focus {
@@ -128,22 +137,28 @@ a:hover {
 }
 
 .module:hover {
-  transform: scale(1.01); 
-  background-color: #96bde9; 
-  border-color: var(--color2); 
-  color: white; 
+  transform: scale(1.01);
+  background-color: #96bde9;
+  border-color: var(--color2);
+  color: white;
 }
 
-.burguer{
-  @media(min-width: 768px){
+
+
+@media(max-width: 1300px){
+  .ocultar{
     display: none;
   }
-}
-
-
-.Links{
   
-  display: flex;
-  justify-content: space-between;
 }
+
+@media(min-width: 1300px){
+  .burguer{
+    display: none;
+  }
+  
+}
+
+
+
 
