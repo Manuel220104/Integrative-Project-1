@@ -8,7 +8,8 @@ class Book(models.Model):
     Editorial = models.CharField(max_length=100)
     Language = models.CharField(max_length=50)
     YearPublication = models.IntegerField(default=False)
-    
+    Product = models.OneToOneField(Product, on_delete=models.CASCADE)
+
     def __str__(self):
         return (self.Title)
     

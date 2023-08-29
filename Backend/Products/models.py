@@ -15,6 +15,7 @@ class Product(models.Model):
         ("Technology", "Technology")
     ]
     ProductType = models.CharField(max_length = 20, choices=PRODUCT_TYPE, default=False)
+
         
     def __str__(self):
         return str(self.ProductId)
