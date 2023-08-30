@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form'
 import { CreateProducts, getAllProducts } from '../api/Product.api.js'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -7,21 +6,27 @@ import { useNavigate, useParams } from 'react-router-dom'
 export function CreateProduct() {
     const { register, handleSubmit, formState: { errors }, setValue, } = useForm();
     const navigate = useNavigate()
-    const params = useParams()
 
-
+    const onSubmit = handleSubmit(async (data) => {
+        try {
+            await CreateProducts(data);
+            navigate('/Productos');
+        } catch (error) {
+            console.error('Error al crear el producto:', error);
+            console.log('Respuesta del servidor:', error.response);
+        }
+    });
     const [selectedCategory, setSelectedCategory] = useState('libro');
 
     const handleCategoryChange = (event) => {
         setSelectedCategory(event.target.value);
-
     }
 
     return (
         <div>
             <h1>Crear producto</h1>
-            <div class="selector">
-                <label for="category">Selecciona una categoría:</label>
+            <div className="selector">
+                <label htmlFor="category">Selecciona una categoría:</label>
                 <select id="category" onChange={handleCategoryChange} value={selectedCategory}>
                     <option value="libro">Libro</option>
                     <option value="instrumento">Instrumento Musical</option>
@@ -32,42 +37,58 @@ export function CreateProduct() {
 
             {/* Para libro */}
             {selectedCategory == 'libro' && (
-                <div class="form" id="BookForm" >
+                <div className="form" id="BookForm" >
                     <form onSubmit={onSubmit}>
 
-                        <label for="title" >Titulo:</label>
+                        {/* <label htmlFor="title" >Titulo:</label>
                         <input type="text" {...register("title", {required: true})}/>
                         {errors.title && <span>Titulo es requerido</span>}
 
-                        <label for="isbn">ISBN:</label>
+                        <label htmlFor="isbn">ISBN:</label>
                         <input type="number" />
 
-                        <label for="authors">Authors:</label>
+                        <label htmlFor="authors">Authors:</label>
                         <input type="text"/>
 
-                        <label for="editorial">Editorial:</label>
+                        <label htmlFor="editorial">Editorial:</label>
                         <input type="text"/>
 
-                        <label for="language">Language:</label>
+                        <label htmlFor="language">Language:</label>
                         <input type="text" />
 
-                        <label for="yearPublication">Year Publication:</label>
-                        <input type="number"  />
+                        <label htmlFor="yearPublication">Year Publication:</label>
+                        <input type="number"  /> */}
 
-                        <label for="price">Price:</label>
-                        <input type="number"  />
 
-                        <label for="description">Description:</label>
-                        <input type="text"  />
+                        <label htmlFor="Price">Price:</label>
+                        <input type="number" {...register("Price", { required: true })} />
+                        {errors.Price && <span>Price es requerido</span>}
 
-                        <label for="imageUrl">Image URL:</label>
-                        <input type="url"  />
+                        <label htmlFor="Description">Descricion:</label>
+                        <input type="text"  {...register("Description", { required: true })} />
+                        {errors.Description && <span>Description es requerido</span>}
 
-                        <label for="quantity">Quantity:</label>
-                        <input type="number"  />
+                        <label htmlFor="ImageUrl">Imagen URL:</label>
+                        <input type="text"  {...register("ImageUrl", { required: true })} />
+                        {errors.ImageUrl && <span>ImageUrl es requerido</span>}
 
-                        <label for="discount">Discount:</label>
-                        <input type="number" />
+                        <label htmlFor="Quantity">Quantity:</label>
+                        <input type="number" {...register("Quantity", { required: true })} />
+                        {errors.Quantity && <span>ImageUrl es requerido</span>}
+
+                        <label htmlFor="Discount">Discount:</label>
+                        <input type="number" {...register("Discount", { required: true })} />
+                        {errors.Discount && <span>Discount es requerido</span>}
+
+                        <label htmlFor="ProductType">Tipo de producto:</label>
+                        <select {...register("ProductType", { required: true })}>
+                            <option value="Book">Libro</option>
+                            <option value="MusicalInstrument">Instrumento Musical</option>
+                            <option value="TableGames">Juego de Mesa</option>
+                            <option value="Technology">Tecnología</option>
+                        </select>
+                        {errors.ProductType && <span>Tipo de producto es requerido</span>}
+
 
                         <button>Save</button>
 
@@ -79,32 +100,32 @@ export function CreateProduct() {
 
             {/* Para Tecnologia */}
             {selectedCategory == 'tecnologia' && (
-                <div class="form" id="technologyForm" >
-                    <label for="nombre">Nombre:</label>
+                <div className="form" id="technologyForm" >
+                    <label htmlFor="nombre">Nombre:</label>
                     <input type="text" id="nombre" name="nombre" required />
 
-                    <label for="characteristics">Characteristics:</label>
+                    <label htmlFor="characteristics">Characteristics:</label>
                     <input type="text" id="characteristics" name="characteristics" maxlength="300" required />
 
-                    <label for="brand">Brand:</label>
+                    <label htmlFor="brand">Brand:</label>
                     <input type="text" id="brand" name="brand" maxlength="50" required />
 
-                    <label for="model">Model:</label>
+                    <label htmlFor="model">Model:</label>
                     <input type="text" id="model" name="model" maxlength="50" required />
 
-                    <label for="price">Price:</label>
+                    <label htmlFor="price">Price:</label>
                     <input type="number" id="price" name="price" max="999.999" step="0.001" required />
 
-                    <label for="description">Description:</label>
+                    <label htmlFor="description">Description:</label>
                     <input type="text" id="description" name="description" maxlength="500" required />
 
-                    <label for="imageUrl">Image URL:</label>
+                    <label htmlFor="imageUrl">Image URL:</label>
                     <input type="url" id="imageUrl" name="imageUrl" maxlength="500" required />
 
-                    <label for="quantity">Quantity:</label>
+                    <label htmlFor="quantity">Quantity:</label>
                     <input type="number" id="quantity" name="quantity" min="1" value="1" required />
 
-                    <label for="discount">Discount:</label>
+                    <label htmlFor="discount">Discount:</label>
                     <input type="number" id="discount" name="discount" min="0" max="100" value="0" required />
 
                     <button>Save</button>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import {BooksList} from '../components/BooksList'
+import {ProductList} from '../components/ProductList'
 
 export function ProductPage() {
-    return(<BooksList/>)
+    return(<ProductList/>)
 }
 

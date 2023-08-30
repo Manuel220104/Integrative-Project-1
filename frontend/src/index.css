@@ -19,10 +19,8 @@ body {
   display: flex;
   justify-content: space-between;
   height: 100px;
-  margin: 0 30px;
+  margin: 0 2%;
 }
-
-
 
 .navbar-items{
   display: flex;
@@ -36,9 +34,10 @@ body {
 
 .navbar-logo{
   margin: 0 30px;
-  margin-left: -25px;
-  width: 165px;
-  height: 56px;
+  margin-left: -10px;
+  width: auto;
+  max-width: 165px;
+  max-height: 56px;
 }
 
 .navbar-item{
@@ -62,14 +61,12 @@ a:hover {
   text-decoration: none;
 }
 
-.login{
-  
+.login{ 
   display: flex;
   text-align: center;
   color: var(--color2);
   align-items: center;
   justify-content: center;
-  
 }
 
 .login img{
@@ -81,17 +78,19 @@ a:hover {
   height: 16px;
 }
 
-
-  
-
 .search-bar{
-  
-  width: 250px;
+  width: 350px;
   height: 35px;
   border: 1px solid var(--color2);
   border-radius: 25px;
   color: var(--color1);
-  
+}
+.search-bar-fake{
+  width: 150px;
+  height: 35px;
+  border: 1px solid var(--color2);
+  border-radius: 25px;
+  color: var(--color1);
 }
 
 .search-bar:focus {
@@ -104,12 +103,10 @@ a:hover {
   border-color: var(--color2); 
 }
 
-/* CustomCarousel.css */
-.carousel-item {
-  max-height: 450px;
-  /* Otros estilos personalizados si es necesario */
-}
 
+.carousel-item img{
+  max-height: 450px;
+}
 
 .containermodules{
   margin-top: 20px;
@@ -144,14 +141,18 @@ a:hover {
   color: white;
 }
 
-
-
 @media(max-width: 1300px){
   .ocultar{
     display: none;
-    flex-direction: co;
   }
-  
+  .login img{
+    margin-right: 15px;
+  } 
+  .navbar-logo{
+    margin-left: 4%;
+    max-width: 140px;
+    max-height: 35px;
+  }
 }
 
 @media(min-width: 1300px){
@@ -161,6 +162,75 @@ a:hover {
   
 }
 
+.enlace{
+  color: var(--color1);
+}
+/* sidebar */
+.side-bar{
+  height: 0;
+  width: 0;
+  overflow: hidden;
+}
 
+.side-bar.active {
+  width: 250px; 
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  max-width: 400px;
+  min-width: 280px;
+  z-index: 999;
+  background-color: white;
+}
 
+/* Estilos para los elementos de navegación */
+.side-bar .navbar-item {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+}
 
+.sidebar-item{
+  text-align: left;
+  margin-left: 10px;
+}
+
+/* Estilos para el enlace */
+.navbar-item a {
+  text-decoration: none;
+  color: white;
+}
+
+/* search */
+.search{
+  height: 0;
+  width: 0;
+  overflow: hidden;
+}
+.search.active{
+  background-color: white;
+  position: fixed;
+  top:0;
+  width: 100%;
+  height: 100px;
+  z-index: 999;
+}
+
+.mid-search{
+  margin-right: 8%;
+}
+@media(max-width: 682px){
+  .ocultar2{
+    display: none;
+  }
+  .search-bar{
+    width: 300px;
+  }
+  .mid-search{
+    margin-right: 2%;
+  }
+
+}

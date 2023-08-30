@@ -1,5 +1,5 @@
 export function AboutUs() {
     return(
-        <di>About us</di>
+        <h1>About us</h1>
     )
 }
