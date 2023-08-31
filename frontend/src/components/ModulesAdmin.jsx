@@ -24,4 +24,4 @@ export function ModulesAdmin(){
         </div>
     </div>
     )
-}   
+} 

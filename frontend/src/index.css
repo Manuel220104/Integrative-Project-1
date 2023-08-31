@@ -234,3 +234,126 @@ a:hover {
   }
 
 }
+
+.Page{
+  padding-left: 0px;
+  font-family: ‘Inter’, sans-serif !important;
+  text-align: left;
+  margin-left: 35px;
+  margin-right: 30px;
+  padding-top: 10px;
+  
+    
+}
+
+.Title{
+  font-weight: bold;
+  display: inline;
+  font-weight: 900;
+  font-size: 35px ;
+  letter-spacing: -2px;
+  width: auto;
+  
+  
+  }
+.Subtitle{
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: normal;
+}
+.Text-About{
+  margin-top: 30px;
+  margin-bottom: 30px;
+  letter-spacing: normal;
+  font-size: 15px;
+  margin-bottom: 50px;
+}
+
+.Map {
+  
+  display: block; /* Asegura que la imagen sea un bloque para aplicar márgenes */
+  margin: 0 auto;
+}
+
+.selector{
+  margin-top: 30px;
+  margin-bottom: 30px;
+  
+}
+
+.Atributos{
+  font-size: 15px;
+}
+
+.atributo{
+  display: flex;
+
+}
+
+
+.Ingresar-Dato{
+  background-color: rgb(255, 255, 255); /* Cambia el color de fondo */
+  border-radius: 10px;
+  margin-bottom: 20px;
+  color: #000000;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid #5ABCF4; /* Agrega un borde */
+  border-radius: 9px;
+  padding: 5px;
+  
+}
+.Ingresar-Descripcion {
+  background-color: rgb(255, 255, 255); /* Cambia el color de fondo */
+  border-radius: 10px;
+  margin-bottom: 20px;
+  color: #000000;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid  #5ABCF4; /* Agrega un borde */
+  border-radius: 9px;
+  padding: 5px;
+  width: 400px;
+  white-space: normal; /* Permite saltos de línea automáticos */
+  word-wrap: break-word;
+  
+}
+
+
+.Boton-Guardar{
+  display: block;
+  margin-top: 40px;
+  background-color: #5ABCF4; /* Cambia el color de fondo */
+  color: #ffffff; /* Cambia el color del texto */
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Agrega una sombra */
+  border: 1px solid #5ABCF4; /* Agrega un borde */
+  transition: background-color 0.3s, color 0.3s;
+  padding: 5px; /* Ajusta el tamaño del botón */
+  cursor: pointer;
+  border-radius: 9px;
+}
+
+.Seleccionar{
+  font-size: 20px;
+}
+
+.Seleccionar-Dato{
+  display: block;
+  margin-top: 10px;
+  background-color: rgb(255, 255, 255); /* Cambia el color de fondo */
+  color: #000000; /* Cambia el color del texto */
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Agrega una sombra */
+  border: 1px solid #5ABCF4; /* Agrega un borde */
+  transition: background-color 0.3s, color 0.3s;
+  padding: 5px; /* Ajusta el tamaño del botón */
+  cursor: pointer;
+  border-radius: 9px;
+}
+
+.error{
+  display: block;
+  margin-top: -20px;
+  margin-bottom: 10px;
+  color:#bd4e4e;
+}

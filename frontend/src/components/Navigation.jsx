@@ -97,7 +97,7 @@ export function Navigation() {
                 <FontAwesomeIcon  className="mr-10"icon={faX} onClick={toggleSearch} style={{ color: "#5abcf4", }} />
             </div>
 
-
+           
         </div>
     )
 }

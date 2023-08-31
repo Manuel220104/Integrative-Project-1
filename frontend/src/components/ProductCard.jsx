@@ -1,10 +1,16 @@
+
 export function ProductCard({Product}) {
     return (
         <div>
-            <h1>{Product.ProductId}</h1>
+
+            <></>
+            <img src={Product.ImageUrl}></img>
+            
             <h2>{Product.Price}</h2>
             <p>{Product.Description}</p>
-            <hr/>
-        </div>    )
-}
 
+            <hr/>
+        </div>
+        
+        )
+}

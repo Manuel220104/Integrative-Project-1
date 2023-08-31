@@ -14,9 +14,15 @@ export function ProductList() {
         loadProducts();
     }, []);
 
-    return <div className="grid grid-cols-3 gap-3">
+    return(
+        
+        <div className="grid grid-cols-3 gap-3">
         {Products.map(product => (
             <ProductCard key={product.ProductId} Product={product} />
         ))}
-    </div>;
+    </div>
+
+        
+
+    )
 }
