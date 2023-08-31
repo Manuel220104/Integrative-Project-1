@@ -87,7 +87,6 @@ export function Navigation() {
             </div>
 
         
-
             <div className={`search flex justify-content-start items-center justify-center ${searchOpen ? 'active'  : ''}`}>
                 <img className="ml-3 mr-0 navbar-logo ocultar2" src={Logo} alt="Logo" />
                 <div className='mid-search w-full h-full flex items-center justify-center'>

@@ -6,6 +6,9 @@ import { Admin } from './pages/Admin';
 import { Liked } from './pages/Liked';
 import { CreateProduct } from './pages/CreateProduct'
 import { Navigation } from './components/Navigation';
+import { Footer } from './components/Footer';
+
+
 
 
 function App(){
@@ -20,10 +23,8 @@ function App(){
       <Route path="/Mis-MeGusta" element={<Liked/>} />
       <Route path="/Nosotros" element={<AboutUs/>} />
       <Route path="/Admin" element={<Admin/>} />
-
-      
-
     </Routes>
+    <Footer/>
     </BrowserRouter>
   )
 }
