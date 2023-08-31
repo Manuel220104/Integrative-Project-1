@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { CreateProducts, getAllProducts } from '../api/Product.api.js'
 import { useNavigate, useParams } from 'react-router-dom'
 
-export function CreateProduct() {
+export function CreateProduct(  ) {
     const { register, handleSubmit, formState: { errors }, setValue, } = useForm();
     const navigate = useNavigate()
 
@@ -24,13 +24,14 @@ export function CreateProduct() {
 
     return (
         <div>
+        <div>
             <div className="Page">
                 <h1 className="Title">Crear producto</h1>
                 <div className="selector">
                     <label className="Seleccionar" htmlFor="category">Tipo de producto</label>
                     <select className="Seleccionar-Dato" id="category" onChange={handleCategoryChange} value={selectedCategory}>
                         <option value="libro">Libro</option>
-                        <option value="instrumento">Instrumento Musical</option>
+                        <option value="instrumentoMusical">Instrumento Musical</option>
                         <option value="tecnologia">Tecnología</option>
                         <option value="juego">Juego de Mesa</option>
                     </select>
@@ -64,11 +65,11 @@ export function CreateProduct() {
 
 
                             <label className="atributo" htmlFor="Price">Precio:</label>
-                            <input className="Ingresar-Dato" type="number" {...register("Price", { required: true })} />
+                            <input className="Ingresar-Dato" type="number" step="000.001" {...register("Price", { required: true })} />
                             {errors.Price && <span className="error" >Precio es requerido</span>}
 
                             <label className="atributo" htmlFor="Description">Descripcion:</label>
-                            <textarea className="Ingresar-Descripcion" type="text"  {...register("Description", { required: true })} />
+                            <textarea className="Ingresar-Descripcion" type="text"  {...register("Descriptions", { required: true })} />
                             {errors.Description && <span className="error" >Descripcion es requerido</span>}
 
                             <label className="atributo" htmlFor="ImageUrl">Imagen URL:</label>
@@ -83,7 +84,8 @@ export function CreateProduct() {
                             <input className="Ingresar-Dato" type="number" {...register("Discount", { required: true })} />
                             {errors.Discount && <span className="error" >Descuento es requerido</span>}
 
-                            <label className="atributo" htmlFor="ProductType">Tipo de producto:</label>
+                            
+                            {/*}<label className="atributo" htmlFor="ProductType">Tipo de producto:</label>
                             <select className="Seleccionar-Dato" {...register("ProductType", { required: true })}>
                                 <option value="Book">Libro</option>
                                 <option value="MusicalInstrument">Instrumento Musical</option>
@@ -91,9 +93,9 @@ export function CreateProduct() {
                                 <option value="Technology">Tecnología</option>
                             </select>
                             {errors.ProductType && <span className="error">Tipo de producto es requerido</span>}
+                        {*/}
 
-
-                            <button className="Boton-Guardar">Save</button>
+                            <button className="Boton-Guardar">Crear</button>
 
                         </form>
 
@@ -135,7 +137,9 @@ export function CreateProduct() {
                     </div>
                 )}
 
+
+
             </div>
-        </div>
+        </div></div>
     )
 }

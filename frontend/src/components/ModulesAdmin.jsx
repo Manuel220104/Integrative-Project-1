@@ -11,10 +11,14 @@ export function ModulesAdmin(){
             </Link>
         </div>
         <div className='module'>
-            <p>Editar Producto</p>
+            <Link to="/Editar-Productos">
+                <p>Editar Producto</p>
+            </Link>
         </div>
         <div className='module'>
-            <p>Borrar Producto</p>
+            <Link to="/Borrar-Productos">
+                <p>Borrar Producto</p>
+            </Link>
         </div>
         <div className='module'>
             <p>Crear Novedad</p>

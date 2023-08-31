@@ -143,7 +143,7 @@ a:hover {
 
 .module:hover {
   transform: scale(1.01);
-  background-color: #96bde9;
+  background-color: #a5c6eb;
   border-color: var(--color2);
   color: white;
 }
@@ -154,7 +154,8 @@ a:hover {
   }
   .login img{
     margin-right: 15px;
-  } 
+  }
+
   .navbar-logo{
     margin-left: 4%;
     max-width: 140px;
@@ -242,6 +243,7 @@ a:hover {
 
 }
 
+
 .Page{
   padding-left: 0px;
   font-family: ‘Inter’, sans-serif !important;
@@ -249,9 +251,20 @@ a:hover {
   margin-left: 35px;
   margin-right: 30px;
   padding-top: 10px;
-  
     
 }
+
+.Page-About{
+  padding-left: 0px;
+  font-family: ‘Inter’, sans-serif !important;
+  text-align: left;
+  margin-left: 4vw;
+  margin-right: 30vw;
+  margin-top: 20px;
+  text-align: justify;
+}
+
+
 
 .Title{
   font-weight: bold;
@@ -259,12 +272,12 @@ a:hover {
   font-size: 35px ;
   letter-spacing: -2px;
   width: auto;
-  
+  display: block;
   
   }
 .Subtitle{
   font-weight: bold;
-  margin-top: 10px;
+  margin-top: 30px;
   margin-bottom: 30px;
   font-size: 20px;
   font-weight: 700;
@@ -274,15 +287,18 @@ a:hover {
   margin-top: 30px;
   margin-bottom: 30px;
   letter-spacing: normal;
-  font-size: 15px;
+  font-size: 17px;
   margin-bottom: 50px;
 }
 
 .Map {
-  
+  margin-top: 30px;
+  background-color:rgb(60, 60, 60);
   display: block; /* Asegura que la imagen sea un bloque para aplicar márgenes */
-  margin: 0 auto;
+  width: 1500px;
 }
+
+
 
 .selector{
   margin-top: 30px;
@@ -298,6 +314,24 @@ a:hover {
   display: flex;
 
 }
+.custom-marker-list {
+  list-style: none; /* Eliminar el marcador de lista predeterminado */
+  padding: 0;
+}
+
+.custom-marker-list li {
+  position: relative; /* Establecer la posición en relativa para el marcador personalizado */
+  margin-left: 20px; /* Espacio para el marcador personalizado */
+}
+
+.custom-marker-list li::before {
+  content: "\2022"; /* Usar un carácter Unicode, como un punto, para el marcador */
+  position: absolute;
+  left: -20px; /* Ajustar la posición del marcador */
+  color: #000000; /* Color del marcador */
+  font-size: 1.5em; /* Tamaño del marcador */
+}
+
 
 
 .Ingresar-Dato{
@@ -311,6 +345,7 @@ a:hover {
   padding: 5px;
   
 }
+
 .Ingresar-Descripcion {
   background-color: rgb(255, 255, 255); /* Cambia el color de fondo */
   border-radius: 10px;
@@ -479,3 +514,19 @@ a:hover {
 }
 
 
+/*
+CATEGORIAS DISEÑO
+*/
+
+.diseño{
+margin-left: 50px !important;
+margin-right: 0px !important;
+max-width: 98rem !important;
+}
+.texto{
+  padding-top: 2rem !important;
+}
+.productosOrganizados{
+  display: flex;
+  margin-right: 30px;
+}
