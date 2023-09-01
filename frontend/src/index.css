@@ -259,9 +259,9 @@ a:hover {
   font-family: ‘Inter’, sans-serif !important;
   text-align: left;
   margin-left: 4vw;
-  margin-right: 30vw;
+  margin-right: 14vw;
   margin-top: 20px;
-  text-align: justify;
+  text-align: left;
 }
 
 
@@ -518,6 +518,9 @@ a:hover {
 CATEGORIAS DISEÑO
 */
 
+.Category{
+  font-family: ‘Inter’, sans-serif !important;
+}
 .diseño{
 margin-left: 50px !important;
 margin-right: 0px !important;
@@ -529,4 +532,8 @@ max-width: 98rem !important;
 .productosOrganizados{
   display: flex;
   margin-right: 30px;
+}
+
+.titulo{
+  font-size: 18px;
 }
