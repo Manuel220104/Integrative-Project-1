@@ -40,7 +40,7 @@ export function Footer() {
                     </div>
                 </div>
                 <div className="group-2">
-                    <small>&copy; <script>document.write(new Date().getFullYear())</script> <b>Acentos</b> - All rights reserved</small>
+                    <small>&copy; <script>document.write(new Date().getFullYear())</script> <b>Acentos</b> - Todos los derechos reservados</small>
                 </div>
             </footer>
         </div>

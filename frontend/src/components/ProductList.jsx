@@ -68,6 +68,7 @@ function classNames(...classes) {
 export function ProductList() {
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const [Products, setProducts] = useState([]);
+
     useEffect(() => {
         async function loadProducts() {
             const res = await getAllProducts();
@@ -80,8 +81,6 @@ export function ProductList() {
     
     return(
         <div className="Category">
-
-        
             <div className="Page-Category">
                 <div className="bg-white">
             <div>

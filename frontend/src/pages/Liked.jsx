@@ -1,5 +1,5 @@
 export function Liked() {
     return(
-        <di>Liked Page</di>
+        <h1>Liked Page</h1>
     )
 }

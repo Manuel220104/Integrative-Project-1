@@ -141,6 +141,11 @@ a:hover {
   justify-content: center;
 }
 
+.module p{
+  color: var(--color1);
+  font-weight: bold;
+}
+
 .module:hover {
   transform: scale(1.01);
   background-color: #a5c6eb;
@@ -244,43 +249,27 @@ a:hover {
 }
 
 
-.Page{
-  padding-left: 0px;
-  font-family: ‘Inter’, sans-serif !important;
-  text-align: left;
-  margin-left: 35px;
-  margin-right: 30px;
-  padding-top: 10px;
-    
-}
-
 .Page-About{
-  padding-left: 0px;
-  font-family: ‘Inter’, sans-serif !important;
-  text-align: left;
-  margin-left: 4vw;
-  margin-right: 14vw;
-  margin-top: 20px;
-  text-align: left;
+  margin: 0 auto;
+  margin-top: 10px;
+  max-width: 1400px;
+  width: 90%;
 }
-
 
 
 .Title{
-  font-weight: bold;
-  display: inline;
-  font-size: 35px ;
+  font-weight: 500;
+  font-size: 35px;
   letter-spacing: -2px;
   width: auto;
   display: block;
   
   }
 .Subtitle{
-  font-weight: bold;
+  font-weight: 400;
   margin-top: 30px;
   margin-bottom: 30px;
   font-size: 20px;
-  font-weight: 700;
   letter-spacing: normal;
 }
 .Text-About{
