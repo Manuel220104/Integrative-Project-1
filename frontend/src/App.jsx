@@ -16,6 +16,7 @@ function App() {
 
   const [showFooter, setShowFooter] = useState([]);;
     useEffect(() => {
+      console.log('entre')
       const handleShowFooter = () => {
         const location = window.location.pathname;
         const shouldShowFooter = !location.includes('/admin');
