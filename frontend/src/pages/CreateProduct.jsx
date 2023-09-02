@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { useForm } from 'react-hook-form'
-import { CreateProducts, getAllProducts } from '../api/Product.api.js'
+import { CreateProducts, getAllProducts, obtenerUltimoIdProducto   } from '../api/Product.api.js'
 import { createBooks } from '../api/Books.api.js'
 import { useNavigate, useParams } from 'react-router-dom'
 
@@ -11,7 +11,7 @@ export function CreateProduct(  ) {
 
     function GetDataOfProduct(data) {
         const ProductData = {
-            Price: data.Price, 
+            Price: data.Price,
             Description: data.Description,
             ImageUrl: data.ImageUrl,
             Quantity: data.Quantity,
@@ -23,7 +23,7 @@ export function CreateProduct(  ) {
 
     function GetDataOfBook(data) {
         const ProductData = {
-            ISBN: data.ISBN, 
+            ISBN: data.ISBN,
             Title: data.Title,
             Authors: data.Authors,
             Editorial: data.Editorial,
@@ -33,32 +33,48 @@ export function CreateProduct(  ) {
         return ProductData
     }
 
+    const App = () => {
+        const [ultimoId, setUltimoId] = useState(null);
 
-    const onSubmit = handleSubmit(async (data) => {
+        useEffect(() => {
+            obtenerUltimoIdProducto()
+                .then((id) => {
+                    setUltimoId(id);
+                })
+            .catch((error) => {
+                console.error('Error al obtener el último ID de producto:', error);
+            });
+            console.log(ultimoId)
+            return ultimoId
+        }, []);
+    };
+
+    
+        const onSubmit = handleSubmit(async (data) => {
         console.log(data)
         const ProductData = GetDataOfProduct(data)
         const BookData = GetDataOfBook(data)
 
         
-        // const id = 42;
-        // BookData.Product = id;
-        // console.log(BookData)
+        //const id = App;
+        //BookData.Product = id;
+        //console.log(BookData)
 
         try {
-            await CreateProducts(ProductData); 
+            await CreateProducts(ProductData);
             // navigate('/Productos');
         } catch (error) {
             console.error('Error al crear el producto:', error);
             console.log('Respuesta del servidor:', error.response);
         }
 
-        // try {
-        //     await createBooks(BookData);
-        //     // navigate('/Productos');
-        // } catch (error) {
-        //     console.error('Error al crear el producto:', error);
-        //     console.log('Respuesta del servidor:', error.response);
-        // }
+        //try {
+            //await createBooks(BookData);
+            // navigate('/Productos');
+        //} catch (error) {
+            //console.error('Error al crear el producto:', error);
+            //console.log('Respuesta del servidor:', error.response);
+        //}
     });
 
     const [selectedCategory, setSelectedCategory] = useState('libro');
