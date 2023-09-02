@@ -63,8 +63,6 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-
-
 export function ProductList() {
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const [Products, setProducts] = useState([]);

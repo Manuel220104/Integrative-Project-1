@@ -10,7 +10,6 @@ router.register(r'Product', views.ProductView, 'Product')
 # se pone asi para saber la version pero se puede
 # luego de la , van las urls generadas por django
 urlpatterns = [
-    path("api/v1/", include(router.urls)),
-    
+    path("api/v1/", include(router.urls)),   
 ]
 

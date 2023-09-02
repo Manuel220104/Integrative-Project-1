@@ -7,7 +7,9 @@ const BooksApi = axios.create({
 
 export const getAllBooks = () => BooksApi.get('/');
     
-    
-export const createBook = (book) => BooksApi.post('/', book );
+export const createBooks = (book) => BooksApi.post('/', book );
+
+
+
 
 

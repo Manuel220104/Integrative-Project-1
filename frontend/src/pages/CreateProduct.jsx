@@ -1,23 +1,67 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { useForm } from 'react-hook-form'
 import { CreateProducts, getAllProducts } from '../api/Product.api.js'
+import { createBooks } from '../api/Books.api.js'
 import { useNavigate, useParams } from 'react-router-dom'
 
 export function CreateProduct(  ) {
+
     const { register, handleSubmit, formState: { errors }, setValue, } = useForm();
     const navigate = useNavigate()
 
+    function GetDataOfProduct(data) {
+        const ProductData = {
+            Price: data.Price, 
+            Description: data.Description,
+            ImageUrl: data.ImageUrl,
+            Quantity: data.Quantity,
+            Discount: data.Discount,
+            ProductType: data.ProductType
+        };
+        return ProductData
+    }
+
+    function GetDataOfBook(data) {
+        const ProductData = {
+            ISBN: data.ISBN, 
+            Title: data.Title,
+            Authors: data.Authors,
+            Editorial: data.Editorial,
+            Language: data.Language,
+            YearPublication: data.YearPublication
+        };
+        return ProductData
+    }
+
+
     const onSubmit = handleSubmit(async (data) => {
+        console.log(data)
+        const ProductData = GetDataOfProduct(data)
+        const BookData = GetDataOfBook(data)
+
+        
+        // const id = 42;
+        // BookData.Product = id;
+        // console.log(BookData)
+
         try {
-            await CreateProducts(data);
-            navigate('/Productos');
+            await CreateProducts(ProductData); 
+            // navigate('/Productos');
         } catch (error) {
             console.error('Error al crear el producto:', error);
             console.log('Respuesta del servidor:', error.response);
         }
-    });
-    const [selectedCategory, setSelectedCategory] = useState('libro');
 
+        // try {
+        //     await createBooks(BookData);
+        //     // navigate('/Productos');
+        // } catch (error) {
+        //     console.error('Error al crear el producto:', error);
+        //     console.log('Respuesta del servidor:', error.response);
+        // }
+    });
+
+    const [selectedCategory, setSelectedCategory] = useState('libro');
     const handleCategoryChange = (event) => {
         setSelectedCategory(event.target.value);
     }
@@ -37,39 +81,43 @@ export function CreateProduct(  ) {
                     </select>
                 </div>
                 
-
                 {/* Para libro */}
                 {selectedCategory == 'libro' && (
                     
                     <div className="form" id="BookForm" >
                         <form className= "Atributos" onSubmit={onSubmit}>
 
-                            {/* <label htmlFor="title" >Titulo:</label>
-                            <input type="text" {...register("title", {required: true})}/>
-                            {errors.title && <span>Titulo es requerido</span>}
+                            <label htmlFor="Title" >Titulo:</label>
+                            <input type="text" {...register("Title", {required: true})}/>
+                            {errors.Title && <span>Titulo es requerido</span>}
 
-                            <label htmlFor="isbn">ISBN:</label>
-                            <input type="number" />
+                            <label htmlFor="ISBN" >ISBN:</label>
+                            <input type="number" {...register("ISBN", {required: true})}/>
+                            {errors.ISBN && <span>ISBN es requerido</span>}
 
-                            <label htmlFor="authors">Authors:</label>
-                            <input type="text"/>
+                            <label htmlFor="Authors" >Autores:</label>
+                            <input type="text" {...register("Authors", {required: true})}/>
+                            {errors.Authors && <span>Autores es requerido</span>}
 
-                            <label htmlFor="editorial">Editorial:</label>
-                            <input type="text"/>
+                            
+                            <label htmlFor="Editorial" >Editorial:</label>
+                            <input type="text" {...register("Editorial", {required: true})}/>
+                            {errors.Editorial && <span>Editorial es requerido</span>}
 
-                            <label htmlFor="language">Language:</label>
-                            <input type="text" />
+                            <label htmlFor="Language" >Lenguaje:</label>
+                            <input type="text" {...register("Language", {required: true})}/>
+                            {errors.Language && <span>Lenguaje es requerido</span>}
 
-                            <label htmlFor="yearPublication">Year Publication:</label>
-                            <input type="number"  /> */}
-
-
+                            <label htmlFor="YearPublication">Año de publicacion:</label>
+                            <input type="number" {...register("YearPublication", {required: true})}/>
+                            {errors.YearPublication && <span>Año de publicacion</span>}
+  
                             <label className="atributo" htmlFor="Price">Precio:</label>
                             <input className="Ingresar-Dato" type="number" step="000.001" {...register("Price", { required: true })} />
                             {errors.Price && <span className="error" >Precio es requerido</span>}
 
                             <label className="atributo" htmlFor="Description">Descripcion:</label>
-                            <textarea className="Ingresar-Descripcion" type="text"  {...register("Descriptions", { required: true })} />
+                            <textarea className="Ingresar-Descripcion" type="text"  {...register("Description", { required: true })} />
                             {errors.Description && <span className="error" >Descripcion es requerido</span>}
 
                             <label className="atributo" htmlFor="ImageUrl">Imagen URL:</label>
@@ -84,17 +132,7 @@ export function CreateProduct(  ) {
                             <input className="Ingresar-Dato" type="number" {...register("Discount", { required: true })} />
                             {errors.Discount && <span className="error" >Descuento es requerido</span>}
 
-                            
-                            {/*}<label className="atributo" htmlFor="ProductType">Tipo de producto:</label>
-                            <select className="Seleccionar-Dato" {...register("ProductType", { required: true })}>
-                                <option value="Book">Libro</option>
-                                <option value="MusicalInstrument">Instrumento Musical</option>
-                                <option value="TableGames">Juego de Mesa</option>
-                                <option value="Technology">Tecnología</option>
-                            </select>
-                            {errors.ProductType && <span className="error">Tipo de producto es requerido</span>}
-                        {*/}
-
+                            <input type="hidden" name="ProductType" value="Book" {...register("ProductType")}/>
                             <button className="Boton-Guardar">Crear</button>
 
                         </form>

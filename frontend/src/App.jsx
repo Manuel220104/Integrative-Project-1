@@ -15,7 +15,6 @@ import { Footer } from './components/Footer';
 function App() {
 
   const [showFooter, setShowFooter] = useState([]);;
-    
     useEffect(() => {
       const handleShowFooter = () => {
         const location = window.location.pathname;
