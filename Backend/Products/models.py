@@ -14,7 +14,7 @@ class Product(models.Model):
         ("TableGames", "Table Games"),
         ("Technology", "Technology")
     ]
-    ProductType = models.CharField(max_length = 20, choices=PRODUCT_TYPE, default=False)
+    ProductType = models.CharField(max_length = 20, choices=PRODUCT_TYPE)
 
         
     def __str__(self):

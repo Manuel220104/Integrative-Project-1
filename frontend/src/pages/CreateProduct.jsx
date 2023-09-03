@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { useForm } from 'react-hook-form'
-import { CreateProducts, getAllProducts, obtenerUltimoIdProducto   } from '../api/Product.api.js'
+import { CreateProducts, getLastProduct } from '../api/Product.api.js'
 import { createBooks } from '../api/Books.api.js'
 import { useNavigate, useParams } from 'react-router-dom'
 
@@ -33,32 +33,10 @@ export function CreateProduct(  ) {
         return ProductData
     }
 
-    const App = () => {
-        const [ultimoId, setUltimoId] = useState(null);
-
-        useEffect(() => {
-            obtenerUltimoIdProducto()
-                .then((id) => {
-                    setUltimoId(id);
-                })
-            .catch((error) => {
-                console.error('Error al obtener el último ID de producto:', error);
-            });
-            console.log(ultimoId)
-            return ultimoId
-        }, []);
-    };
-
-    
         const onSubmit = handleSubmit(async (data) => {
-        console.log(data)
+        // console.log(data)
         const ProductData = GetDataOfProduct(data)
         const BookData = GetDataOfBook(data)
-
-        
-        //const id = App;
-        //BookData.Product = id;
-        //console.log(BookData)
 
         try {
             await CreateProducts(ProductData);
@@ -68,13 +46,21 @@ export function CreateProduct(  ) {
             console.log('Respuesta del servidor:', error.response);
         }
 
-        //try {
-            //await createBooks(BookData);
-            // navigate('/Productos');
-        //} catch (error) {
-            //console.error('Error al crear el producto:', error);
-            //console.log('Respuesta del servidor:', error.response);
-        //}
+        async function loadlastProducts() {
+            const res = await getLastProduct();
+            const id = res.data.ProductId; 
+            return id
+        }
+        
+        try {
+            const id = await loadlastProducts();
+            console.log(id)
+            BookData.Product = id;
+            await createBooks(BookData);
+        } catch (error) {
+            console.error('Error al crear el producto:', error);
+            console.log('Respuesta del servidor:', error.response);
+        }
     });
 
     const [selectedCategory, setSelectedCategory] = useState('libro');
