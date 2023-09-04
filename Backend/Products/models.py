@@ -7,7 +7,7 @@ class Product(models.Model):
     Description = models.CharField(max_length = 500)
     ImageUrl = models.URLField(blank = False, max_length=500)
     Quantity = models.PositiveIntegerField(default=1)
-    Discount = models.PositiveIntegerField(default=False)
+    Discount = models.PositiveIntegerField()
     PRODUCT_TYPE =[
         ("Book", "Book"),
         ("MusicalInstrument", "Musical Instrument"),
@@ -15,7 +15,7 @@ class Product(models.Model):
         ("Technology", "Technology")
     ]
     ProductType = models.CharField(max_length = 20, choices=PRODUCT_TYPE, default=False)
-
+    CreationDate = models.DateTimeField(auto_now_add=True)
         
     def __str__(self):
         return str(self.ProductId)

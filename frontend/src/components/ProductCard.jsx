@@ -2,10 +2,10 @@
 export function ProductCard({Product}) {
     return (
         <div>
-            <img src={Product.ImageUrl}></img>
-            <h2>{Product.Price}</h2>
-            <p>{Product.Description}</p>
-
+            <h1>{Product.ISBN}</h1>
+            <img src={Product.Product.ImageUrl}></img>
+            <h2>{Product.Product.Price}</h2>
+            <p>{Product.Product.Description}</p>
             <hr/>
         </div>
         

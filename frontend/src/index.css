@@ -526,3 +526,19 @@ max-width: 98rem !important;
 .titulo{
   font-size: 18px;
 }
+
+/*
+Carrusel novedades con date
+*/
+
+.CaruselDate{
+  width: 10px;
+}
+.imagencarrusel{
+  width: 10px;
+}
+.carousel .slide img {
+    width: 10%;
+    vertical-align: top;
+    border: 0;
+}

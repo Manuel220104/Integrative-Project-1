@@ -2,3 +2,5 @@ source/venv> .\Scripts\Activate.ps1
 python manage.py runserver
 npm install 
 
+con error
+

@@ -34,7 +34,7 @@ export function CreateProduct(  ) {
     }
 
         const onSubmit = handleSubmit(async (data) => {
-        // console.log(data)
+        console.log(data)
         const ProductData = GetDataOfProduct(data)
         const BookData = GetDataOfBook(data)
 
@@ -56,9 +56,10 @@ export function CreateProduct(  ) {
             const id = await loadlastProducts();
             console.log(id)
             BookData.Product = id;
+            console.log(BookData)
             await createBooks(BookData);
         } catch (error) {
-            console.error('Error al crear el producto:', error);
+            console.error('Error al crear el libro:', error);
             console.log('Respuesta del servidor:', error.response);
         }
     });
