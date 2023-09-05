@@ -11,5 +11,6 @@ urlpatterns = [
     path('Musical_Instruments/', include('Musical_Instruments.urls')),
     path('Table_Games/', include('Table_Games.urls')),
     path('Technologys/', include('Technologys.urls')),
+    path('InformationCarousel/', include('InformationCarousel.urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

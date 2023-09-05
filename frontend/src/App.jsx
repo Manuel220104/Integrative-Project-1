@@ -39,7 +39,7 @@ function App() {
         <Route path="/Nosotros" element={<AboutUs />} />
         <Route path="/Admin" element={<Admin />} />
       </Routes>
-      {showFooter && <Footer/>} 
+      {showFooter && <Footer/>}
     </BrowserRouter>
   )
 }

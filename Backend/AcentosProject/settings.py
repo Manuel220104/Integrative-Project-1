@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'Musical_Instruments',
     'Table_Games',
     'Technologys',
+    'InformationCarousel',
     
     
 ]
