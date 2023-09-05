@@ -9,10 +9,10 @@ class Product(models.Model):
     Quantity = models.PositiveIntegerField(default=1)
     Discount = models.PositiveIntegerField()
     PRODUCT_TYPE =[
-        ("Book", "Book"),
-        ("MusicalInstrument", "Musical Instrument"),
-        ("TableGames", "Table Games"),
-        ("Technology", "Technology")
+        ("Libro", "Libro"),
+        ("Instrumento Musical", "Instrumento Musical"),
+        ("Juego de mesa", "Juego de mesa"),
+        ("Tecnologia", "Tecnologia")
     ]
     ProductType = models.CharField(max_length = 20, choices=PRODUCT_TYPE, default=False)
     CreationDate = models.DateTimeField(auto_now_add=True)

@@ -511,8 +511,7 @@ CATEGORIAS DISEÑO
   font-family: ‘Inter’, sans-serif !important;
 }
 .diseño{
-margin-left: 50px !important;
-margin-right: 0px !important;
+
 max-width: 98rem !important;
 }
 .texto{
@@ -541,4 +540,100 @@ Carrusel novedades con date
     width: 10%;
     vertical-align: top;
     border: 0;
+}
+
+/* Estilos para el carrusel */
+.carousel-container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.slick-slide {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Carousel.css */
+.carousel-container {
+  width: 80%; /* Ajusta el ancho del carrusel según tus necesidades */
+  margin: 0 auto; /* Centra el carrusel en el contenedor */
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  cursor: pointer;
+  background-color: rgba(16, 2, 2, 0.7);
+  padding: 10px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.carousel-arrow:hover {
+  background-color: rgba(197, 80, 80, 0.9);
+}
+
+
+/* Carousel.css */
+
+.carousel-container {
+  width: 85%; /* Ajusta el ancho del contenedor del carrusel según tus necesidades */
+  margin: 0 auto;
+  padding: 20px;
+  padding-top: 30px;
+}
+
+
+.slick-slide {
+  text-align: center;
+  justify-content: center;
+  display: flex !important;
+}
+
+
+
+.slick-prev {
+  left: -6vw; /* Ajusta la posición del botón "Previous" a la izquierda */
+}
+
+.slick-next {
+  right: -6vw; /* Ajusta la posición del botón "Next" a la derecha */
+}
+
+.slick-prev,
+.slick-next {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease-in-out;
+  
+}
+
+.slick-prev:before{
+  content:'←' ;
+  padding: 3px;
+  color: var(--color2);
+  font-size: 30px;
+}
+.slick-next:before {
+  content: '→';
+  padding: 3px;
+  color: var(--color2);
+  font-size: 30px;
+}
+
+.imagencarrusel {
+  width: 140px;
+  height: 180px;
+}
+
+.titulocarrusel{
+  font-weight: bold;
+  text-align: left;
+  margin-left: 10vw;
+  margin-top: 50px;
+  font-size: 30px;
 }

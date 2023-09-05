@@ -17,6 +17,6 @@ class BookView(viewsets.ModelViewSet):
 class ObtainBookandProduct(APIView):
     def get(self, request):
         books = Book.objects.select_related('Product').all()
-        serializer = BookSerializerProduct(books, many=True)  
+        serializer = BookSerializerProduct(books, many=True)
         return Response(serializer.data)
-    
+
