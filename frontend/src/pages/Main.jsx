@@ -7,7 +7,7 @@ import {CarruselDeImagenes} from '../components/CarouselInformation'
 export function Main() {
     return(
         <div>
-            <Carousel/>
+
             <CarruselDeImagenes/>
             <LastProductDate/>
 

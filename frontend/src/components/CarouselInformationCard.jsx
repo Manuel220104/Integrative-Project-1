@@ -1,10 +1,12 @@
+import { Carousel } from 'react-bootstrap'; // Asegúrate de importar React-Bootstrap
 
-export function CarouselInformationCard({Product}) {
+export function CarouselInformationCard({ Product }) {
     return (
         <div>
-            <img className="imagencarrusel" src={Product.image}></img>
-            <h2>{Product.Text}</h2>
+            <div>
+                <img className="d-block w-100" src={Product.image}></img>
+            </div>
+
         </div>
-        
-        )
+    )
 }

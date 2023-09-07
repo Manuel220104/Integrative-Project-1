@@ -575,7 +575,7 @@ Carrusel novedades con date
 }
 
 
-/* Carousel.css */
+/* CarouselNovedades.css */
 
 .carousel-container {
   width: 85%; /* Ajusta el ancho del contenedor del carrusel según tus necesidades */
@@ -636,4 +636,27 @@ Carrusel novedades con date
   margin-left: 10vw;
   margin-top: 50px;
   font-size: 30px;
+}
+
+
+
+/* CarouselInformation.css */
+.carousel-button {
+  opacity: 80% !important; /* Mantiene la opacidad del botón al 100% */
+  background-color: #5ABCF4 !important;
+  border-color: #ffffff !important ;
+  color: #fff !important; /* Cambia esto al color deseado para el texto */
+  border-radius: 10px !important;
+}
+
+.carousel-button.active {
+  background-color: #2d78a3 !important;
+  border-color: #ffffff !important ;
+  color: #fff !important; /* Cambia esto al color deseado para el texto */
+}
+
+.my-custom-carousel {
+  max-width: 500px !important; /* Ancho máximo deseado */
+  margin: 0 auto; /* Para centrar horizontalmente el carrusel */
+  /* Otros estilos personalizados según tus preferencias */
 }
