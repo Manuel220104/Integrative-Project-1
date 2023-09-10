@@ -13,3 +13,5 @@ export const getLastProduct = () => ProductApi.get('http://localhost:8000/Produc
 
 export const getLastProductDate = () => ProductApi.get('http://localhost:8000/Products/api/v1/Ultimo_registro_fecha/');
 
+export const getAllProductsAndChild = () => ProductApi.get('http://localhost:8000/Products/api/v1/Product_and_child/');
+

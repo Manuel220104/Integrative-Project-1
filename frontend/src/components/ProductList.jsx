@@ -1,6 +1,9 @@
 import { useEffect, useState, Fragment } from 'react'
 import { ProductCard } from './ProductCard'
-import { getProductBook } from '../api/Books.api'
+import { getAllProductsAndChild } from '../api/Product.api'
+
+
+
 
 
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
@@ -66,15 +69,14 @@ function classNames(...classes) {
 export function ProductList() {
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
-    const [ProductsBooks, setProductsBooks] = useState([]);
-
+    const [ProductsAndChild, setProductsAndChild] = useState([]);
     useEffect(() => {
-        async function loadProductsBook() {
-            const res = await getProductBook();
-            setProductsBooks(res.data);
+        async function loadProductsChild() {
+            const res = await getAllProductsAndChild();
+            setProductsAndChild(res.data);
             console.log(res.data);
         }
-        loadProductsBook();
+        loadProductsChild();
     }, []);
     
     
@@ -308,8 +310,8 @@ export function ProductList() {
                     </form>
 
                     {/* Product grid */}
-                    <div className="lg:col-span-3 productosOrganizados">{ProductsBooks.map(product => (
-                    <ProductCard key={product.Product.ProductId} Product={product} />
+                    <div className="lg:col-span-3 productosOrganizados">{ProductsAndChild.map(product => (
+                    <ProductCard key={product.ProductId} Product={product} />
                     ))}</div>
                 </div>
                 </section>

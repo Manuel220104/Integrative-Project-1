@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from rest_framework import viewsets, status
-from .serializer import ProductSerializer
+from .serializer import ProductSerializer, ProductWithComponentsSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Product
 from datetime import datetime, timedelta
+from rest_framework.generics import ListAPIView
 
 # Create your views here.
 
@@ -37,3 +38,9 @@ class UltimoRegistroDate(APIView):
         serializer = ProductSerializer(productos_ultimos_30_dias, many=True)
 
         return Response(serializer.data)
+    
+class ProductsWithComponentsView(ListAPIView):
+    serializer_class = ProductWithComponentsSerializer
+
+    def get_queryset(self):
+        return Product.objects.prefetch_related('book', 'technology')  
