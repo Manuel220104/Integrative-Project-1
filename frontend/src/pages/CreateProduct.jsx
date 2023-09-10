@@ -11,6 +11,7 @@ export function CreateProduct(  ) {
 
     function GetDataOfProduct(data) {
         const ProductData = {
+            Name: data.Name,
             Price: data.Price,
             Description: data.Description,
             ImageUrl: data.ImageUrl,
@@ -24,7 +25,6 @@ export function CreateProduct(  ) {
     function GetDataOfBook(data) {
         const ProductData = {
             ISBN: data.ISBN,
-            Title: data.Title,
             Authors: data.Authors,
             Editorial: data.Editorial,
             Language: data.Language,
@@ -37,6 +37,10 @@ export function CreateProduct(  ) {
         console.log(data)
         const ProductData = GetDataOfProduct(data)
         const BookData = GetDataOfBook(data)
+        console.log('product')
+        console.log(ProductData)
+        console.log('book')
+        console.log(BookData)
 
         try {
             await CreateProducts(ProductData);
@@ -90,9 +94,9 @@ export function CreateProduct(  ) {
                     <div className="form" id="BookForm" >
                         <form className= "Atributos" onSubmit={onSubmit}>
 
-                            <label htmlFor="Title" >Titulo:</label>
-                            <input type="text" {...register("Title", {required: true})}/>
-                            {errors.Title && <span>Titulo es requerido</span>}
+                            <label htmlFor="Name" >Titulo:</label>
+                            <input type="text" {...register("Name", {required: true})}/>
+                            {errors.Name && <span>Titulo es requerido</span>}
 
                             <label htmlFor="ISBN" >ISBN:</label>
                             <input type="number" {...register("ISBN", {required: true})}/>
@@ -135,7 +139,8 @@ export function CreateProduct(  ) {
                             <input className="Ingresar-Dato" type="number" {...register("Discount", { required: true })} />
                             {errors.Discount && <span className="error" >Descuento es requerido</span>}
 
-                            <input type="hidden" name="ProductType" value="Book" {...register("ProductType")}/>
+                            <input type="hidden" name="ProductType" value="Libro" {...register("ProductType")}/>
+
                             <button className="Boton-Guardar">Crear</button>
 
                         </form>

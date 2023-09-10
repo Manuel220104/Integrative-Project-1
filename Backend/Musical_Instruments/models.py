@@ -3,7 +3,6 @@ from Products.models import Product
 
 class Musical_Instrument(models.Model):
     Musical_InstrumentId = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
-    Name = models.CharField(max_length=50)
     MUSICAL_INSTRUMENT_TYPE =[
         ("Viento", "Viento"),
         ("Cuerda", "Cuerda"),

@@ -510,10 +510,6 @@ CATEGORIAS DISEÑO
 .Category{
   font-family: ‘Inter’, sans-serif !important;
 }
-.diseño{
-
-max-width: 98rem !important;
-}
 .texto{
   padding-top: 2rem !important;
 }
@@ -523,6 +519,7 @@ max-width: 98rem !important;
 }
 
 .titulo{
+  font-family: var(--fuentePrincipal);
   font-size: 18px;
 }
 

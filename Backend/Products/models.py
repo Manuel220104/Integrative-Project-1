@@ -3,6 +3,7 @@ from django.db import models
 
 class Product(models.Model):
     ProductId = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
+    Name = models.CharField(max_length= 200)
     Price = models.DecimalField(max_digits=6, decimal_places=3)
     Description = models.CharField(max_length = 500)
     ImageUrl = models.URLField(blank = False, max_length=500)
