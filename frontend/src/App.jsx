@@ -10,13 +10,13 @@ import { EditProduct } from './pages/EditProduct';
 import { DeleteProduct } from './pages/DeleteProduct';
 import { Navigation } from './components/Navigation';
 import { Footer } from './components/Footer';
+import { ProductDetail } from './components/ProductDetail';
 
 
 function App() {
 
   const [showFooter, setShowFooter] = useState([]);;
     useEffect(() => {
-      console.log('entre')
       const handleShowFooter = () => {
         const location = window.location.pathname;
         const shouldShowFooter = !location.includes('/admin');
@@ -31,7 +31,12 @@ function App() {
       <Routes>
         {/* redirect to url element={<Navigate to="/Books" />} */}
         <Route path="/" element={<Main />} />
-        <Route path="/Productos" element={<ProductPage />} />
+        <Route path="/Productos" element={<ProductPage />}/>
+        <Route path="/Productos/Libros" element={<ProductPage />} />
+        <Route path="/Productos/InstrumentosMusicales" element={<ProductPage />} />
+        <Route path="/Productos/JuegosDeMesa" element={<ProductPage />} />
+        <Route path="/Productos/Tecnologia" element={<ProductPage />} />
+        <Route path="/Productos/DetalleProducto" element={<ProductDetail />} />
         <Route path="/Crear-Productos" element={<CreateProduct />} />
         <Route path="/Editar-Productos" element={<EditProduct />} />
         <Route path="/Delete-Productos" element={<DeleteProduct />} />

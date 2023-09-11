@@ -1,9 +1,7 @@
 import { useEffect, useState, Fragment } from 'react'
 import { ProductCard } from './ProductCard'
 import { getAllProductsAndChild } from '../api/Product.api'
-
-
-
+import { useLocation } from 'react-router-dom';
 
 
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
@@ -18,11 +16,11 @@ const sortOptions = [
     { name: 'Price: High to Low', href: '#', current: false },
     ]
     const subCategories = [
-        { name: 'Totes', href: '#' },
-        { name: 'Backpacks', href: '#' },
-        { name: 'Travel Bags', href: '#' },
-        { name: 'Hip Bags', href: '#' },
-        { name: 'Laptop Sleeves', href: '#' },
+        { name: 'General', href: '/Productos' },
+        { name: 'Libros', href: '/Productos/Libros' },
+        { name: 'Instrumentos Musicales', href: '/Productos/InstrumentosMusicales' },
+        { name: 'Juegos De Mesa', href: '/Productos/JuegosDeMesa' },
+        { name: 'Tecnologia', href: '/Productos/Tecnologia' },
     ]
     const filters = [
         {
@@ -68,16 +66,28 @@ function classNames(...classes) {
 
 export function ProductList() {
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
-
+    
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+   
     const [ProductsAndChild, setProductsAndChild] = useState([]);
+    const [searchTerm, setSearchTerm] = useState(searchParams.get('Busqueda'));
+
+
     useEffect(() => {
         async function loadProductsChild() {
             const res = await getAllProductsAndChild();
             setProductsAndChild(res.data);
             console.log(res.data);
+            console.log('entre')
         }
         loadProductsChild();
-    }, []);
+    }, [location]);
+
+
+    useEffect(() => {
+        setSearchTerm(searchParams.get('Busqueda'));
+      }, [location.search]);
     
     
     return(
@@ -184,7 +194,11 @@ export function ProductList() {
                 </div>
                 </Dialog>
             </Transition.Root>
-
+            {searchTerm !== null && searchTerm !== '' && (
+                <div>
+                    <h2 className='titulo text-4xl font-bold tracking-tight text-gray-900 ml-4'>Resultados para: <span className='spanSearch'>{searchTerm}</span></h2>
+                </div>
+            )}
             <main className="mx-auto px-4 sm:px-6 lg:px-8 diseño">
                 <div className="texto flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
                 <h1 className="titulo text-4xl font-bold tracking-tight text-gray-900">FILTRA TU BUSQUEDA</h1>
@@ -310,9 +324,26 @@ export function ProductList() {
                     </form>
 
                     {/* Product grid */}
-                    <div className="lg:col-span-3 productosOrganizados">{ProductsAndChild.map(product => (
-                    <ProductCard key={product.ProductId} Product={product} />
-                    ))}</div>
+                    <div className="lg:col-span-3 productosOrganizados">
+                        {ProductsAndChild.map(product => {
+                            if (searchTerm !== null){
+                                const searchTermLowerCase = searchTerm.toLowerCase();
+                                if (product.Name.toLowerCase().includes(searchTermLowerCase)) {
+                                    return <ProductCard key={product.ProductId} Product={product} />;
+                                }
+                            }
+                            else{
+                                if (location.pathname.includes('/Libros')){
+                                    if (product.ProductType.includes("Libro")) {
+                                        return <ProductCard key={product.ProductId} Product={product} />;
+                                    }
+                                }
+                                return <ProductCard key={product.ProductId} Product={product} />;
+                            }
+                            return null;
+                        
+                        })}
+                    </div>
                 </div>
                 </section>
             </main>

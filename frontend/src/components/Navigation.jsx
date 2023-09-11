@@ -6,7 +6,9 @@ import login from '../assets/icons/login.png'
 import like from '../assets/icons/like.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faX } from '@fortawesome/free-solid-svg-icons'
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
+import { useNavigate } from 'react-router-dom';
+
 
 
 export function Navigation() {
@@ -22,6 +24,31 @@ export function Navigation() {
         setSearchOpen(!searchOpen)
     }
 
+
+    // Obtener el current link no se usa
+
+    // const [currentURL, setCurrentURL] = useState('');
+    // useEffect(() => {
+    //   const currentURL = window.location.pathname;
+    //   setCurrentURL(currentURL);
+    // }, []);
+
+    //  Busqueda
+    const navigate = useNavigate();
+    const redirectToURL = '/Productos';
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const handleSearch = () => {
+        navigate(`${redirectToURL}?Busqueda=${searchTerm}`);
+    };
+
+    const handleSearchKeyDown = (e) => {
+        // Manejar la búsqueda cuando se presiona "Enter" (código de tecla 13)
+        if (e.key === 'Enter') {
+            e.preventDefault(); // Evitar que se envíe un formulario si está dentro de uno
+            handleSearch(); // Llama a tu función de búsqueda aquí
+        }
+      };
 
     return (
         <div>
@@ -88,10 +115,12 @@ export function Navigation() {
 
         
             <div className={`search flex justify-content-start items-center justify-center ${searchOpen ? 'active'  : ''}`}>
-                <img className="ml-3 mr-0 navbar-logo ocultar2" src={Logo} alt="Logo" />
+                <Link to="/">
+                    <img className="ml-3 mr-0 navbar-logo ocultar2" src={Logo} alt="Logo" />
+                </Link>
                 <div className='mid-search w-full h-full flex items-center justify-center'>
-                    <input className="navbar-item search-bar" type="text" placeholder="" />
-                    <a href="" className="navbar-item search-icon "><img src={search} alt="Buscar" /></a>
+                    <input onChange={(e) => setSearchTerm(e.target.value)} onKeyDown={handleSearchKeyDown} className="navbar-item search-bar" type="text" placeholder="" />
+                    <button onClick={handleSearch} className="navbar-item search-icon "><img src={search} alt="Buscar" /></button>
                 </div>
                 <FontAwesomeIcon  className="mr-10"icon={faX} onClick={toggleSearch} style={{ color: "#5abcf4", }} />
             </div>

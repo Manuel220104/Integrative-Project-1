@@ -654,7 +654,7 @@ Carrusel novedades con date
 
 .CardP{
   display: flex;
-  max-width: 320px;
+  width: 320px;
   max-height: 250px;
 }
 .CardP .imageProduct img{
@@ -682,12 +682,16 @@ Carrusel novedades con date
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Cambia el tamaño mínimo según tus necesidades */
   column-gap: 2rem;
   row-gap: 2rem ;
-  justify-content: center;
-  align-items: center;
+  
+}
+@media (max-width: 780px) {
+  .productosOrganizados{
+    place-items: center;
+  }
 }
 
 .info{
-  margin: 5px 0px;
+  margin: 8px 0px;
   margin-left: 15px;
   flex: 1;
   display: flex;
@@ -703,7 +707,19 @@ Carrusel novedades con date
 }
 
 .seeCard{
+  color: var(--color2);
   border-radius: 20px;
-  padding: 5px;
+  padding: 5px 10px;
   background-color: #EEEEEE;
+}
+
+button.navbar-item:focus {
+  outline: none;
+}
+
+.spanSearch{
+  text-transform: capitalize;
+  font-family: var(--fuenteSecundaria);
+  margin-left: 10px ;
+  font-weight: 400;
 }
