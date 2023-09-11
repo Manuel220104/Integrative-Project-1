@@ -43,4 +43,17 @@ class ProductsWithComponentsView(ListAPIView):
     serializer_class = ProductWithComponentsSerializer
 
     def get_queryset(self):
-        return Product.objects.prefetch_related('book', 'technology')  
+        return Product.objects.prefetch_related('book', 'technology')
+
+
+class Ultimos6ProductosConDescuento(APIView):
+    def get(self, request):
+        # Consulta para obtener los últimos 10 productos con descuento mayor que 0
+        productos_ultimos_6_con_descuento = Product.objects.filter(
+            Discount__gt=0
+        )[:6]  # Ordenar por fecha de creación en orden descendente y limitar a los últimos 10
+
+        # Serializar los productos
+        serializer = ProductSerializer(productos_ultimos_6_con_descuento, many=True)
+
+        return Response(serializer.data)

@@ -24,6 +24,12 @@ const settings = {
     slidesToShow: 5, // Muestra 4 imágenes a la vez
     slidesToScroll: 1, // Avanza de a 1 imagen
     responsive: [
+        {
+            breakpoint: 1430, // Cambia la configuración en pantallas más pequeñas
+            settings: {
+            slidesToShow: 4, // Muestra 2 elementos en pantallas pequeñas
+            },
+        },
     {
         breakpoint: 1024, // Cambia la configuración en pantallas más pequeñas
         settings: {
@@ -54,7 +60,7 @@ const prevSlide = () => {
 };
 
 return (
-    <div>
+    <div >
         <h1 className="titulocarrusel">Novedades</h1>
         <div className="carousel-container">
         <Slider {...settings} ref={sliderRef}>
@@ -65,6 +71,6 @@ return (
 
         </div>
     </div>
-   
+
 );
 }

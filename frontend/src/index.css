@@ -7,7 +7,7 @@
   --color2: #5ABCF4;
   --fuentePrincipal: 'Inter';
   --fuenteSecundaria: 'Open Sans';
-}  
+} 
 
 body {
   background: white;
@@ -527,8 +527,10 @@ Carrusel novedades con date
 .CaruselDate{
   width: 10px;
 }
+
 .imagencarrusel{
   width: 10px;
+  border-radius: 10px;
 }
 .carousel .slide img {
     width: 10%;
@@ -538,8 +540,9 @@ Carrusel novedades con date
 
 /* Estilos para el carrusel */
 .carousel-container {
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
+
 }
 
 .slick-slide {
@@ -576,13 +579,13 @@ Carrusel novedades con date
   margin: 0 auto;
   padding: 20px;
   padding-top: 30px;
+  
 }
 
 
 .slick-slide {
   text-align: center;
   justify-content: center;
-  display: flex !important;
 }
 
 .slick-prev {
@@ -606,52 +609,161 @@ Carrusel novedades con date
 
 .slick-prev:before{
   content:'←' ;
-  padding: 3px;
   color: var(--color2);
   font-size: 30px;
+
 }
 .slick-next:before {
   content: '→';
-  padding: 3px;
   color: var(--color2);
   font-size: 30px;
 }
 
 .imagencarrusel {
-  width: 140px;
-  height: 180px;
+  width: 1px !important;
+  height: 20px !important;
 }
 
 .titulocarrusel{
+  text-align: center;
   font-weight: bold;
-  text-align: left;
-  margin-left: 10vw;
+  
   margin-top: 50px;
-  font-size: 30px;
+  font-size: 35px;
+  
 }
+
+.cardNews{
+  display: flex ;
+  
+}
+
+.cardNews .iconsCard{
+  display: flex;
+  margin-left: 7px;
+  
+}
+.imagencarrusel {
+  width: 140px !important;
+  height: 200px !important;
+
+}
+
+.infoNews {
+  margin-top: 2px;
+  margin-bottom: 4px;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.TitleCardNews{
+  font-size: 15px;
+  color: #000000;
+  font-family: var(--fuentePrincipal);
+  font-weight: 500;
+  text-align: left;
+}
+
+
+
+
 
 
 /* CarouselInformation.css */
 .carousel-button {
+  font-weight: bold !important;
   opacity: 80% !important; /* Mantiene la opacidad del botón al 100% */
-  background-color: #5ABCF4 !important;
+  background-color: #cfcfcf !important;
   border-color: #ffffff !important ;
-  color: #fff !important; /* Cambia esto al color deseado para el texto */
-  border-radius: 10px !important;
+  color: #6e6e6e !important; /* Cambia esto al color deseado para el texto */
+  
 }
 
 .carousel-button.active {
-  background-color: #2d78a3 !important;
+  font-weight: bold !important;
+  background-color:  #5ABCF4 !important;
   border-color: #ffffff !important ;
   color: #fff !important; /* Cambia esto al color deseado para el texto */
 }
 
 .my-custom-carousel {
+  font-weight: bold;
   max-width: 500px !important; /* Ancho máximo deseado */
   margin: 0 auto; /* Para centrar horizontalmente el carrusel */
   /* Otros estilos personalizados según tus preferencias */
 }
 
+
+.number{
+  margin-top: -5px;
+  text-align: left;
+}
+/* Carousel Descuentos */
+.DiscountsGrid{
+  margin-top: 30px;
+  margin-bottom: auto;
+  margin-left: 110px ;
+  margin-right: 50px ;
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+}
+.titulocarruselDescuentos{
+  text-align: center;
+  font-weight: bold;
+  
+  margin-top: 50px;
+  font-size: 35px;
+  
+}
+.allDiscounts{
+  text-align: center;
+  margin-top: 30px;
+}
+
+.Discount{
+  font-weight: bold ;
+  font-size: 25px !important;
+  color: #5ABCF4;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas en pantallas grandes */
+  grid-gap: 20px; /* Espacio entre productos */
+  margin: 20px;
+}
+
+.product {
+  border: 1px solid #ccc;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease; /* Transición suave */
+}
+.cardNews:hover {
+  transform: scale(1.05); /* Escala ligeramente al 105% del tamaño original */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra elevada */
+  
+}
+
+/* Media Query para pantallas medianas y pequeñas */
+@media (max-width: 850px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas medianas */
+  }
+}
+
+/* Media Query para pantallas muy pequeñas */
+@media (max-width: 650px) {
+  .product-grid {
+    grid-template-columns: 1fr; /* Una sola columna en pantallas muy pequeñas */
+  }
+}
+
+
+/* CardP */
 .CardP{
   display: flex;
   width: 320px;
@@ -723,3 +835,6 @@ button.navbar-item:focus {
   margin-left: 10px ;
   font-weight: 400;
 }
+
+
+

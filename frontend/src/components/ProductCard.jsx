@@ -25,7 +25,7 @@ export function ProductCard({ Product }) {
                             </Link>
                             <img className="navbar-item cart-icon" src={cart} alt="Carrito" />
                         </div>
-                        <Link to={`/Productos/DetalleProducto`}> 
+                        <Link to={`/Productos/DetalleProducto`}>
                             <span className="seeCard">Ver más</span>
                         </Link>
                     </div>
