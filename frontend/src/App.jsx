@@ -36,7 +36,7 @@ function App() {
         <Route path="/Productos/InstrumentosMusicales" element={<ProductPage />} />
         <Route path="/Productos/JuegosDeMesa" element={<ProductPage />} />
         <Route path="/Productos/Tecnologia" element={<ProductPage />} />
-        <Route path="/Productos/DetalleProducto" element={<ProductDetail />} />
+        <Route path="/Productos/DetalleProducto/:productId" element={<ProductDetail />} />
         <Route path="/Crear-Productos" element={<CreateProduct />} />
         <Route path="/Editar-Productos" element={<EditProduct />} />
         <Route path="/Delete-Productos" element={<DeleteProduct />} />

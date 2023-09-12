@@ -101,15 +101,15 @@ export function Navigation() {
                 </div>
                 <hr className="my-4 border-t-2 border-gray-300" />
                 <Link to="/">
-                    <div className="navbar-item sidebar-item mt-3 enlace" >Inicio</div>
+                    <div onClick={toggleSidebar} className="navbar-item sidebar-item mt-3 enlace">Inicio</div>
                 </Link>
 
                 <Link to="/Productos">
-                    <div className="navbar-item sidebar-item enlace">Productos</div>
+                    <div onClick={toggleSidebar} className="navbar-item sidebar-item enlace">Productos</div>
                 </Link>
 
                 <Link to="/Nosotros">
-                    <div className="navbar-item sidebar-item enlace">Acerca de nosotros</div>
+                    <div onClick={toggleSidebar} className="navbar-item sidebar-item enlace">Acerca de nosotros</div>
                 </Link>
             </div>
 
