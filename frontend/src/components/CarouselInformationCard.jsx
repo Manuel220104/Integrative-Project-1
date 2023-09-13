@@ -6,7 +6,6 @@ export function CarouselInformationCard({ Product }) {
             <div>
                 <img className="d-block w-100" src={Product.image}></img>
             </div>
-
         </div>
     )
 }

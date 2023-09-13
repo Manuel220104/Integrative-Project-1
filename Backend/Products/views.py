@@ -23,22 +23,31 @@ class UltimoRegistro(APIView):
     
 
         
-class UltimoRegistroDate(APIView):
+# class UltimoRegistroDate(APIView):
+#     def get(self, request):
+#         # Obtenemos la fecha actual
+#         fecha_actual = datetime.now()
+
+#         # Restamos 30 días a la fecha actual para obtener la fecha de inicio
+#         fecha_inicio = fecha_actual - timedelta(days=30)
+
+#         # Consulta para obtener los productos creados en los últimos 30 días
+#         productos_ultimos_30_dias = Product.objects.filter(CreationDate__gte=fecha_inicio)
+
+#         # Serializamos los productos
+#         serializer = ProductSerializer(productos_ultimos_30_dias, many=True)
+
+#         return Response(serializer.data)
+
+class UltimosDiezProductos(APIView):
     def get(self, request):
-        # Obtenemos la fecha actual
-        fecha_actual = datetime.now()
-
-        # Restamos 30 días a la fecha actual para obtener la fecha de inicio
-        fecha_inicio = fecha_actual - timedelta(days=30)
-
-        # Consulta para obtener los productos creados en los últimos 30 días
-        productos_ultimos_30_dias = Product.objects.filter(CreationDate__gte=fecha_inicio)
+        # Consulta para obtener los últimos 10 productos agregados
+        ultimos_10_productos = Product.objects.all().order_by('-CreationDate')[:10]
 
         # Serializamos los productos
-        serializer = ProductSerializer(productos_ultimos_30_dias, many=True)
+        serializer = ProductSerializer(ultimos_10_productos, many=True)
 
         return Response(serializer.data)
-    
 class ProductsWithComponentsView(ListAPIView):
     serializer_class = ProductWithComponentsSerializer
 
@@ -46,12 +55,12 @@ class ProductsWithComponentsView(ListAPIView):
         return Product.objects.prefetch_related('book', 'technology')
 
 
-class Ultimos6ProductosConDescuento(APIView):
+class Ultimos10ProductosConDescuento(APIView):
     def get(self, request):
         # Consulta para obtener los últimos 10 productos con descuento mayor que 0
         productos_ultimos_6_con_descuento = Product.objects.filter(
             Discount__gt=0
-        )[:6]  # Ordenar por fecha de creación en orden descendente y limitar a los últimos 10
+        )[:10]  # Ordenar por fecha de creación en orden descendente y limitar a los últimos 10
 
         # Serializar los productos
         serializer = ProductSerializer(productos_ultimos_6_con_descuento, many=True)

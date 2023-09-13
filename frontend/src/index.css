@@ -551,7 +551,7 @@ Carrusel novedades con date
 
 /* Carousel.css */
 .carousel-container {
-  width: 80%; /* Ajusta el ancho del carrusel según tus necesidades */
+  width: 91%; /* Ajusta el ancho del carrusel según tus necesidades */
   margin: 0 auto; /* Centra el carrusel en el contenedor */
 }
 
@@ -575,7 +575,6 @@ Carrusel novedades con date
 /* CarouselNovedades.css */
 
 .carousel-container {
-  width: 85%; /* Ajusta el ancho del contenedor del carrusel según tus necesidades */
   margin: 0 auto;
   padding: 20px;
   padding-top: 30px;
@@ -627,7 +626,6 @@ Carrusel novedades con date
 .titulocarrusel{
   text-align: center;
   font-weight: bold;
-  
   margin-top: 50px;
   font-size: 35px;
   
@@ -666,7 +664,41 @@ Carrusel novedades con date
   text-align: left;
 }
 
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 10px;
+}
 
+.title {
+  font-size: 35px;
+  margin: 0 16px;
+  font-weight: bold;
+}
+
+.line {
+  height: 1px;
+  background-color: #bcbcbc !important; /* Cambia el color de las líneas según tus preferencias */
+  flex-grow: 1;
+}
+
+.left-line {
+  margin-right: 16px;
+  margin-left: 5vw;
+}
+
+.right-line {
+  margin-left: 16px;
+  margin-right: 6vw;
+}
+
+.CarouselNews{
+  margin-top: 50px;
+  margin-left: 6vw;
+  margin-right: 6vw !important;
+}
 
 
 
@@ -700,67 +732,13 @@ Carrusel novedades con date
   margin-top: -5px;
   text-align: left;
 }
-/* Carousel Descuentos */
-.DiscountsGrid{
-  margin-top: 30px;
-  margin-bottom: auto;
-  margin-left: 110px ;
-  margin-right: 50px ;
-  display: flex;
-  justify-content: center; /* Centrar horizontalmente */
-  align-items: center; /* Centrar verticalmente */
-}
-.titulocarruselDescuentos{
-  text-align: center;
-  font-weight: bold;
-  
-  margin-top: 50px;
-  font-size: 35px;
-  
-}
-.allDiscounts{
-  text-align: center;
-  margin-top: 30px;
-}
 
+
+/* Dicount */
 .Discount{
-  font-weight: bold ;
-  font-size: 25px !important;
-  color: #5ABCF4;
+  color:  #5ABCF4 !important;
 }
 
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columnas en pantallas grandes */
-  grid-gap: 20px; /* Espacio entre productos */
-  margin: 20px;
-}
-
-.product {
-  border: 1px solid #ccc;
-  padding: 20px;
-  text-align: center;
-  transition: transform 0.3s ease; /* Transición suave */
-}
-.cardNews:hover {
-  transform: scale(1.05); /* Escala ligeramente al 105% del tamaño original */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra elevada */
-  
-}
-
-/* Media Query para pantallas medianas y pequeñas */
-@media (max-width: 850px) {
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas medianas */
-  }
-}
-
-/* Media Query para pantallas muy pequeñas */
-@media (max-width: 650px) {
-  .product-grid {
-    grid-template-columns: 1fr; /* Una sola columna en pantallas muy pequeñas */
-  }
-}
 
 
 /* CardP */
