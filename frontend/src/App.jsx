@@ -8,6 +8,7 @@ import { Liked } from './pages/Liked';
 import { CreateProduct } from './pages/CreateProduct';
 import { EditProduct } from './pages/EditProduct';
 import { DeleteProduct } from './pages/DeleteProduct';
+import { CreateCarouselInfo } from './pages/CreateCarouselInfo';
 import { Navigation } from './components/Navigation';
 import { Footer } from './components/Footer';
 import { ProductDetail } from './components/ProductDetail';
@@ -40,6 +41,7 @@ function App() {
         <Route path="/Crear-Productos" element={<CreateProduct />} />
         <Route path="/Editar-Productos" element={<EditProduct />} />
         <Route path="/Delete-Productos" element={<DeleteProduct />} />
+        <Route path="/Crear-Informacion-Carrusel" element={<CreateCarouselInfo />} />
         <Route path="/Mis-MeGusta" element={<Liked />} />
         <Route path="/Nosotros" element={<AboutUs />} />
         <Route path="/Admin" element={<Admin />} />

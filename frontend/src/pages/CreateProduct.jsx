@@ -1,10 +1,10 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form'
 import { CreateProducts, getLastProduct } from '../api/Product.api.js'
 import { createBooks } from '../api/Books.api.js'
 import { useNavigate, useParams } from 'react-router-dom'
 
-export function CreateProduct(  ) {
+export function CreateProduct() {
 
     const { register, handleSubmit, formState: { errors }, setValue, } = useForm();
     const navigate = useNavigate()
@@ -33,7 +33,7 @@ export function CreateProduct(  ) {
         return ProductData
     }
 
-        const onSubmit = handleSubmit(async (data) => {
+    const onSubmit = handleSubmit(async (data) => {
         console.log(data)
         const ProductData = GetDataOfProduct(data)
         const BookData = GetDataOfBook(data)
@@ -52,10 +52,10 @@ export function CreateProduct(  ) {
 
         async function loadlastProducts() {
             const res = await getLastProduct();
-            const id = res.data.ProductId; 
+            const id = res.data.ProductId;
             return id
         }
-        
+
         try {
             const id = await loadlastProducts();
             console.log(id)
@@ -74,10 +74,11 @@ export function CreateProduct(  ) {
     }
 
     return (
-        <div>
-        <div>
-            <div className="Page">
+        <div className="CreateProductPage">
+            <div>
+
                 <h1 className="Title">Crear producto</h1>
+
                 <div className="selector">
                     <label className="Seleccionar" htmlFor="category">Tipo de producto</label>
                     <select className="Seleccionar-Dato" id="category" onChange={handleCategoryChange} value={selectedCategory}>
@@ -87,38 +88,39 @@ export function CreateProduct(  ) {
                         <option value="juego">Juego de Mesa</option>
                     </select>
                 </div>
-                
+
                 {/* Para libro */}
                 {selectedCategory == 'libro' && (
-                    
+
                     <div className="form" id="BookForm" >
-                        <form className= "Atributos" onSubmit={onSubmit}>
+                        <form className="Atributos" onSubmit={onSubmit}>
 
-                            <label htmlFor="Name" >Titulo:</label>
-                            <input type="text" {...register("Name", {required: true})}/>
-                            {errors.Name && <span>Titulo es requerido</span>}
+                            <label className="atributo" htmlFor="Name" >Titulo:</label>
+                            <input className="Ingresar-Dato" type="text" {...register("Name", { required: true })} />
+                            {errors.Name && <span className="error">Titulo es requerido</span>}
 
-                            <label htmlFor="ISBN" >ISBN:</label>
-                            <input type="number" {...register("ISBN", {required: true})}/>
-                            {errors.ISBN && <span>ISBN es requerido</span>}
+                            <label className="atributo" htmlFor="ISBN" >ISBN:</label>
+                            <input className="Ingresar-Dato" type="number" {...register("ISBN", { required: true })} />
+                            {errors.ISBN && <span className="error">ISBN es requerido</span>}
 
-                            <label htmlFor="Authors" >Autores:</label>
-                            <input type="text" {...register("Authors", {required: true})}/>
-                            {errors.Authors && <span>Autores es requerido</span>}
+                            <label className="atributo" htmlFor="Authors" >Autores:</label>
+                            <input className="Ingresar-Dato" type="text" {...register("Authors", { required: true })} />
+                            {errors.Authors && <span className="error">Autores es requerido</span>}
 
-                            
-                            <label htmlFor="Editorial" >Editorial:</label>
-                            <input type="text" {...register("Editorial", {required: true})}/>
-                            {errors.Editorial && <span>Editorial es requerido</span>}
 
-                            <label htmlFor="Language" >Lenguaje:</label>
-                            <input type="text" {...register("Language", {required: true})}/>
-                            {errors.Language && <span>Lenguaje es requerido</span>}
+                            <label className="atributo" htmlFor="Editorial" >Editorial:</label>
+                            <input className="Ingresar-Dato" type="text" {...register("Editorial", { required: true })} />
+                            {errors.Editorial && <span className="error">Editorial es requerido</span>}
 
-                            <label htmlFor="YearPublication">Año de publicacion:</label>
-                            <input type="number" {...register("YearPublication", {required: true})}/>
-                            {errors.YearPublication && <span>Año de publicacion</span>}
-  
+                            <label className="atributo" htmlFor="Language" >Lenguaje:</label>
+                            <input className="Ingresar-Dato" type="text" {...register("Language", { required: true })} />
+                            {errors.Language && <span className="error">Lenguaje es requerido</span>}
+
+                            <label className="atributo" htmlFor="YearPublication">Año de publicacion:</label>
+                            <input className="Ingresar-Dato" type="number" {...register("YearPublication", { required: true })} />
+                            {errors.YearPublication && <span className="error">Año de publicacion</span>}
+
+
                             <label className="atributo" htmlFor="Price">Precio:</label>
                             <input className="Ingresar-Dato" type="number" step="000.001" {...register("Price", { required: true })} />
                             {errors.Price && <span className="error" >Precio es requerido</span>}
@@ -128,18 +130,18 @@ export function CreateProduct(  ) {
                             {errors.Description && <span className="error" >Descripcion es requerido</span>}
 
                             <label className="atributo" htmlFor="ImageUrl">Imagen URL:</label>
-                            <input className="Ingresar-Dato"type="text"  {...register("ImageUrl", { required: true })} />
+                            <input className="Ingresar-Dato" type="text"  {...register("ImageUrl", { required: true })} />
                             {errors.ImageUrl && <span className="error" >Imagen Url es requerido</span>}
 
                             <label className="atributo" htmlFor="Quantity">Cantidad:</label>
-                            <input className="Ingresar-Dato"type="number" {...register("Quantity", { required: true })} />
+                            <input className="Ingresar-Dato" type="number" {...register("Quantity", { required: true })} />
                             {errors.Quantity && <span className="error">Cantidad es requerido</span>}
 
                             <label className="atributo" htmlFor="Discount">Descuento:</label>
                             <input className="Ingresar-Dato" type="number" {...register("Discount", { required: true })} />
                             {errors.Discount && <span className="error" >Descuento es requerido</span>}
 
-                            <input type="hidden" name="ProductType" value="Libro" {...register("ProductType")}/>
+                            <input type="hidden" name="ProductType" value="Libro" {...register("ProductType")} />
 
                             <button className="Boton-Guardar">Crear</button>
 
@@ -186,6 +188,6 @@ export function CreateProduct(  ) {
 
 
             </div>
-        </div></div>
+        </div>
     )
 }

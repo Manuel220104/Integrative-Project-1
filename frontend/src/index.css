@@ -365,6 +365,7 @@ a:hover {
 
 .Seleccionar{
   font-size: 20px;
+  font-weight: 450;
 }
 
 .Seleccionar-Dato{
@@ -387,6 +388,10 @@ a:hover {
   color:#bd4e4e;
 }
 
+
+.CreateProductPage{
+  margin-left: 2.5vw;
+}
 
 
 /* footer */

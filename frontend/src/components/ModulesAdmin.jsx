@@ -21,7 +21,9 @@ export function ModulesAdmin(){
             </Link>
         </div>
         <div className='module'>
-            <p>Crear Novedad</p>
+            <Link to="/Crear-Informacion-Carrusel">
+                <p>Carrusel de Informacion</p>
+            </Link>
         </div>
         <div className='module'>
             <p>Crear Usuario</p>

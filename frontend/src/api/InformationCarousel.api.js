@@ -6,7 +6,8 @@ const InformationCarouselApi = axios.create({
 
 export const getAllInformationCarousel = () => InformationCarouselApi.get('/');
 
-export const createInformationCarousel = (book) => BooksApi.post('/', book );
+export const CreateInformationCarousel = (information) => InformationCarouselApi.post('/', information );
 
+export const getLastCarouselInfo = () => InformationCarouselApi.get('http://localhost:8000/InformationCarousel/api/v1/ultimo_registro_CarouselInfo/');
 
 
