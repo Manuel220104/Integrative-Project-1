@@ -7,7 +7,7 @@ from .views import UltimoRegistro
 from .views import UltimosDiezProductos
 from .views import ProductsWithComponentsView
 from .views import Ultimos10ProductosConDescuento
-
+from .views import Products10WithComponentsView
 
 router = routers.DefaultRouter()
 router.register(r'Product', views.ProductView, 'Product')
@@ -20,4 +20,7 @@ urlpatterns = [
     path('api/v1/Ultimo_registro_fecha/', UltimosDiezProductos.as_view(), name='ultimo_registro_fecha'),
     path('api/v1/Product_and_child/', ProductsWithComponentsView.as_view(), name='product_child'),
     path('api/v1/Ultimos_descuento/', Ultimos10ProductosConDescuento.as_view(), name='Ultimos_descuento'),
+    path('api/v1/Last_Products_and_child/', Products10WithComponentsView.as_view(), name='Last_Products_and_child'),
 ]
+
+Products10WithComponentsView

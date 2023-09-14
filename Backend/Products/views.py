@@ -22,7 +22,6 @@ class UltimoRegistro(APIView):
         return Response(serializer.data)
     
 
-        
 # class UltimoRegistroDate(APIView):
 #     def get(self, request):
 #         # Obtenemos la fecha actual
@@ -66,3 +65,9 @@ class Ultimos10ProductosConDescuento(APIView):
         serializer = ProductSerializer(productos_ultimos_6_con_descuento, many=True)
 
         return Response(serializer.data)
+    
+class Products10WithComponentsView(ListAPIView):
+    serializer_class = ProductWithComponentsSerializer
+
+    def get_queryset(self):
+        return Product.objects.prefetch_related('book', 'technology').order_by('-ProductId')[:10]
