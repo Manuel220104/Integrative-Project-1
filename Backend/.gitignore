@@ -1,0 +1,74 @@
+# Ignore Python bytecode files
+
+__pycache__/
+
+
+
+# Ignore the virtual environment directory
+
+venv/
+
+
+
+# Ignore log files
+
+*.log
+
+
+
+# Ignore static and media files (if they are served locally)
+
+/staticfiles/
+
+/media/
+
+
+
+# Ignore secret settings and keys (e.g., settings_local.py, .env)
+
+*.secret
+
+.env
+
+
+
+# Ignore compiled Python files
+
+*.pyc
+
+*.pyo
+
+__pycache__/
+
+
+
+# Ignore pipenv virtual environment
+
+.Pipfile
+
+.Pipfile.lock
+
+
+
+# Ignore IDE and text editor-specific files and directories
+
+.idea/
+
+.vscode/
+
+*.sublime-project
+
+*.sublime-workspace
+
+
+
+# Ignore system and temporary files
+
+.DS_Store
+
+Thumbs.db
+
+
+# Ignore the virtual environment directory
+
+venv/
