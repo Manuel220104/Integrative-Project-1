@@ -33,7 +33,8 @@ export function Login() {
                         <form className="space-y-6" action="#" method="POST">
                             <div>
                                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                                    Email address
+                                    Direccion de correo
+                                    
                                 </label>
                                 <div className="mt-1">
                                     <input
