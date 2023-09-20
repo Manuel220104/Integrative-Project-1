@@ -10,7 +10,7 @@ class Musical_Instrument(models.Model):
         ("Electrófonos", "Electrófonos"),
         ("Idiófonos", "Idiófonos")
     ]
-    ProductType = models.CharField(max_length = 20, choices=MUSICAL_INSTRUMENT_TYPE)
+    MusicalInstrumentType = models.CharField(max_length = 20, choices=MUSICAL_INSTRUMENT_TYPE)
     Brand = models.CharField(max_length =40)
     Model = models.CharField(max_length =30)
     Product = models.OneToOneField(Product, on_delete=models.CASCADE)

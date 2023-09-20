@@ -5,6 +5,8 @@ import { AboutUs } from './pages/AboutUs';
 import { ProductPage } from './pages/ProductPage';
 import { Admin } from './pages/Admin';
 import { Liked } from './pages/Liked';
+import { Login } from './pages/Login';
+import { Signup } from './pages/Signup';
 import { CreateProduct } from './pages/CreateProduct';
 import { EditProduct } from './pages/EditProduct';
 import { DeleteProduct } from './pages/DeleteProduct';
@@ -20,7 +22,7 @@ function App() {
     useEffect(() => {
       const handleShowFooter = () => {
         const location = window.location.pathname;
-        const shouldShowFooter = !location.includes('/admin');
+        const shouldShowFooter = !location.includes('/admin',);
         setShowFooter(shouldShowFooter);
       };
       handleShowFooter();
@@ -43,6 +45,8 @@ function App() {
         <Route path="/Delete-Productos" element={<DeleteProduct />} />
         <Route path="/Crear-Informacion-Carrusel" element={<CreateCarouselInfo />} />
         <Route path="/Mis-MeGusta" element={<Liked />} />
+        <Route path="/Iniciar-Sesion" element={<Login />} />
+        <Route path="/Registro-Usuario" element={<Signup />} />
         <Route path="/Nosotros" element={<AboutUs />} />
         <Route path="/Admin" element={<Admin />} />
       </Routes>

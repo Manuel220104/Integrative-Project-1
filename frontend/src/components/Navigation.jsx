@@ -83,8 +83,12 @@ export function Navigation() {
 
                     <div className="navbar-login">
                         <a className="login" href="">
+                        <Link to="/Iniciar-Sesion">
                             <img className="login-icon" src={login} alt="login" />
+                        </Link>
+                        <Link to="/Iniciar-Sesion">
                             <span className="ocultar"> Iniciar sesión / Registrarse</span>
+                        </Link>
                         </a>
                     </div>
 
