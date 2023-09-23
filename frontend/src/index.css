@@ -638,7 +638,7 @@ Carrusel novedades con date
 
 .cardNews{
   display: flex ;
-  
+  justify-content: center;
 }
 
 .cardNews .iconsCard{
