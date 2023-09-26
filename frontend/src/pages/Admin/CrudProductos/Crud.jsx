@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import { Link } from 'react-router-dom'
 export function Crud() {
     const [selectedCategory, setSelectedCategory] = useState('libro');
     const handleCategoryChange = (event) => {
@@ -7,15 +7,23 @@ export function Crud() {
     }
     return (
         <div className="max-w-[95%] mx-auto">
-            <div className="selector">
-                <label className="Seleccionar" htmlFor="category">Tipo de producto</label>
-                <select className="Seleccionar-Dato" id="category" onChange={handleCategoryChange} value={selectedCategory}>
-                    <option value="libro">Libro</option>
-                    <option value="instrumentoMusical">Instrumento Musical</option>
-                    <option value="tecnologia">Tecnología</option>
-                    <option value="juego">Juego de Mesa</option>
-                </select>
+            <div className='flex justify-between'>
+                <div className="selector">
+                    <label className="Seleccionar" htmlFor="category">Tipo de producto</label>
+                    <select className="Seleccionar-Dato" id="category" onChange={handleCategoryChange} value={selectedCategory}>
+                        <option value="libro">Libro</option>
+                        <option value="instrumentoMusical">Instrumento Musical</option>
+                        <option value="tecnologia">Tecnología</option>
+                        <option value="juego">Juego de Mesa</option>
+                    </select>
+                </div>
+                <div>
+                    <Link to="/Crear-Productos">
+                    <button className="Boton-Guardar">Crear producto</button>
+                    </Link>
+                </div>
             </div>
+
             <div>
                 <table className="table">
                 <thead>
