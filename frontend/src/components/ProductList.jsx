@@ -71,9 +71,6 @@ export function ProductList() {
     const searchParams = new URLSearchParams(location.search);
    
     const [ProductsAndChild, setProductsAndChild] = useState([]);
-    const [searchTerm, setSearchTerm] = useState(searchParams.get('Busqueda'));
-
-
     useEffect(() => {
         async function loadProductsChild() {
             const res = await getAllProductsAndChild();
@@ -82,8 +79,9 @@ export function ProductList() {
         }
         loadProductsChild();
     }, [location]);
-
-
+    
+    
+    const [searchTerm, setSearchTerm] = useState(searchParams.get('Busqueda'));
     useEffect(() => {
         setSearchTerm(searchParams.get('Busqueda'));
       }, [location.search]);

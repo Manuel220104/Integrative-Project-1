@@ -809,6 +809,10 @@ Carrusel novedades con date
   background-color: #EEEEEE;
 }
 
+.edit{
+  color: var(--color2);
+}
+
 button.navbar-item:focus {
   outline: none;
 }

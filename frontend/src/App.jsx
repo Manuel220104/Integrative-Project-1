@@ -8,6 +8,7 @@ import { Liked } from './pages/User/Liked';
 import { Login } from './pages/Login_and_sign_up/Login';
 import { Signup } from './pages/Login_and_sign_up/Signup';
 import { CreateProduct } from './pages/Admin/CrudProductos/CreateProduct';
+import { EditProduct } from './pages/Admin/CrudProductos/EditProduct';
 import { Crud } from './pages/Admin/CrudProductos/Crud';
 import { CreateCarouselInfo } from './pages/Admin/CreateCarouselInfo';
 import { Navigation } from './components/Navigation';
@@ -20,7 +21,7 @@ function App() {
   useEffect(() => {
     const currentURL = location.pathname;
     console.log(currentURL)
-    if (currentURL === '/' || currentURL === '/Nosotros' || currentURL === '/Mis-MeGusta' || currentURL.includes('/Productos/DetalleProducto/')){
+    if (currentURL === '/' || currentURL === '/Nosotros' || currentURL === '/Mis-MeGusta' || currentURL.includes('/Productos/DetalleProducto/') || currentURL === '/Productos'){
       setshowFooter(true); 
     } 
     else {
@@ -42,7 +43,7 @@ function App() {
         <Route path="/Productos/DetalleProducto/:productId" element={<ProductDetail />} />
         <Route path="/Gestionar-Productos" element={<Crud />} />
         <Route path="/Crear-Productos" element={<CreateProduct />} />
-        <Route path="/Editar-Productos" element={<CreateProduct />} />
+        <Route path="/Editar-Productos/:productId" element={<EditProduct />} />
         <Route path="/Crear-Informacion-Carrusel" element={<CreateCarouselInfo />} />
         <Route path="/Mis-MeGusta" element={<Liked />} />
         <Route path="/Iniciar-Sesion" element={<Login />} />

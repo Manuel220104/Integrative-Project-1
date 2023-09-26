@@ -1,13 +1,11 @@
 import React from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import like from '../assets/icons/like.png'
 
 
 export function ProductDetail() {
-  const { productId } = useParams();
   const location = useLocation();
   const { Product } = location.state || {};
-  console.log(Product)
 
   return (
     <div>

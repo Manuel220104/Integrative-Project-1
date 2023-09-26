@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-
 import like from '../assets/icons/like.png'
 import cart from '../assets/icons/cart.png'
 
@@ -8,6 +7,7 @@ const MaxLength = 30;
 
 export function ProductCard({ Product }) {
     const truncatedName = Product.Name.length > MaxLength ? `${Product.Name.substring(0, MaxLength)}...` : Product.Name;
+    
     return (
         <div>
             {Product.ProductType == 'Libro' && (
