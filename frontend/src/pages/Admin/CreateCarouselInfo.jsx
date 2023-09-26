@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form'
-import { CreateInformationCarousel} from '../api/InformationCarousel.api.js'
-import { createBooks } from '../api/Books.api.js'
+import { CreateInformationCarousel} from '../../api/InformationCarousel.api.js'
+import { createBooks } from '../../api/Books.api.js'
 import { useNavigate, useParams } from 'react-router-dom'
 
 
@@ -26,11 +26,6 @@ export function CreateCarouselInfo() {
         const InfoData = GetInfoCarrusel(data)
         console.log(InfoData)
         
-
-        
-    
-
-
         try {
             await CreateInformationCarousel(InfoData);
             // navigate('/Productos');

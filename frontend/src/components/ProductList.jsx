@@ -79,7 +79,6 @@ export function ProductList() {
             const res = await getAllProductsAndChild();
             setProductsAndChild(res.data);
             console.log(res.data);
-            console.log('entre')
         }
         loadProductsChild();
     }, [location]);

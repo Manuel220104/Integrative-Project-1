@@ -1,4 +1,4 @@
-import mapa from '../assets/Images/mapa.png'
+import mapa from '../../assets/Images/mapa.png'
 
 export function AboutUs() {
     return(

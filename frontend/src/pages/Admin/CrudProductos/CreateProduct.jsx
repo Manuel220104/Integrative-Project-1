@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form'
-import { CreateProducts, getLastProduct } from '../api/Product.api.js'
-import { createBooks } from '../api/Books.api.js'
+import { CreateProducts, getLastProduct } from '../../../api/Product.api.js'
+import { createBooks } from '../../../api/Books.api.js'
 import { useNavigate, useParams } from 'react-router-dom'
 
 export function CreateProduct() {

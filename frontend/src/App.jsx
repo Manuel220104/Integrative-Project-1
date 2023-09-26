@@ -1,35 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { Main } from './pages/Main';
-import { AboutUs } from './pages/AboutUs';
-import { ProductPage } from './pages/ProductPage';
-import { Admin } from './pages/Admin';
-import { Liked } from './pages/Liked';
-import { Login } from './pages/Login';
-import { Signup } from './pages/Signup';
-import { CreateProduct } from './pages/CreateProduct';
-import { EditProduct } from './pages/EditProduct';
-import { DeleteProduct } from './pages/DeleteProduct';
-import { CreateCarouselInfo } from './pages/CreateCarouselInfo';
+import { BrowserRouter, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { Main } from './pages/User/Main';
+import { AboutUs } from './pages/User/AboutUs';
+import { ProductPage } from './pages/User/ProductPage';
+import { Admin } from './pages/Admin/Admin';
+import { Liked } from './pages/User/Liked';
+import { Login } from './pages/Login_and_sign_up/Login';
+import { Signup } from './pages/Login_and_sign_up/Signup';
+import { CreateProduct } from './pages/Admin/CrudProductos/CreateProduct';
+import { Crud } from './pages/Admin/CrudProductos/Crud';
+import { CreateCarouselInfo } from './pages/Admin/CreateCarouselInfo';
 import { Navigation } from './components/Navigation';
 import { Footer } from './components/Footer';
 import { ProductDetail } from './components/ProductDetail';
 
-
 function App() {
-
-  const [showFooter, setShowFooter] = useState([]);;
-    useEffect(() => {
-      const handleShowFooter = () => {
-        const location = window.location.pathname;
-        const shouldShowFooter = !location.includes('/admin',);
-        setShowFooter(shouldShowFooter);
-      };
-      handleShowFooter();
-  },[window.location.pathname]);
+  const location = useLocation();
+  const [showFooter, setshowFooter] = useState(false);
+  useEffect(() => {
+    const currentURL = location.pathname;
+    console.log(currentURL)
+    if (currentURL === '/' || currentURL === '/Nosotros' || currentURL === '/Mis-MeGusta' || currentURL.includes('/Productos/DetalleProducto/')){
+      setshowFooter(true); 
+    } 
+    else {
+      setshowFooter(false); 
+    }
+  }, [location.pathname]);
 
   return (
-    <BrowserRouter>
+    <div>
       <Navigation />
       <Routes>
         {/* redirect to url element={<Navigate to="/Books" />} */}
@@ -40,9 +40,9 @@ function App() {
         <Route path="/Productos/JuegosDeMesa" element={<ProductPage />} />
         <Route path="/Productos/Tecnologia" element={<ProductPage />} />
         <Route path="/Productos/DetalleProducto/:productId" element={<ProductDetail />} />
+        <Route path="/Gestionar-Productos" element={<Crud />} />
         <Route path="/Crear-Productos" element={<CreateProduct />} />
-        <Route path="/Editar-Productos" element={<EditProduct />} />
-        <Route path="/Delete-Productos" element={<DeleteProduct />} />
+        <Route path="/Editar-Productos" element={<CreateProduct />} />
         <Route path="/Crear-Informacion-Carrusel" element={<CreateCarouselInfo />} />
         <Route path="/Mis-MeGusta" element={<Liked />} />
         <Route path="/Iniciar-Sesion" element={<Login />} />
@@ -51,7 +51,7 @@ function App() {
         <Route path="/Admin" element={<Admin />} />
       </Routes>
       {showFooter && <Footer/>}
-    </BrowserRouter>
+      </div>
   )
 }
 

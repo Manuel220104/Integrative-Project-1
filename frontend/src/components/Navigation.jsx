@@ -24,15 +24,6 @@ export function Navigation() {
         setSearchOpen(!searchOpen)
     }
 
-
-    // Obtener el current link no se usa
-
-    // const [currentURL, setCurrentURL] = useState('');
-    // useEffect(() => {
-    //   const currentURL = window.location.pathname;
-    //   setCurrentURL(currentURL);
-    // }, []);
-
     //  Busqueda
     const navigate = useNavigate();
     const redirectToURL = '/Productos';
@@ -43,10 +34,9 @@ export function Navigation() {
     };
 
     const handleSearchKeyDown = (e) => {
-        // Manejar la búsqueda cuando se presiona "Enter" (código de tecla 13)
         if (e.key === 'Enter') {
-            e.preventDefault(); // Evitar que se envíe un formulario si está dentro de uno
-            handleSearch(); // Llama a tu función de búsqueda aquí
+            e.preventDefault(); 
+            handleSearch(); 
         }
       };
 
@@ -82,14 +72,14 @@ export function Navigation() {
                     </Link>
 
                     <div className="navbar-login">
-                        <a className="login" href="">
+                        <div className="login" href="">
                         <Link to="/Iniciar-Sesion">
                             <img className="login-icon" src={login} alt="login" />
                         </Link>
                         <Link to="/Iniciar-Sesion">
                             <span className="ocultar"> Iniciar sesión / Registrarse</span>
                         </Link>
-                        </a>
+                        </div>
                     </div>
 
                     <div className="burguer">
