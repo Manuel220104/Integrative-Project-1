@@ -55,27 +55,28 @@ export function Crud() {
                         <th scope="col">Precio</th>
                         <th scope="col">Descuento</th>
                         <th scope="col">Cantidad</th>
-
-
                     </tr>
                 </thead>
                 <tbody>
                 {ProductsAndChild.map((product, index) => {
-                    return (
-                    <tr key={index}>
-                        <th scope="row">{product.ProductId}</th>
-                        <td>{product.Name}</td>
-                        <td>{product.book.ISBN}</td>
-                        <td>{product.Price}</td>
-                        <td>{product.Discount}</td>
-                        <td>{product.Quantity}</td>
-                        <td>
-                        <Link to={`/Editar-Productos/${product.ProductId}`} state={{ Product: product}}>
-                            <span className='edit'>Editar</span>
-                        </Link>
-                        </td>
-                    </tr>
-                    );
+                    if(product.ProductType==='Libro'){
+                        return (
+                            <tr key={index}>
+                                <th scope="row">{product.ProductId}</th>
+                                <td>{product.Name}</td>
+                                <td>{product.book.ISBN}</td>
+                                <td>{product.Price}</td>
+                                <td>{product.Discount}</td>
+                                <td>{product.Quantity}</td>
+                                <td>
+                                <Link to={`/Editar-Productos/${product.ProductId}`} state={{ Product: product}}>
+                                    <span className='edit'>Editar</span>
+                                </Link>
+                                </td>
+                            </tr>
+                            );
+                    }       
+                    
                 })}
                 </tbody>
             </table>

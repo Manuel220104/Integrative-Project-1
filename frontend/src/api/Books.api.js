@@ -4,7 +4,7 @@ import axios from 'axios'
 const urlBack = "http://localhost:8000/"
 
 const BooksApi = axios.create({
-    baseURL: urlBack+'Books/api/v1/Book/'
+    baseURL: urlBack+'Table_Games/api/v1/Table_Game/'
 });
 
 

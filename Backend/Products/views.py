@@ -42,16 +42,14 @@ class UltimosDiezProductos(APIView):
     def get(self, request):
         # Consulta para obtener los últimos 10 productos agregados
         ultimos_10_productos = Product.objects.all().order_by('-CreationDate')[:10]
-
         # Serializamos los productos
         serializer = ProductSerializer(ultimos_10_productos, many=True)
-
         return Response(serializer.data)
+    
 class ProductsWithComponentsView(ListAPIView):
     serializer_class = ProductWithComponentsSerializer
-
     def get_queryset(self):
-        return Product.objects.prefetch_related('book', 'technology')
+        return Product.objects.prefetch_related('book','technology', 'table_game', 'musical_instrument')
 
 
 class Ultimos10ProductosConDescuento(APIView):

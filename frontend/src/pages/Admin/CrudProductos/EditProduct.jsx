@@ -89,60 +89,83 @@ export function EditProduct() {
                 {selectedCategory == 'Libro' && (
 
                     <div className="form" id="BookForm" >
-                        <form className="Atributos" onSubmit={onSubmit}>
+                        <form onSubmit={onSubmit}>
+                            <div className='Atributos'>
+    
+                                <div>
+                                    <label className="atributo" htmlFor="Name" >Titulo:</label>
+                                    <input className="Ingresar-Dato" type="text" value={product.Name} {...register("Name", { required: true })} />
+                                    {errors.Name && <span className="error">Titulo es requerido</span>}
+                                </div>
+    
+                                <div>
+                                    <label className="atributo" htmlFor="ISBN" >ISBN:</label>
+                                    <input className="Ingresar-Dato" type="number" value={product.book.ISBN} {...register("ISBN", { required: true })} />
+                                    {errors.ISBN && <span className="error">ISBN es requerido</span>}
+                                </div>
 
-                            <label className="atributo" htmlFor="Name" >Titulo:</label> 
-                            <input className="Ingresar-Dato" type="text" value={product.Name} {...register("Name", { required: true })} />
-                            {errors.Name && <span className="error">Titulo es requerido</span>}
+                                <div>
+                                    <label className="atributo" htmlFor="Authors" >Autores:</label>
+                                    <input className="Ingresar-Dato" type="text" value={product.book.Authors}{...register("Authors", { required: true })} />
+                                    {errors.Authors && <span className="error">Autores es requerido</span>}
+                                </div>
+    
+    
+                                <div>
+                                    <label className="atributo" htmlFor="Editorial" >Editorial:</label>
+                                    <input className="Ingresar-Dato" type="text" value={product.book.Editorial} {...register("Editorial", { required: true })} />
+                                    {errors.Editorial && <span className="error">Editorial es requerido</span>}
+                                </div>
+    
+                                <div>
+                                    <label className="atributo" htmlFor="Language" >Lenguaje:</label>
+                                    <input className="Ingresar-Dato" type="text" value={product.book.Language}{...register("Language", { required: true })} />
+                                    {errors.Language && <span className="error">Lenguaje es requerido</span>}
+                                </div>
+    
+                                <div>
+                                    <label className="atributo" htmlFor="YearPublication">Año de publicacion:</label>
+                                    <input className="Ingresar-Dato" type="number" value={product.book.YearPublication}{...register("YearPublication", { required: true })} />
+                                    {errors.YearPublication && <span className="error">Año de publicacion</span>}
+                                </div>
+    
+                                <div>
+                                    <label className="atributo" htmlFor="Price">Precio:</label>
+                                    <input className="Ingresar-Dato" type="number" step="000.001" value={product.Price}{...register("Price", { required: true })} />
+                                    {errors.Price && <span className="error" >Precio es requerido</span>}
+                                </div>
+    
+                                <div>
+                                    <label className="atributo" htmlFor="Description">Descripcion:</label>
+                                    <textarea className="Ingresar-Descripcion" type="text"  value={product.Description}  {...register("Description", { required: true })} />
+                                    {errors.Description && <span className="error" >Descripcion es requerido</span>}
+                                </div>
+    
+                                <div>
+                                    <label className="atributo" htmlFor="ImageUrl">Imagen URL:</label>
+                                    <input className="Ingresar-Dato" type="text" value={product.ImageUrl} {...register("ImageUrl", { required: true })} />
+                                    {errors.ImageUrl && <span className="error" >Imagen Url es requerido</span>}
+                                </div>
+    
+                                <div>
+                                    <label className="atributo" htmlFor="Quantity">Cantidad:</label>
+                                    <input className="Ingresar-Dato" type="number" value={product.Quantity} {...register("Quantity", { required: true })} />
+                                    {errors.Quantity && <span className="error">Cantidad es requerido</span>}
+                                </div>
 
-                            <label className="atributo" htmlFor="ISBN" >ISBN:</label>
-                            <input className="Ingresar-Dato" type="number" value={product.book.ISBN} {...register("ISBN", { required: true })} />
-                            {errors.ISBN && <span className="error">ISBN es requerido</span>}
+                                <div>
+                                    <label className="atributo" htmlFor="Discount">Descuento:</label>
+                                    <input className="Ingresar-Dato" type="number" value={product.Discount}{...register("Discount", { required: true })} />
+                                    {errors.Discount && <span className="error" >Descuento es requerido</span>}
+                                </div>
 
-                            <label className="atributo" htmlFor="Authors" >Autores:</label>
-                            <input className="Ingresar-Dato" type="text" value={product.book.Authors}{...register("Authors", { required: true })} />
-                            {errors.Authors && <span className="error">Autores es requerido</span>}
-
-
-                            <label className="atributo" htmlFor="Editorial" >Editorial:</label>
-                            <input className="Ingresar-Dato" type="text" value={product.book.Editorial} {...register("Editorial", { required: true })} />
-                            {errors.Editorial && <span className="error">Editorial es requerido</span>}
-
-                            <label className="atributo" htmlFor="Language" >Lenguaje:</label>
-                            <input className="Ingresar-Dato" type="text" value={product.book.Language}{...register("Language", { required: true })} />
-                            {errors.Language && <span className="error">Lenguaje es requerido</span>}
-
-                            <label className="atributo" htmlFor="YearPublication">Año de publicacion:</label>
-                            <input className="Ingresar-Dato" type="number" value={product.book.YearPublication}{...register("YearPublication", { required: true })} />
-                            {errors.YearPublication && <span className="error">Año de publicacion</span>}
-
-
-                            <label className="atributo" htmlFor="Price">Precio:</label>
-                            <input className="Ingresar-Dato" type="number" step="000.001" value={product.Price}{...register("Price", { required: true })} />
-                            {errors.Price && <span className="error" >Precio es requerido</span>}
-
-                            <label className="atributo" htmlFor="Description">Descripcion:</label>
-                            <textarea className="Ingresar-Descripcion" type="text"  value={product.Description}  {...register("Description", { required: true })} />
-                            {errors.Description && <span className="error" >Descripcion es requerido</span>}
-
-                            <label className="atributo" htmlFor="ImageUrl">Imagen URL:</label>
-                            <input className="Ingresar-Dato" type="text" value={product.ImageUrl} {...register("ImageUrl", { required: true })} />
-                            {errors.ImageUrl && <span className="error" >Imagen Url es requerido</span>}
-
-                            <label className="atributo" htmlFor="Quantity">Cantidad:</label>
-                            <input className="Ingresar-Dato" type="number" value={product.Quantity} {...register("Quantity", { required: true })} />
-                            {errors.Quantity && <span className="error">Cantidad es requerido</span>}
-
-                            <label className="atributo" htmlFor="Discount">Descuento:</label>
-                            <input className="Ingresar-Dato" type="number" value={product.Discount}{...register("Discount", { required: true })} />
-                            {errors.Discount && <span className="error" >Descuento es requerido</span>}
+                            </div>
 
                             <input type="hidden" name="ProductType" value="Libro" {...register("ProductType")} />
 
-                            <button className="Boton-Guardar">Actualizar</button>
+                            <button className="Boton-Guardar mb-5">Actualizar</button>
 
                         </form>
-
                     </div>
                 )}
 

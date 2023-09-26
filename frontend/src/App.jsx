@@ -7,7 +7,7 @@ import { Admin } from './pages/Admin/Admin';
 import { Liked } from './pages/User/Liked';
 import { Login } from './pages/Login_and_sign_up/Login';
 import { Signup } from './pages/Login_and_sign_up/Signup';
-import { CreateProduct } from './pages/Admin/CrudProductos/CreateProduct';
+import { CreateProduct } from './pages/Admin/CrudProductos/Create/CreateProduct';
 import { EditProduct } from './pages/Admin/CrudProductos/EditProduct';
 import { Crud } from './pages/Admin/CrudProductos/Crud';
 import { CreateCarouselInfo } from './pages/Admin/CreateCarouselInfo';

@@ -304,62 +304,83 @@ a:hover {
 
 }
 .custom-marker-list {
-  list-style: none; /* Eliminar el marcador de lista predeterminado */
+  list-style: none; 
   padding: 0;
 }
 
 .custom-marker-list li {
-  position: relative; /* Establecer la posición en relativa para el marcador personalizado */
-  margin-left: 20px; /* Espacio para el marcador personalizado */
+  position: relative;
+  margin-left: 20px; 
 }
 
 .custom-marker-list li::before {
-  content: "\2022"; /* Usar un carácter Unicode, como un punto, para el marcador */
+  content: "\2022"; 
   position: absolute;
-  left: -20px; /* Ajustar la posición del marcador */
-  color: #000000; /* Color del marcador */
-  font-size: 1.5em; /* Tamaño del marcador */
+  left: -20px; 
+  color: #000000; 
+  font-size: 1.5em; 
 }
+
+.Atributos{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media screen and (max-width: 1400px) {
+  .Atributos {
+    grid-template-columns: repeat(2, 1fr); 
+  }
+}
+
 
 
 
 .Ingresar-Dato{
-  background-color: rgb(255, 255, 255); /* Cambia el color de fondo */
+  background-color: rgb(255, 255, 255); 
   border-radius: 10px;
   margin-bottom: 20px;
   color: #000000;
+  width: 340px;
+  height: 40px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  border: 1px solid #5ABCF4; /* Agrega un borde */
+  border: 1px solid #5ABCF4; 
   border-radius: 9px;
   padding: 5px;
-  
 }
 
 .Ingresar-Descripcion {
-  background-color: rgb(255, 255, 255); /* Cambia el color de fondo */
+  background-color: rgb(255, 255, 255); 
   border-radius: 10px;
   margin-bottom: 20px;
   color: #000000;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  border: 1px solid  #5ABCF4; /* Agrega un borde */
+  border: 1px solid  #5ABCF4; 
   border-radius: 9px;
   padding: 5px;
-  width: 400px;
-  white-space: normal; /* Permite saltos de línea automáticos */
+  width: 450px;
+  height: 100px;
+  white-space: normal; 
   word-wrap: break-word;
-  
 }
 
+@media screen and (max-width: 1000px) {
+  .Atributos {
+    grid-template-columns: 1fr; 
+  }
+  .Ingresar-Descripcion{
+    width: 340px;
+  }
+}
 
 .Boton-Guardar{
   display: block;
-  margin-top: 40px;
-  background-color: #5ABCF4; /* Cambia el color de fondo */
-  color: #ffffff; /* Cambia el color del texto */
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Agrega una sombra */
-  border: 1px solid #5ABCF4; /* Agrega un borde */
+  margin-top: 25px;
+  background-color: #5ABCF4;
+  color: #ffffff; 
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
+  border: 1px solid #5ABCF4; 
   transition: background-color 0.3s, color 0.3s;
-  padding: 5px; /* Ajusta el tamaño del botón */
+  padding: 5px; 
   cursor: pointer;
   border-radius: 9px;
 }
@@ -372,12 +393,12 @@ a:hover {
 .Seleccionar-Dato{
   display: block;
   margin-top: 10px;
-  background-color: rgb(255, 255, 255); /* Cambia el color de fondo */
-  color: #000000; /* Cambia el color del texto */
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Agrega una sombra */
-  border: 1px solid #5ABCF4; /* Agrega un borde */
+  background-color: rgb(255, 255, 255);
+  color: #000000; 
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
+  border: 1px solid #5ABCF4;
   transition: background-color 0.3s, color 0.3s;
-  padding: 5px; /* Ajusta el tamaño del botón */
+  padding: 5px;
   cursor: pointer;
   border-radius: 9px;
 }
