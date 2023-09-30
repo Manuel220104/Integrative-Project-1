@@ -7,7 +7,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 export function CreateBook(){
     const {register, handleSubmit, formState: { errors }, setValue, } = useForm();
-    const navigate = useNavigate()
 
     function GetDataOfProduct(data) {
         const ProductData = {

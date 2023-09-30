@@ -23,8 +23,6 @@ export function Crud() {
 
     console.log(ProductsAndChild)
 
-    const atributes_product = ['ProductId', 'Name', 'Price', 'Discount', 'Quantity']
-    
     return (
         <div className="max-w-[95%] mx-auto">
             <div className='flex justify-between'>
@@ -39,80 +37,164 @@ export function Crud() {
                 </div>
                 <div>
                     <Link to="/Crear-Productos">
-                    <button className="Boton-Guardar">Crear producto</button>
+                        <button className="Boton-Guardar">Crear producto</button>
                     </Link>
                 </div>
             </div>
 
             {selectedCategory == 'libro' && (
-            <div>
-                <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">ISBN</th>
-                        <th scope="col">Precio</th>
-                        <th scope="col">Descuento</th>
-                        <th scope="col">Cantidad</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {ProductsAndChild.map((product, index) => {
-                    if(product.ProductType==='Libro'){
-                        return (
-                            <tr key={index}>
-                                <th scope="row">{product.ProductId}</th>
-                                <td>{product.Name}</td>
-                                <td>{product.book.ISBN}</td>
-                                <td>{product.Price}</td>
-                                <td>{product.Discount}</td>
-                                <td>{product.Quantity}</td>
-                                <td>
-                                <Link to={`/Editar-Productos/${product.ProductId}`} state={{ Product: product}}>
-                                    <span className='edit'>Editar</span>
-                                </Link>
-                                </td>
+                <div>
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">ISBN</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Descuento</th>
+                                <th scope="col">Cantidad</th>
                             </tr>
-                            );
-                    }       
-                    
-                })}
-                </tbody>
-            </table>
+                        </thead>
+                        <tbody>
+                            {ProductsAndChild.map((product, index) => {
+                                if (product.ProductType === 'Libro') {
+                                    return (
+                                        <tr key={index}>
+                                            <th scope="row">{product.ProductId}</th>
+                                            <td>{product.Name}</td>
+                                            <td>{product.book.ISBN}</td>
+                                            <td>{product.Price}</td>
+                                            <td>{product.Discount}</td>
+                                            <td>{product.Quantity}</td>
+                                            <td>
+                                                <Link to={`/Editar-Libro/${product.ProductId}`} state={{ Product: product }}>
+                                                    <span className='edit'>Editar</span>
+                                                </Link>
+                                            </td>
+                                        </tr>
+                                    );
+                                }
 
-            </div>
-        )},
+                            })}
+                        </tbody>
+                    </table>
+
+                </div>
+            )}
+
             {selectedCategory == 'instrumentoMusical' && (
-            <div>
-                <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Precio</th>
-                        <th scope="col">Descuento</th>
-                        <th scope="col">Cantidad</th>
+                <div>
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Descuento</th>
+                                <th scope="col">Cantidad</th>
 
-                    </tr>
-                </thead>
-                <tbody>
-                {ProductsAndChild.map((product, index) => {
-                    return (
-                    <tr key={index}>
-                        <th scope="row">{product.ProductId}</th>
-                        <td>{product.Name}</td>
-                        <td>{product.Price}</td>
-                        <td>{product.Discount}</td>
-                        <td>{product.Quantity}</td>
-                    </tr>
-                    );
-                })}
-                </tbody>
-            </table>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {ProductsAndChild.map((product, index) => {
+                                if (product.ProductType === 'Instrumento Musical') {
+                                    return (
+                                        <tr key={index}>
+                                            <th scope="row">{product.ProductId}</th>
+                                            <td>{product.Name}</td>
+                                            <td>{product.Price}</td>
+                                            <td>{product.Discount}</td>
+                                            <td>{product.Quantity}</td>
+                                            <td>
+                                                <Link to={`/Editar-Instrumentos-Musicales/${product.ProductId}`} state={{ Product: product }}>
+                                                    <span className='edit'>Editar</span>
+                                                </Link>
+                                            </td>
+                                        </tr>
+                                    );
+                                }
+                            })}
+                        </tbody>
+                    </table>
 
-            </div>
-        )}
+                </div>
+            )}
+
+            {selectedCategory == 'juego' && (
+                <div>
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Descuento</th>
+                                <th scope="col">Cantidad</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {ProductsAndChild.map((product, index) => {
+                                if (product.ProductType === 'Juego de mesa') {
+                                    return (
+                                        <tr key={index}>
+                                            <th scope="row">{product.ProductId}</th>
+                                            <td>{product.Name}</td>
+                                            <td>{product.Price}</td>
+                                            <td>{product.Discount}</td>
+                                            <td>{product.Quantity}</td>
+                                            <td>
+                                                <Link to={`/Editar-Juegos-Mesa/${product.ProductId}`} state={{ Product: product }}>
+                                                    <span className='edit'>Editar</span>
+                                                </Link>
+                                            </td>
+                                        </tr>
+                                    );
+                                }
+                            })}
+                        </tbody>
+                    </table>
+
+                </div>
+            )}
+
+            {selectedCategory == 'tecnologia' && (
+                <div>
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Descuento</th>
+                                <th scope="col">Cantidad</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {ProductsAndChild.map((product, index) => {
+                                if (product.ProductType === 'Tecnologia') {
+                                    return (
+                                        <tr key={index}>
+                                            <th scope="row">{product.ProductId}</th>
+                                            <td>{product.Name}</td>
+                                            <td>{product.Price}</td>
+                                            <td>{product.Discount}</td>
+                                            <td>{product.Quantity}</td>
+                                            <td>
+                                                <Link to={`/Editar-Tecnologia/${product.ProductId}`} state={{ Product: product }}>
+                                                    <span className='edit'>Editar</span>
+                                                </Link>
+                                            </td>
+                                        </tr>
+                                    );
+                                }
+                            })}
+                        </tbody>
+                    </table>
+
+                </div>
+            )}
         </div>
     )
 

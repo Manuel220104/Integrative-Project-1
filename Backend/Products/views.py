@@ -49,7 +49,7 @@ class UltimosDiezProductos(APIView):
 class ProductsWithComponentsView(ListAPIView):
     serializer_class = ProductWithComponentsSerializer
     def get_queryset(self):
-        return Product.objects.prefetch_related('book','technology', 'table_game', 'musical_instrument')
+        return Product.objects.prefetch_related('book','technology','table_game','musical_instrument')
 
 
 class Ultimos10ProductosConDescuento(APIView):

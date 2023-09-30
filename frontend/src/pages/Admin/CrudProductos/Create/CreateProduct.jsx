@@ -7,30 +7,30 @@ import {CreateTechnology} from './CreateTechnology.jsx'
 
 export function CreateProduct() {
 
-    const [selectedCategory, setSelectedCategory] = useState('libro');
+    const [selectedCategory, setSelectedCategory] = useState('Libro');
     const handleCategoryChange = (event) => {
         setSelectedCategory(event.target.value);
     }
 
     return (
         <div className="CreateProductPage">
-                <h1 className="Title">Crear producto</h1>
+                <h1 className="Title">Crear producto : {selectedCategory}</h1>
 
                 <div className="selector">
                     <label className="Seleccionar" htmlFor="category">Tipo de producto</label>
                     <select className="Seleccionar-Dato" id="category" onChange={handleCategoryChange} value={selectedCategory}>
-                        <option value="libro">Libro</option>
-                        <option value="instrumentoMusical">Instrumento Musical</option>
-                        <option value="tecnologia">Tecnología</option>
-                        <option value="juego">Juego de Mesa</option>
+                        <option value="Libro">Libro</option>
+                        <option value="Instrumento Musical">Instrumento Musical</option>
+                        <option value="Tecnología">Tecnología</option>
+                        <option value="Juego de Mesa">Juego de Mesa</option>
                     </select>
                 </div>
 
 
-                {selectedCategory === 'libro' && <CreateBook />}
-                {selectedCategory === 'instrumentoMusical' && <CreateMusicalIns />}
-                {selectedCategory === 'juego' && <CreateGames />}
-                {selectedCategory === 'tecnologia' && <CreateTechnology />}
+                {selectedCategory === 'Libro' && <CreateBook />}
+                {selectedCategory === 'Instrumento Musical' && <CreateMusicalIns />}
+                {selectedCategory === 'Juego de Mesa' && <CreateGames />}
+                {selectedCategory === 'Tecnología' && <CreateTechnology />}
         </div>
     )
 }

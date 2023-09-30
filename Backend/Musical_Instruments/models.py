@@ -8,4 +8,4 @@ class Musical_Instrument(models.Model):
     Product = models.OneToOneField(Product, on_delete=models.CASCADE)
     
     def __str__(self):
-        return (self.Name)
+        return str(self.Musical_InstrumentId)

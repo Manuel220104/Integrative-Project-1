@@ -323,21 +323,46 @@ export function ProductList() {
                     {/* Product grid */}
                     <div className="lg:col-span-3 productosOrganizados">
                         {ProductsAndChild.map(product => {
+                            // Busqueda
                             if (searchTerm !== null){
                                 const searchTermLowerCase = searchTerm.toLowerCase();
                                 if (product.Name.toLowerCase().includes(searchTermLowerCase)) {
                                     return <ProductCard key={product.ProductId} Product={product} />;
                                 }
                             }
-                            else{
-                                if (location.pathname.includes('/Libros')){
-                                    if (product.ProductType.includes("Libro")) {
-                                        return <ProductCard key={product.ProductId} Product={product} />;
-                                    }
+                            // Filtros
+                            
+                            if (location.pathname.includes('/Libros')){
+                                if (product.ProductType == "Libro") {
+                                    return <ProductCard key={product.ProductId} Product={product} />;
                                 }
+                            }
+                            
+                            else if (location.pathname.includes('/InstrumentosMusicales')){
+                                if (product.ProductType == "Instrumento Musical") {
+                                    console.log('entre')
+                                    return <ProductCard key={product.ProductId} Product={product} />;
+                                }
+                            }
+
+                            else if (location.pathname.includes('/JuegosDeMesa')){
+                                if (product.ProductType == "Juego de mesa") {
+                                    return <ProductCard key={product.ProductId} Product={product} />;
+                                }
+                            }
+
+                            else if (location.pathname.includes('/Tecnologia')){
+                                if (product.ProductType == "Tecnologia") {
+                                    return <ProductCard key={product.ProductId} Product={product} />;
+                                }
+                            } 
+                            else {
+
                                 return <ProductCard key={product.ProductId} Product={product} />;
                             }
-                            return null;
+                            return null
+
+                            
                         
                         })}
                     </div>

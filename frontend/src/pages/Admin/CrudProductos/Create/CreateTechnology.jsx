@@ -40,8 +40,6 @@ export function CreateTechnology(){
         console.log('tech')
         console.log(TechData)
 
-
-
         try {
             await CreateProducts(ProductData);
             // navigate('/Productos');
@@ -112,6 +110,7 @@ export function CreateTechnology(){
                                 <input className="Ingresar-Dato" type="number" {...register("Discount", { required: true })} />
                                 {errors.Discount && <span className="error" >Descuento es requerido</span>}
                             </div>
+                            
                         </div>
 
                         <input type="hidden" name="ProductType" value="Tecnologia" {...register("ProductType")} />

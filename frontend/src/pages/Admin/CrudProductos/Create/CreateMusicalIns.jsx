@@ -34,9 +34,7 @@ export function CreateMusicalIns(){
         console.log(data)
         const ProductData = GetDataOfProduct(data)
         const MusicData = GetDataOfMusic(data)
-        console.log('product')
         console.log(ProductData)
-        console.log('book')
         console.log(MusicData)
 
         try {
