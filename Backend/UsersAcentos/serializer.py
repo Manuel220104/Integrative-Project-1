@@ -1,8 +1,7 @@
 from rest_framework import serializers
-from django.contrib.auth.models import User
-#from .models import CustomUser
+from django.contrib.auth import get_user_model
 
-class UserAcentosSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ('username', 'password')
+        model = get_user_model()
+        fields = ('id', 'email')

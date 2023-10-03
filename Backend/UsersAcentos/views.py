@@ -1,27 +1,26 @@
-from django.contrib.auth.models import User
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from rest_framework import status
-from rest_framework_simplejwt.views import TokenObtainPairView
-from .serializer import UserAcentosSerializer
-from rest_framework import viewsets
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.authtoken.models import Token
+from django.contrib.auth import authenticate, login
+from django.contrib.auth import get_user_model
+from .serializer import UserSerializer
 
-class UserView(viewsets.ModelViewSet):
-    serializer_class = UserAcentosSerializer
-    queryset = User.objects.all()
-    
-class UserAcentosRegistration(APIView):
+class RegisterView(APIView):
     def post(self, request):
-        serializer = UserAcentosSerializer(data=request.data)
+        serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            user = serializer.save()
+            return Response({'user_id': user.id, 'message': 'Usuario registrado exitosamente'}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class CustomObtainJWTToken(TokenObtainPairView):
-    def post(self, request, *args, **kwargs):
-        response = super().post(request, *args, **kwargs)
-        if response.status_code == status.HTTP_200_OK:
-            user = User.objects.get(username=request.data['username'])
-            response.data['user_id'] = user.id
-        return response
+class LoginView(APIView):
+    def post(self, request):
+        email = request.data.get('email')
+        password = request.data.get('password')
+        user = authenticate(request, email=email, password=password)
+        if user:
+            login(request, user)
+            token, created = Token.objects.get_or_create(user=user)
+            return Response({'token': token.key}, status=status.HTTP_200_OK)
+        return Response({'message': 'Credenciales inválidas'}, status=status.HTTP_401_UNAUTHORIZED)
