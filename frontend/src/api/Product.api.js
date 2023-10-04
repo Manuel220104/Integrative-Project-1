@@ -24,4 +24,7 @@ export const getLastProductsDescount = () => ProductApi.get(urlBack+'Products/ap
 
 export const getLast10Products = () => ProductApi.get(urlBack+'Products/api/v1/Last_Products_and_child/');
 
+export const updateProduct = (id, updateProductData) => ProductApi.put(`${id}/`, updateProductData);
+
+
 

@@ -48,3 +48,5 @@ virtualenv==20.24.3
 virtualenv-clone==0.5.7
 wdb==3.3.0
 xdis==5.0.13
+djangorestframework-simplejwt==5.3.0
+

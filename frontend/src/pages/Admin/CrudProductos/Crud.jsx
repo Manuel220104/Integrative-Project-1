@@ -23,6 +23,14 @@ export function Crud() {
 
     console.log(ProductsAndChild)
 
+    function formatNumberWithCommas(input) {
+        if (typeof input !== 'number') {
+            input = parseFloat(input.replace(/,/g, ''));
+        }
+        return input.toLocaleString('es-ES'); // Cambia 'es-ES' a tu localización si es diferente
+    }
+    
+
     return (
         <div className="max-w-[95%] mx-auto">
             <div className='flex justify-between'>
@@ -63,7 +71,7 @@ export function Crud() {
                                             <th scope="row">{product.ProductId}</th>
                                             <td>{product.Name}</td>
                                             <td>{product.book.ISBN}</td>
-                                            <td>{product.Price}</td>
+                                            <td>$ {formatNumberWithCommas(product.Price)}</td>
                                             <td>{product.Discount}</td>
                                             <td>{product.Quantity}</td>
                                             <td>
@@ -102,7 +110,7 @@ export function Crud() {
                                         <tr key={index}>
                                             <th scope="row">{product.ProductId}</th>
                                             <td>{product.Name}</td>
-                                            <td>{product.Price}</td>
+                                            <td>$ {formatNumberWithCommas(product.Price)}</td>
                                             <td>{product.Discount}</td>
                                             <td>{product.Quantity}</td>
                                             <td>
@@ -140,7 +148,7 @@ export function Crud() {
                                         <tr key={index}>
                                             <th scope="row">{product.ProductId}</th>
                                             <td>{product.Name}</td>
-                                            <td>{product.Price}</td>
+                                            <td>$ {formatNumberWithCommas(product.Price)}</td>
                                             <td>{product.Discount}</td>
                                             <td>{product.Quantity}</td>
                                             <td>
@@ -178,7 +186,7 @@ export function Crud() {
                                         <tr key={index}>
                                             <th scope="row">{product.ProductId}</th>
                                             <td>{product.Name}</td>
-                                            <td>{product.Price}</td>
+                                            <td>$ {formatNumberWithCommas(product.Price)}</td>
                                             <td>{product.Discount}</td>
                                             <td>{product.Quantity}</td>
                                             <td>
