@@ -12,7 +12,8 @@ urlpatterns = [
     path('Table_Games/', include('Table_Games.urls')),
     path('Technologys/', include('Technologys.urls')),
     path('InformationCarousel/', include('InformationCarousel.urls')),
-    path('UsersAcentos/', include('UsersAcentos.urls')),
+    path('accounts/', include('accounts.urls')),
+
     
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

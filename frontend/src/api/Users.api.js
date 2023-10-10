@@ -9,8 +9,13 @@ const UserApi = axios.create({
     //baseserver
 });
 
-export const getAllUsers = () => UserApi.get('/')
-
-export const getRegister = () => UserApi.get(urlBack+'UsersAcentos/api/v1/register/');
-
-
+axios.post('/accounts/api/login/', {
+    username: username,
+    password: password
+})
+.then(response => {
+    // Maneja la respuesta exitosa (por ejemplo, guarda el token en el almacenamiento local)
+})
+.catch(error => {
+    // Maneja los errores de inicio de sesión (por ejemplo, muestra un mensaje de error)
+});

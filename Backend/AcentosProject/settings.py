@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
+    'rest_framework.authtoken',
     'coreapi',
     'Products',
     'Books',
@@ -48,7 +49,7 @@ INSTALLED_APPS = [
     'Table_Games',
     'Technologys',
     'InformationCarousel',
-    'UsersAcentos',
+    'accounts',
     
     
 ]

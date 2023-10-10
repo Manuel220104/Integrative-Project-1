@@ -16,3 +16,6 @@ urlpatterns = [
     path('api/v1/Book_Product/', ObtainBookandProduct.as_view(), name='product_book'),
 ]
 
+
+
+
