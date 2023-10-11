@@ -8,17 +8,22 @@ import { useNavigate, useParams } from 'react-router-dom'
 export function CreateBook() {
     const { register, handleSubmit, formState: { errors }, setValue, } = useForm();
 
+
+
     function GetDataOfProduct(data) {
-        const ProductData = {
-            Name: data.Name,
-            Price: data.Price,
-            Description: data.Description,
-            ImageUrl: data.ImageUrl,
-            Quantity: data.Quantity,
-            Discount: data.Discount,
-            ProductType: data.ProductType
-        };
-        return ProductData
+        const formData = new FormData();
+        formData.append("Name", data.Name);
+        formData.append("Price", data.Price);
+        formData.append("Description", data.Description);
+        formData.append("ImageUrl", data.ImageUrl);
+        formData.append("Image", data.image[0]);
+        formData.append("Quantity", data.Quantity);
+        formData.append("Discount", data.Discount);
+        formData.append("ProductType", data.ProductType);
+        
+        
+        
+        return formData
     }
 
     function GetDataOfBook(data) {
@@ -33,6 +38,9 @@ export function CreateBook() {
     }
 
     const onSubmitBook = handleSubmit(async (data) => {
+
+        
+
         console.log(data)
         const ProductData = GetDataOfProduct(data)
         const BookData = GetDataOfBook(data)
@@ -71,7 +79,7 @@ export function CreateBook() {
     return (
         <div className="form Bookform" id="BookForm" >
             <form onSubmit={onSubmitBook}>
-                <div className='Atributos'>
+                <div className='Atributos' encType="multipart/form-data">
                     <div>
                         <label className="atributo" htmlFor="Name" >Titulo:</label>
                         <input className="Ingresar-Dato" type="text" {...register("Name", {
@@ -230,6 +238,13 @@ export function CreateBook() {
                         {errors.ImageUrl && (
                             <span className="error">{errors.ImageUrl.message}</span>
                         )}
+                    </div>
+
+                    <div>
+                    <label className="atributo" htmlFor="image">Imagen:</label>
+                        <input type="file" name="image" id="image" accept="image/*" {...register("image", { required: true })} />
+
+                        {errors.Image && <span className="error">Imagen es requerida</span>}
                     </div>
 
                     <div>

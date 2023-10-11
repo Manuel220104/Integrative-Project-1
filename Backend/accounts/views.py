@@ -60,7 +60,7 @@ def login(request):
             token, created = Token.objects.get_or_create(user=user)
 
             # Devuelve el token en la respuesta
-            return Response({'token': token.key}, status=status.HTTP_200_OK)
+            return Response({'token': token.key, 'username_or_email': username_or_email}, status=status.HTTP_200_OK)
         else:
             # Si la contraseña no es válida, devuelve un mensaje de error
             return Response({'error': 'Credenciales inválidas'}, status=status.HTTP_401_UNAUTHORIZED)

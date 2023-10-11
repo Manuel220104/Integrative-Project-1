@@ -7,10 +7,10 @@ from rest_framework import routers
 router = routers.SimpleRouter()
 
 urlpatterns = [
-    path('api/users/', views.UserListView.as_view(), name='user-list'),
-    path('api/register/', views.register, name='register'),
-    path('api/login/', views.login, name='login'),
-    path('api/logout/', views.logout_view, name='logout'),
+    path('api/v1/users/', views.UserListView.as_view(), name='user-list'),
+    path('api/v1/register/', views.register, name='register'),
+    path('api/v1/login/', views.login, name='login'),
+    path('api/v1/logout/', views.logout_view, name='logout'),
     # Otras URL de tu aplicación
 ]
 

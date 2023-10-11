@@ -49,4 +49,6 @@ virtualenv-clone==0.5.7
 wdb==3.3.0
 xdis==5.0.13
 djangorestframework-simplejwt==5.3.0
+django-allauth==0.47.0
+social-auth-app-django==4.0.0
 

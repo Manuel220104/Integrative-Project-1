@@ -18,6 +18,9 @@ export function Navigation() {
         setSidebarOpen(!sidebarOpen)
     }
 
+    const token = localStorage.getItem('token');
+    const username_or_email = localStorage.getItem('username_or_email');
+
     const [searchOpen, setSearchOpen] = useState(false);
 
     const toggleSearch = () => {
@@ -35,10 +38,18 @@ export function Navigation() {
 
     const handleSearchKeyDown = (e) => {
         if (e.key === 'Enter') {
-            e.preventDefault(); 
-            handleSearch(); 
+            e.preventDefault();
+            handleSearch();
         }
-      };
+    };
+
+    const handleLogout = () => {
+        // Eliminar el token del almacenamiento local
+        localStorage.removeItem('token');
+        // Realizar otras tareas de cierre de sesión, si es necesario
+        // Redirigir al usuario a la página de inicio de sesión, por ejemplo
+        navigate('/Iniciar-Sesion');
+    };
 
     return (
         <div>
@@ -62,8 +73,8 @@ export function Navigation() {
                 </div>
 
                 <div className="navbar-search">
-                    <input className="navbar-item search-bar-fake button ocultar" style={{ color: "#5abcf4", }} type="button"  onClick={toggleSearch}/>
-                
+                    <input className="navbar-item search-bar-fake button ocultar" style={{ color: "#5abcf4", }} type="button" onClick={toggleSearch} />
+
                     <a href="#" className="navbar-item search-icon" onClick={toggleSearch}><img src={search} alt="Buscar" /></a>
 
                     <img className="navbar-item cart-icon" src={cart} alt="Carrito" />
@@ -72,14 +83,21 @@ export function Navigation() {
                     </Link>
 
                     <div className="navbar-login">
-                        <div className="login" href="">
-                        <Link to="/Iniciar-Sesion">
-                            <img className="login-icon" src={login} alt="login" />
-                        </Link>
-                        <Link to="/Iniciar-Sesion">
-                            <span className="ocultar"> Iniciar sesión / Registrarse</span>
-                        </Link>
-                        </div>
+                        {token ? ( // Si hay un token, el usuario ha iniciado sesión
+                            <div className="login" onClick={handleLogout}>
+                                <button className="cerrarsesion" onClick={handleLogout}>Cerrar sesión</button>
+                                <span>({username_or_email})</span>
+                            </div>
+                        ) : (
+                            <div className="login" href="">
+                                <Link to="/Iniciar-Sesion">
+                                    <img className="login-icon" src={login} alt="login" />
+                                </Link>
+                                <Link to="/Iniciar-Sesion">
+                                    <span className="ocultar"> Iniciar sesión / Registrarse</span>
+                                </Link>
+                            </div>
+                        )}
                     </div>
 
                     <div className="burguer">
@@ -107,8 +125,8 @@ export function Navigation() {
                 </Link>
             </div>
 
-        
-            <div className={`search flex justify-content-start items-center justify-center ${searchOpen ? 'active'  : ''}`}>
+
+            <div className={`search flex justify-content-start items-center justify-center ${searchOpen ? 'active' : ''}`}>
                 <Link to="/">
                     <img className="ml-3 mr-0 navbar-logo ocultar2" src={Logo} alt="Logo" />
                 </Link>
@@ -116,10 +134,10 @@ export function Navigation() {
                     <input onChange={(e) => setSearchTerm(e.target.value)} onKeyDown={handleSearchKeyDown} className="navbar-item search-bar" type="text" placeholder="" />
                     <button onClick={handleSearch} className="navbar-item search-icon "><img src={search} alt="Buscar" /></button>
                 </div>
-                <FontAwesomeIcon  className="mr-10"icon={faX} onClick={toggleSearch} style={{ color: "#5abcf4", }} />
+                <FontAwesomeIcon className="mr-10" icon={faX} onClick={toggleSearch} style={{ color: "#5abcf4", }} />
             </div>
 
-           
+
         </div>
     )
 }

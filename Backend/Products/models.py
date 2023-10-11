@@ -1,5 +1,7 @@
 from django.db import models
-
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
+import os
 
 class Product(models.Model):
     ProductId = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
@@ -7,6 +9,7 @@ class Product(models.Model):
     Price = models.PositiveIntegerField()
     Description = models.CharField(max_length = 500)
     ImageUrl = models.URLField(blank = False, max_length=500)
+    Image = models.ImageField(upload_to='./Products/Productimages/', null=True, blank=True)
     Quantity = models.PositiveIntegerField(default=0)
     Discount = models.PositiveIntegerField()
     PRODUCT_TYPE =[
@@ -21,4 +24,11 @@ class Product(models.Model):
     def __str__(self):
         return str(self.ProductId)
     
-    
+@receiver(pre_delete, sender=Product)
+def delete_product_image(sender, instance, **kwargs):
+    # Elimina el archivo de imagen si existe
+    if instance.Image:
+        # La ruta del archivo de imagen
+        image_path = instance.Image.path
+        if os.path.isfile(image_path):
+            os.remove(image_path)

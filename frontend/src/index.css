@@ -71,6 +71,11 @@ a:hover {
   color: var(--color2);
   align-items: center;
   justify-content: center;
+  
+}
+
+.cerrarsesion{
+  margin-right: 5px;
 }
 
 .login img{
