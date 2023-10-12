@@ -390,6 +390,26 @@ a:hover {
   border-radius: 9px;
 }
 
+
+
+.Boton-InicioSesion{
+  display: block;
+  margin-top: 8px;
+  background-color: #5ABCF4;
+  color: #ffffff; 
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
+  border: 1px solid #5ABCF4; 
+  transition: background-color 0.3s, color 0.3s;
+  padding: 5px; 
+  cursor: pointer;
+  border-radius: 9px;
+
+}
+
+.Boton-InicioSesion:hover, .Boton-Guardar:hover {
+  background-color:#4693c1 !important;
+}
+
 .Boton{
   margin: 10px;
   background-color: #5ABCF4;
@@ -635,13 +655,45 @@ Carrusel novedades con date
   justify-content: center;
 }
 
+
 .slick-prev {
-  left: -6vw; /* Ajusta la posición del botón "Previous" a la izquierda */
+  left: -4vw;
 }
 
 .slick-next {
-  right: -6vw; /* Ajusta la posición del botón "Next" a la derecha */
+  right: -4vw;
 }
+
+
+@media screen and (max-width: 1200px) {
+  .slick-prev {
+    left: -5vw;
+  }
+
+  .slick-next {
+    right: -5vw;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .slick-prev {
+    left: -8vw;
+  }
+
+  .slick-next {
+    right: -8vw;
+  }
+}
+@media screen and (max-width: 400px) {
+  .slick-prev {
+    left: -11vw;
+  }
+
+  .slick-next {
+    right: -11vw;
+  }
+}
+
 
 .slick-prev,
 .slick-next {

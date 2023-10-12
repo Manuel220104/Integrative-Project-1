@@ -20,8 +20,11 @@ export function ModulesAdmin(){
             </Link>
         </div>
         <div className='module'>
-            <p>Crear Usuario</p>
+            <Link to="/Crear-Librero">
+                <p>Añadir un Librero</p>
+            </Link>
         </div>
+
     </div>
     )
-} 
+}

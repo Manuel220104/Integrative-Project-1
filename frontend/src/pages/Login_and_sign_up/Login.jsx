@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
+
 export function Login() {
     const [loginData, setLoginData] = useState({
         username_or_email: '',
         password: '',
+        user_type: '',
     });
 
     const [loginSuccess, setLoginSuccess] = useState(false);
@@ -21,36 +23,63 @@ export function Login() {
     
         try {
             const response = await loginUser(loginData);
-        
+    
             // Comprobar si la respuesta indica un inicio de sesión exitoso
             if (response.status === 200) {
                 console.log('Inicio de sesión exitoso');
-                
+    
                 const token = response.data.token;
                 const username_or_email = response.data.username_or_email;
-                console.log('Token:',token);
-                console.log('username_or_email:',username_or_email);
+                const user_type = response.data.user_type;
+                console.log('Token:', token);
+                console.log('username_or_email:', username_or_email);
+                console.log('user_type:', user_type);
                 localStorage.setItem('token', token);
                 localStorage.setItem('username_or_email', username_or_email);
-
-
+                localStorage.setItem('user_type', user_type);
+    
                 setLoginSuccess(true);
                 navigate('/');
             } else {
                 setLoginSuccess(false);
                 console.log('Inicio de sesión fallido');
-        
+    
                 const responseData = await response.json();
                 setResponseMessage(responseData.error);
+    
+                // Limpia los campos de entrada en caso de error
+                setLoginData({
+                    username_or_email: '',
+                    password: '',
+                    user_type: '',
+                });
             }
         } catch (error) {
             // Manejar errores
-            setError(error.message); // Almacenar el mensaje de error en el estado
+            setError("Hubo un error en el inicio de sesión. Por favor, inténtalo de nuevo.");
             console.error('Error en el inicio de sesión:', error);
+    
+            // Limpia los campos de entrada en caso de error
+            setLoginData({
+                username_or_email: '',
+                password: '',
+                user_type: '',
+            });
         }
-        
-        
     };
+
+    const handleInputChange = (e) => {
+        // Limpiar el mensaje de error al cambiar el valor de los campos de entrada
+        setError('');
+
+        // Actualizar el estado loginData según el campo de entrada modificado
+        setLoginData({
+            ...loginData,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+
     
 
     return (
@@ -95,24 +124,24 @@ export function Login() {
                                 />
                             </div>
                         </div>
-                        <div className="flex items-center justify-between">
+                        {/* <div className="flex items-center justify-between">
                             <div className="text-sm">
                                 <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
                                     Forgot your password?
                                 </a>
                             </div>
-                        </div>
+                        </div> */}
                         <div>
                             <button
                                 type="submit"
-                                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                className="Boton-InicioSesion w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             >
                                 Iniciar Sesion
                             </button>
                             <Link to="/Registro-Usuario">
                                 <button
                                     type="button"
-                                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                    className="Boton-InicioSesion w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                 >
                                     Registrate
                                 </button>
@@ -121,51 +150,8 @@ export function Login() {
                     </form>
                     {loginSuccess && <p className="text-green-600">Inicio de sesión exitoso</p>}
                     {error && <p className="text-red-600">Error: {error}</p>}
-                    <div className="mt-6">
-                        <div className="relative">
-                            <div className="absolute inset-0 flex items-center">
-                                <div className="w-full border-t border-gray-300" />
-                            </div>
-                            <div className="relative flex justify-center text-sm">
-                                <span className="px-2 bg-white text-gray-500">Or continue with</span>
-                            </div>
-                        </div>
-                        <div className="mt-6 grid grid-cols-3 gap-3">
-                            <div>
-                                <a
-                                    href="#"
-                                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-                                >
-                                    <span className="sr-only">Sign in with Facebook</span>
-                                    <svg className="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                                        {/* Icono de Facebook */}
-                                    </svg>
-                                </a>
-                            </div>
-                            <div>
-                                <a
-                                    href="#"
-                                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-                                >
-                                    <span className="sr-only">Sign in with Twitter</span>
-                                    <svg className="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                                        {/* Icono de Twitter */}
-                                    </svg>
-                                </a>
-                            </div>
-                            <div>
-                                <a
-                                    href="#"
-                                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-                                >
-                                    <span className="sr-only">Sign in with GitHub</span>
-                                    <svg className="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                                        {/* Icono de GitHub */}
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+
+                    
                 </div>
             </div>
         </div>

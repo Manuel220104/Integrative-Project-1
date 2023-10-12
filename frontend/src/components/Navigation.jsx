@@ -20,6 +20,7 @@ export function Navigation() {
 
     const token = localStorage.getItem('token');
     const username_or_email = localStorage.getItem('username_or_email');
+    const user_type = localStorage.getItem('user_type');
 
     const [searchOpen, setSearchOpen] = useState(false);
 
@@ -70,6 +71,13 @@ export function Navigation() {
                     <Link to="/Nosotros">
                         <div className="navbar-item ocultar enlace">Acerca de nosotros</div>
                     </Link>
+                    
+                    {token && user_type === 'admin' ? (
+                    <Link to="/admin">
+                        <div className="navbar-item ocultar enlace">Admin</div>
+                    </Link>
+                    ) : null}
+
                 </div>
 
                 <div className="navbar-search">
@@ -83,7 +91,7 @@ export function Navigation() {
                     </Link>
 
                     <div className="navbar-login">
-                        {token ? ( // Si hay un token, el usuario ha iniciado sesión
+                        {token  ?  ( // Si hay un token, el usuario ha iniciado sesión
                             <div className="login" onClick={handleLogout}>
                                 <button className="cerrarsesion" onClick={handleLogout}>Cerrar sesión</button>
                                 <span>({username_or_email})</span>

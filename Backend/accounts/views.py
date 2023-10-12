@@ -9,6 +9,8 @@ from .serializer import UserSerializer
 from rest_framework import generics
 from django.http import HttpRequest
 from rest_framework.request import Request
+from .serializer import UserProfileSerializer
+
 
 
 class UserListView(generics.ListAPIView):
@@ -32,7 +34,14 @@ def register(request):
         if user_serializer.is_valid():
             user = user_serializer.save()
             # También puedes iniciar sesión automáticamente al usuario aquí si lo deseas
-
+            UserProfile.objects.create(
+                user=user,
+                username=data['username'],
+                first_name=data['first_name'],
+                last_name=data['last_name'],
+                email=data['email'],
+                residence=data.get('residence', ''),  # Ubicación
+            )
             return Response({'message': 'Usuario registrado correctamente.'}, status=status.HTTP_201_CREATED)
         else:
             return Response({'error': user_serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
@@ -44,6 +53,7 @@ def login(request):
     data = request.data
     username_or_email = data.get('username_or_email')
     password = data.get('password')
+    
 
     # Verificar si el usuario proporcionó un correo electrónico
     if '@' in username_or_email:
@@ -56,17 +66,25 @@ def login(request):
 
     if user is not None:
         if user.check_password(password):
-            # Genera o recupera el token de autenticación
-            token, created = Token.objects.get_or_create(user=user)
-
-            # Devuelve el token en la respuesta
-            return Response({'token': token.key, 'username_or_email': username_or_email}, status=status.HTTP_200_OK)
+            if user.is_staff:
+                # El usuario es un administrador
+                # Genera o recupera el token de autenticación
+                token, created = Token.objects.get_or_create(user=user)
+                # Devuelve el token en la respuesta
+                return Response({'token': token.key, 'username_or_email': username_or_email, 'user_type': 'admin'}, status=status.HTTP_200_OK)
+            else:
+                # El usuario es un usuario normal
+                # Genera o recupera el token de autenticación
+                token, created = Token.objects.get_or_create(user=user)
+                # Devuelve el token en la respuesta
+                return Response({'token': token.key, 'username_or_email': username_or_email, 'user_type': 'normal'}, status=status.HTTP_200_OK)
         else:
             # Si la contraseña no es válida, devuelve un mensaje de error
             return Response({'error': 'Credenciales inválidas'}, status=status.HTTP_401_UNAUTHORIZED)
     else:
         # Si no se encuentra el usuario, devuelve un mensaje de error
         return Response({'error': 'Usuario no encontrado'}, status=status.HTTP_404_NOT_FOUND)
+
 
 
 @api_view(['POST'])
