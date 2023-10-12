@@ -30,7 +30,6 @@ export function Crud() {
         return input.toLocaleString('es-ES'); // Cambia 'es-ES' a tu localización si es diferente
     }
     
-
     return (
         <div className="max-w-[95%] mx-auto">
             <div className='flex justify-between'>

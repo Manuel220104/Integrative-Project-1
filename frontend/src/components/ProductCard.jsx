@@ -3,7 +3,7 @@ import like from '../assets/icons/like.png'
 import cart from '../assets/icons/cart.png'
 
 
-const MaxLength = 30; 
+const MaxLength = 30;
 
 export function ProductCard({ Product }) {
     const truncatedName = Product.Name.length > MaxLength ? `${Product.Name.substring(0, MaxLength)}...` : Product.Name;
@@ -12,15 +12,21 @@ export function ProductCard({ Product }) {
         if (typeof input !== 'number') {
             input = parseFloat(input.replace(/,/g, ''));
         }
-        return input.toLocaleString('es-ES'); // Cambia 'es-ES' a tu localización si es diferente
+        return input.toLocaleString('es-ES');
     }
-    
+
     return (
         <div>
             {Product.ProductType == 'Libro' && (
                 <div className="CardP">
                     <div className='imageProduct'>
-                        <img src={Product.ImageUrl}></img>
+                        {
+                            Product.ImageUrl != null ? (
+                                <img src={Product.ImageUrl} alt="Image" />
+                            ) : (
+                                <img src={Product.Image} alt="Image" />
+                            )
+                        }
                     </div>
                     <div className="info">
                         <span className='TitleCard'>{truncatedName}</span>
@@ -41,7 +47,13 @@ export function ProductCard({ Product }) {
             {Product.ProductType == "Instrumento Musical" && (
                 <div className="CardP">
                     <div className='imageProduct'>
-                        <img src={Product.ImageUrl}></img>
+                        {
+                            Product.ImageUrl != null ? (
+                                <img src={Product.ImageUrl} alt="Image" />
+                            ) : (
+                                <img src={Product.Image} alt="Image" />
+                            )
+                        }
                     </div>
                     <div className="info">
                         <span className='TitleCard'>{truncatedName}</span>
@@ -62,7 +74,13 @@ export function ProductCard({ Product }) {
             {Product.ProductType == "Tecnologia" && (
                 <div className="CardP">
                     <div className='imageProduct'>
-                        <img src={Product.ImageUrl}></img>
+                        {
+                            Product.ImageUrl != null ? (
+                                <img src={Product.ImageUrl} alt="Image" />
+                            ) : (
+                                <img src={Product.Image} alt="Image" />
+                            )
+                        }
                     </div>
                     <div className="info">
                         <span className='TitleCard'>{truncatedName}</span>
@@ -83,7 +101,13 @@ export function ProductCard({ Product }) {
             {Product.ProductType == "Juego de mesa" && (
                 <div className="CardP">
                     <div className='imageProduct'>
-                        <img src={Product.ImageUrl}></img>
+                        {
+                            Product.ImageUrl != null ? (
+                                <img src={Product.ImageUrl} alt="Image" />
+                            ) : (
+                                <img src={Product.Image} alt="Image" />
+                            )
+                        }
                     </div>
                     <div className="info">
                         <span className='TitleCard'>{truncatedName}</span>

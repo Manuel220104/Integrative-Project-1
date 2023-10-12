@@ -12,6 +12,7 @@ import { getAllSubcategory } from '../../../../api/Subcategories.api.js'
 
 export function CreateBook() {
     const { register, handleSubmit, formState: { errors }, setValue, } = useForm();
+
     const [Categories, setCategories] = useState([]);
 
     const location = useLocation();
@@ -39,29 +40,21 @@ export function CreateBook() {
         fetchData();
     }, [location]);
 
+    const [selectedCategoryName, setSelectedCategoryName] = useState('General');
+
+    
     function GetDataOfProduct(data) {
         const formData = new FormData();
         formData.append("Name", data.Name);
         formData.append("Price", data.Price);
         formData.append("Description", data.Description);
-
-        if (data.ImageUrl != "") {
-            formData.append("ImageUrl", data.ImageUrl);
-        }
-
+        formData.append("ImageUrl", data.ImageUrl);
+        formData.append("Image", data.image[0]);
         formData.append("Quantity", data.Quantity);
         formData.append("Discount", data.Discount);
         formData.append("ProductType", data.ProductType);
-        formData.append("Category", data.Category);
-        formData.append("Subcategory", data.Subcategory);
-
-        if (data.image.length > 0) {
-            formData.append("Image", data.image[0]);
-        }
-
-        return formData;
+        return formData
     }
-
 
     function GetDataOfBook(data) {
         const ProductData = {
@@ -76,56 +69,39 @@ export function CreateBook() {
 
     const onSubmitBook = handleSubmit(async (data) => {
         console.log(data)
-        if (data.image.length > 0 || data.ImageUrl != "") {
-            const ProductData = GetDataOfProduct(data)
-            const BookData = GetDataOfBook(data)
-            console.log('product')
-            console.log(ProductData)
-            console.log('book')
+        const ProductData = GetDataOfProduct(data)
+        const BookData = GetDataOfBook(data)
+        console.log('product')
+        console.log(ProductData)
+        console.log('book')
+        console.log(BookData)
+
+        try {
+            await CreateProducts(ProductData);
+            // navigate('/Productos');
+        } catch (error) {
+            console.error('Error al crear el producto:', error);
+            console.log('Respuesta del servidor:', error.response);
+        }
+
+        async function loadlastProducts() {
+            const res = await getLastProduct();
+            const id = res.data.ProductId;
+            return id
+        }
+
+        try {
+            const id = await loadlastProducts();
+            console.log(id)
+            BookData.Product = id;
             console.log(BookData)
-
-            try {
-                await CreateProducts(ProductData);
-                // navigate('/Productos');
-            } catch (error) {
-                console.error('Error al crear el producto:', error);
-                console.log('Respuesta del servidor:', error.response);
-            }
-
-            async function loadlastProducts() {
-                const res = await getLastProduct();
-                const id = res.data.ProductId;
-                return id
-            }
-
-            try {
-                const id = await loadlastProducts();
-                console.log(id)
-                BookData.Product = id;
-                console.log(BookData)
-                await createBooks(BookData);
-            } catch (error) {
-                console.error('Error al crear el libro:', error);
-                console.log('Respuesta del servidor:', error.response);
-            }
+            await createBooks(BookData);
+        } catch (error) {
+            console.error('Error al crear el libro:', error);
+            console.log('Respuesta del servidor:', error.response);
         }
-        else{
-            alert('Se requiere una imagen para crear producto')
-        }
-
     });
 
-    const [selectedCategoryid, setSelectedCategory] = useState('');
-    const handleCategoryChange = (e) => {
-        const selectedCategoryName = e.target.value;
-        const selectedCategoryid = Categories.find(category => category.Name === selectedCategoryName);
-        if (selectedCategoryid) {
-            setSelectedCategory(selectedCategoryid.CategoryId);
-        }
-        else {
-            setSelectedCategory(-1);
-        }
-    }
 
     return (
         <div className="form Bookform" id="BookForm" >
@@ -275,21 +251,27 @@ export function CreateBook() {
                         <label className="atributo" htmlFor="ImageUrl">
                             Imagen URL:
                         </label>
-                        <input 
+                        <input
                             className="Ingresar-Dato"
                             type="url"
                             {...register("ImageUrl", {
+                                required: "La URL de la imagen es requerida",
                                 pattern: {
                                     value: /^(ftp|http|https):\/\/[^ "]+$/,
                                     message: "Ingrese una URL válida",
                                 },
                             })}
                         />
+                        {errors.ImageUrl && (
+                            <span className="error">{errors.ImageUrl.message}</span>
+                        )}
                     </div>
 
                     <div>
                         <label className="atributo" htmlFor="image">Imagen:</label>
-                        <input type="file" name="image" id="image" accept="image/*" {...register("image")} />
+                        <input type="file" name="image" id="image" accept="image/*" {...register("image", { required: true })} />
+
+                        {errors.Image && <span className="error">Imagen es requerida</span>}
                     </div>
 
                     <div>
@@ -306,12 +288,7 @@ export function CreateBook() {
 
                     <div className="selector">
                         <label className="atributo" htmlFor="category">Tipo de Categoría</label>
-                        <select
-                            className="Seleccionar-Dato"
-                            id="category"
-                            {...register("Category")}
-                            onChange={handleCategoryChange}
-                        >
+                        <select className="Seleccionar-Dato" id="category" onChange={(e) => {console.log(e.target.value); setSelectedCategoryName(e.target.value)}} {...register("Category")}>
                             <option value="General">Seleccione una categoría</option>
                             {Categories.map((Category) => {
                                 return (
@@ -322,25 +299,23 @@ export function CreateBook() {
                             })}
                         </select>
                     </div>
+                    
 
+                    <p> {selectedCategoryName}</p>
 
                     <div className="selector">
                         <label className="atributo" htmlFor="subcategory">Tipo de subcategoría</label>
-                        <select className="Seleccionar-Dato" id="subcategory" {...register("Subcategory")}>
-                            <option value="General">Seleccione una subcategoría</option>
-                            {
-                                Subcategories.map((Subcategory) => {
-                                    if (Subcategory.Category === selectedCategoryid) {
-
-                                        return (
-                                            <option key={Subcategory.SubcategoryId} value={Subcategory.Name}>{Subcategory.Name}</option>
-                                        );
-                                    }
-                                    return
-                                })
-                            }
+                        <select className="Seleccionar-Dato" id="subcategory" {...register("Subcategory", { required: false })}>
+                            <option value="General">Seleccione una categoría</option>
+                            {Subcategories.map((Subcategory) => {
+                                return (
+                                    <option key={Subcategory.SubcategoryId} value={Subcategory.Name}>{Subcategory.Name}</option>
+                                );
+                            })}
                         </select>
                     </div>
+
+
                 </div>
 
                 <input type="hidden" name="ProductType" value="Libro" {...register("ProductType")} />

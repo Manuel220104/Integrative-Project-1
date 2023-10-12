@@ -4,6 +4,7 @@ import { Main } from './pages/User/Main';
 import { AboutUs } from './pages/User/AboutUs';
 import { ProductPage } from './pages/User/ProductPage';
 import { Admin } from './pages/Admin/Admin';
+import { CreateCategories } from './pages/Admin/CreateCategories';
 import { Liked } from './pages/User/Liked';
 import { Login } from './pages/Login_and_sign_up/Login';
 import { Signup } from './pages/Login_and_sign_up/Signup';
@@ -52,6 +53,7 @@ function App() {
         <Route path="/Editar-Instrumentos-Musicales/:productId" element={<EditMusicalIns />} />
         <Route path="/Editar-Tecnologia/:productId" element={<EditTechnology />} />
         <Route path="/Crear-Informacion-Carrusel" element={<CreateCarouselInfo />} />
+        <Route path="/Crear-Categoria" element={<CreateCategories />} />
         <Route path="/Mis-MeGusta" element={<Liked />} />
         <Route path="/Iniciar-Sesion" element={<Login />} />
         <Route path="/Registro-Usuario" element={<Signup />} />

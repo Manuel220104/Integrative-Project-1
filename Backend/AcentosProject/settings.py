@@ -50,8 +50,8 @@ INSTALLED_APPS = [
     'Technologys',
     'InformationCarousel',
     'accounts',
-    
-    
+    'Categories',
+    'Subcategories',
 ]
 
 MIDDLEWARE = [

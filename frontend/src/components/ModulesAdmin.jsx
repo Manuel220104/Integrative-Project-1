@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 
 export function ModulesAdmin(){
     return(
-        
     <div className="containermodules container">
         <div className='module'>
             <Link to="/Gestionar-Productos">
@@ -16,7 +15,9 @@ export function ModulesAdmin(){
             </Link>
         </div>
         <div className='module'>
-            <p>Module</p>
+            <Link to="/Crear-Categoria">
+                <p>Crear Categoría</p>
+            </Link>
         </div>
         <div className='module'>
             <p>Crear Usuario</p>

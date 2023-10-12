@@ -390,6 +390,18 @@ a:hover {
   border-radius: 9px;
 }
 
+.Boton{
+  margin: 10px;
+  background-color: #5ABCF4;
+  color: #ffffff; 
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
+  border: 1px solid #5ABCF4; 
+  transition: background-color 0.3s, color 0.3s;
+  padding: 5px; 
+  cursor: pointer;
+  border-radius: 9px;
+}
+
 .Seleccionar{
   font-size: 20px;
   font-weight: 450;
@@ -417,6 +429,10 @@ a:hover {
 
 
 .CreateProductPage{
+  margin-left: 2.5vw;
+}
+
+.FormCategory{
   margin-left: 2.5vw;
 }
 
