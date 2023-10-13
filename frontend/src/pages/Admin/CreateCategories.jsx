@@ -24,7 +24,7 @@ export function CreateCategories() {
         loadCategories();
     }, [location, loadCategories]);
 
-    const onSubmitCategory = handleSubmit(async (data) => {        
+    const onSubmitCategory = handleSubmit(async (data) => {
         try {
             await createCategory(data);
             loadCategories();

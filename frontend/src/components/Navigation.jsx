@@ -49,7 +49,7 @@ export function Navigation() {
         localStorage.removeItem('token');
         // Realizar otras tareas de cierre de sesión, si es necesario
         // Redirigir al usuario a la página de inicio de sesión, por ejemplo
-        navigate('/Iniciar-Sesion');
+        navigate('/');
     };
 
     return (
@@ -92,10 +92,16 @@ export function Navigation() {
 
                     <div className="navbar-login">
                         {token  ?  ( // Si hay un token, el usuario ha iniciado sesión
-                            <div className="login" onClick={handleLogout}>
-                                <button className="cerrarsesion" onClick={handleLogout}>Cerrar sesión</button>
-                                <span>({username_or_email})</span>
+                            <div className="login"  >
+                                <Link to="/Mi-cuenta">
+                                    <img className="login-icon mi-cuenta-icon" src={login} alt="login" />
+                                </Link>
+                                <div onClick={handleLogout}>
+                                    <button className="cerrarsesion" onClick={handleLogout}>Cerrar sesión</button>
+                                    <span>({username_or_email})</span>
+                                </div>
                             </div>
+
                         ) : (
                             <div className="login" href="">
                                 <Link to="/Iniciar-Sesion">

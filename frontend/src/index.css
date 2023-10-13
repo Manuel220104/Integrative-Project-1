@@ -7,7 +7,7 @@
   --color2: #5ABCF4;
   --fuentePrincipal: 'Inter';
   --fuenteSecundaria: 'Open Sans';
-} 
+}
 
 body {
   background: white;
@@ -82,6 +82,9 @@ a:hover {
   margin-right: 10px;
 }
 
+.mi-cuenta-icon{
+  display: flex;
+}
 .search-icon, .cart-icon, .login-icon, .like-icon{
   width: 16px;
   height: 16px;

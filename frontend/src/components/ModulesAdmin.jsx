@@ -5,22 +5,22 @@ export function ModulesAdmin(){
     return(
     <div className="containermodules container">
         <div className='module'>
-            <Link to="/Gestionar-Productos">
+            <Link to="/Admin/Gestionar-Productos">
                 <p>Gestionar Productos</p>
             </Link>
         </div>
         <div className='module'>
-            <Link to="/Crear-Informacion-Carrusel">
+            <Link to="/Admin/Crear-Informacion-Carrusel">
                 <p>Carrusel de Noticias</p>
             </Link>
         </div>
         <div className='module'>
-            <Link to="/Crear-Categoria">
+            <Link to="/Admin/Crear-Categoria">
                 <p>Crear Categoría</p>
             </Link>
         </div>
         <div className='module'>
-            <Link to="/Crear-Librero">
+            <Link to="/Admin/Crear-Librero">
                 <p>Añadir un Librero</p>
             </Link>
         </div>

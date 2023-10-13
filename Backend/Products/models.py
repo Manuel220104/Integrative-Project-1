@@ -14,7 +14,7 @@ class Product(models.Model):
     Quantity = models.PositiveIntegerField(default=0)
     Discount = models.PositiveIntegerField()
     Category = models.CharField(max_length = 500, default='General')
-    Subcategory = models.CharField(max_length = 500, blank=True)    
+    Subcategory = models.CharField(max_length = 500, blank=True)
     
     PRODUCT_TYPE =[
         ("Libro", "Libro")  ,

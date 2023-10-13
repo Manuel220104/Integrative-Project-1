@@ -3,45 +3,32 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.authtoken.models import Token
-from django.contrib.auth.models import User
-from .models import UserProfile
-from .serializer import UserSerializer
+from .models import Usuarios  # Importa el modelo Usuarios en lugar de User
+from .serializer import UsuariosCreateSerializer  # Importa el serializador UsuariosCreateSerializer
+from .serializer import UsuariosSerializer
 from rest_framework import generics
-from django.http import HttpRequest
-from rest_framework.request import Request
-from .serializer import UserProfileSerializer
-
-
 
 class UserListView(generics.ListAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+    queryset = Usuarios.objects.all()
+    serializer_class = UsuariosSerializer
+
 
 @api_view(['POST'])
 def register(request):
     data = request.data
 
-    # Verificar si el nombre de usuario ya existe
-    if User.objects.filter(username=data['username']).exists():
+        # Verificar si el nombre de usuario ya existe
+    if Usuarios.objects.filter(username=data['username']).exists():
         return Response({'error': 'El nombre de usuario ya está en uso.'}, status=status.HTTP_400_BAD_REQUEST)
 
     # Verificar si el correo electrónico ya existe
-    if User.objects.filter(email=data['email']).exists():
+    if Usuarios.objects.filter(email=data['email']).exists():
         return Response({'error': 'El correo electrónico ya está registrado.'}, status=status.HTTP_400_BAD_REQUEST)
 
     try:
-        user_serializer = UserSerializer(data=data)
+        user_serializer = UsuariosCreateSerializer(data=data)  # Usa el serializador UsuariosCreateSerializer
         if user_serializer.is_valid():
             user = user_serializer.save()
-            # También puedes iniciar sesión automáticamente al usuario aquí si lo deseas
-            UserProfile.objects.create(
-                user=user,
-                username=data['username'],
-                first_name=data['first_name'],
-                last_name=data['last_name'],
-                email=data['email'],
-                residence=data.get('residence', ''),  # Ubicación
-            )
             return Response({'message': 'Usuario registrado correctamente.'}, status=status.HTTP_201_CREATED)
         else:
             return Response({'error': user_serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
@@ -58,11 +45,14 @@ def login(request):
     # Verificar si el usuario proporcionó un correo electrónico
     if '@' in username_or_email:
         try:
-            user = User.objects.get(email=username_or_email)
-        except User.DoesNotExist:
+            user = Usuarios.objects.get(email=username_or_email)
+        except Usuarios.DoesNotExist:
             user = None
     else:
-        user = authenticate(username=username_or_email, password=password)
+        # Si no se proporcionó un correo electrónico, intenta buscar por nombre de usuario
+        user = Usuarios.objects.filter(username=username_or_email).first()
+
+
 
     if user is not None:
         if user.check_password(password):
@@ -86,8 +76,7 @@ def login(request):
         return Response({'error': 'Usuario no encontrado'}, status=status.HTTP_404_NOT_FOUND)
 
 
-
 @api_view(['POST'])
 def logout_view(request):
-    logout(request)  # Cierra la sesión del usuario
+    logout(request)
     return Response({'message': 'Sesión cerrada correctamente.'}, status=status.HTTP_200_OK)

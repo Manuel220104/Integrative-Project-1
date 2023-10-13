@@ -112,9 +112,9 @@ function App() {
         )}
 
         {token && user_type === 'admin' ? (
-            <Route path="/Admin/-Categoria" element={<CreateCategories />} />
+            <Route path="/Admin/Crear-Categoria" element={<CreateCategories />} />
         ) : (
-          <Route path="/Admin/-Categoria" element={<Main />} />
+          <Route path="/Admin/Crear-Categoria" element={<Main />} />
         )}
 
         {token && user_type === 'admin' ? (

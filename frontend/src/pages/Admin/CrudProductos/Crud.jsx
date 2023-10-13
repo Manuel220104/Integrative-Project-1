@@ -43,7 +43,7 @@ export function Crud() {
                     </select>
                 </div>
                 <div>
-                    <Link to="/Crear-Productos">
+                    <Link to="/Admin/Crear-Productos">
                         <button className="Boton-Guardar">Crear producto</button>
                     </Link>
                 </div>
