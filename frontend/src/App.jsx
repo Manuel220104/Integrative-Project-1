@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, useLocation, redirect } from 'react-router-dom';
 import { Main } from './pages/User/Main';
 import { AboutUs } from './pages/User/AboutUs';
+import { MyAccount } from './pages/User/MyAccount';
 import { ProductPage } from './pages/User/ProductPage';
 import { Admin } from './pages/Admin/Admin';
 import { CreateCategories } from './pages/Admin/CreateCategories';
+import { CreateLibrero } from './pages/Admin/CreateLibrero';
 import { Liked } from './pages/User/Liked';
 import { Login } from './pages/Login_and_sign_up/Login';
 import { Signup } from './pages/Login_and_sign_up/Signup';
@@ -13,7 +15,6 @@ import { EditBook } from './pages/Admin/CrudProductos/Edit/EditBook';
 import { EditGames } from './pages/Admin/CrudProductos/Edit/EditGames';
 import { EditMusicalIns } from './pages/Admin/CrudProductos/Edit/EditMusicalIns';
 import { EditTechnology } from './pages/Admin/CrudProductos/Edit/EditTechnology';
-
 import { Crud } from './pages/Admin/CrudProductos/Crud';
 import { CreateCarouselInfo } from './pages/Admin/CreateCarouselInfo';
 import { Navigation } from './components/Navigation';
@@ -67,6 +68,7 @@ function App() {
         <Route path="/Iniciar-Sesion" element={<Login />} />
         <Route path="/Registro-Usuario" element={<Signup />} />
         <Route path="/Nosotros" element={<AboutUs />} />
+        <Route path="/Mi-cuenta" element={<MyAccount />} />
 
         {token && user_type === 'admin' ? (
           <Route path="/Admin" element={<Admin />} />
@@ -121,6 +123,12 @@ function App() {
             <Route path="/Admin/Gestionar-Productos" element={<Crud />} />
         ) : (
           <Route path="/Admin/Gestionar-Productos" element={<Main />} />
+        )}
+
+        {token && user_type === 'admin' ? (
+          <Route path="/Admin/Crear-Librero" element={<CreateLibrero />} />
+        ) : (
+          <Route path="/Admin/Crear-librero" element={<Main />} />
         )}
 
 

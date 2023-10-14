@@ -71,11 +71,11 @@ export function Navigation() {
                     <Link to="/Nosotros">
                         <div className="navbar-item ocultar enlace">Acerca de nosotros</div>
                     </Link>
-                    
+
                     {token && user_type === 'admin' ? (
-                    <Link to="/admin">
-                        <div className="navbar-item ocultar enlace">Admin</div>
-                    </Link>
+                        <Link to="/admin">
+                            <div className="navbar-item ocultar enlace">Admin</div>
+                        </Link>
                     ) : null}
 
                 </div>
@@ -91,14 +91,14 @@ export function Navigation() {
                     </Link>
 
                     <div className="navbar-login">
-                        {token  ?  ( // Si hay un token, el usuario ha iniciado sesión
+                        {token ? ( // Si hay un token, el usuario ha iniciado sesión
                             <div className="login"  >
                                 <Link to="/Mi-cuenta">
                                     <img className="login-icon mi-cuenta-icon" src={login} alt="login" />
                                 </Link>
                                 <div onClick={handleLogout}>
-                                    <button className="cerrarsesion" onClick={handleLogout}>Cerrar sesión</button>
-                                    <span>({username_or_email})</span>
+                                    <button className="cerrarsesion ocultar" onClick={handleLogout}>Cerrar sesión</button>
+                                    <span className="ocultar">({username_or_email})</span>
                                 </div>
                             </div>
 
@@ -137,6 +137,11 @@ export function Navigation() {
                 <Link to="/Nosotros">
                     <div onClick={toggleSidebar} className="navbar-item sidebar-item enlace">Acerca de nosotros</div>
                 </Link>
+                <Link to="/">
+                    <div className="navbar-item sidebar-item enlace " onClick={() => {handleLogout();toggleSidebar();}}>Cerrar sesión</div>
+                
+                </Link>
+                <span onClick={toggleSidebar} className="navbar-item sidebar-item enlace">Usuario: {username_or_email}</span>
             </div>
 
 
