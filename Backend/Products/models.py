@@ -3,6 +3,7 @@ from django.db.models.signals import pre_delete
 from django.dispatch import receiver
 import os
 from Categories.models import Category
+from Subcategories.models import Subcategory
 
 class Product(models.Model):
     ProductId = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
@@ -13,8 +14,8 @@ class Product(models.Model):
     Image = models.ImageField(upload_to='./Products/Productimages/', null=True, blank=True)
     Quantity = models.PositiveIntegerField(default=0)
     Discount = models.PositiveIntegerField()
-    Category = models.CharField(max_length = 500, default='General')
-    Subcategory = models.CharField(max_length = 500, blank=True)
+    Category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True)
+    Subcategory = models.ForeignKey(Subcategory, on_delete=models.SET_NULL, blank=True, null=True)
     
     PRODUCT_TYPE =[
         ("Libro", "Libro")  ,
@@ -36,3 +37,5 @@ def delete_product_image(sender, instance, **kwargs):
         image_path = instance.Image.path
         if os.path.isfile(image_path):
             os.remove(image_path)
+
+
