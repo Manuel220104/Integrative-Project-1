@@ -52,8 +52,12 @@ export function CreateBook() {
         formData.append("Quantity", data.Quantity);
         formData.append("Discount", data.Discount);
         formData.append("ProductType", data.ProductType);
+
         formData.append("Category", data.Category);
-        formData.append("Subcategory", data.Subcategory);
+
+        if (data.Subcategory!='General'){
+            formData.append("Subcategory", data.Subcategory);
+        }
 
         if (data.image.length > 0) {
             formData.append("Image", data.image[0]);
@@ -117,14 +121,8 @@ export function CreateBook() {
 
     const [selectedCategoryid, setSelectedCategory] = useState('');
     const handleCategoryChange = (e) => {
-        const selectedCategoryName = e.target.value;
-        const selectedCategoryid = Categories.find(category => category.Name === selectedCategoryName);
-        if (selectedCategoryid) {
-            setSelectedCategory(selectedCategoryid.CategoryId);
-        }
-        else {
-            setSelectedCategory(-1);
-        }
+        const selectedCategoryInt = parseInt(e.target.value, 10);
+        setSelectedCategory(selectedCategoryInt);
     }
 
     return (
@@ -312,10 +310,9 @@ export function CreateBook() {
                             {...register("Category")}
                             onChange={handleCategoryChange}
                         >
-                            <option value="General">Seleccione una categoría</option>
                             {Categories.map((Category) => {
                                 return (
-                                    <option key={Category.CategoryId} value={Category.Name}>
+                                    <option key={Category.CategoryId} value={Category.CategoryId}>
                                         {Category.Name}
                                     </option>
                                 );
@@ -323,17 +320,17 @@ export function CreateBook() {
                         </select>
                     </div>
 
-
                     <div className="selector">
-                        <label className="atributo" htmlFor="subcategory">Tipo de subcategoría</label>
+                        <label className="atributo" htmlFor="subcategory">Tipo de subcategoría si desea</label>
                         <select className="Seleccionar-Dato" id="subcategory" {...register("Subcategory")}>
                             <option value="General">Seleccione una subcategoría</option>
                             {
                                 Subcategories.map((Subcategory) => {
                                     if (Subcategory.Category === selectedCategoryid) {
-
                                         return (
-                                            <option key={Subcategory.SubcategoryId} value={Subcategory.Name}>{Subcategory.Name}</option>
+                                            <option key={Subcategory.SubcategoryId} value={Subcategory.SubcategoryId}>
+                                                {Subcategory.Name}
+                                            </option>
                                         );
                                     }
                                     return
