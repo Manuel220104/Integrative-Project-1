@@ -30,7 +30,7 @@ pandas==2.0.3
 parso==0.8.3
 Pillow==10.0.0
 pipenv==2023.7.23
-platformdirs==3.10.0
+platformdirs==3.10.0    
 pyparsing==3.0.9
 python-dateutil==2.8.2
 python-magic==0.4.27

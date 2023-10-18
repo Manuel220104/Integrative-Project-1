@@ -90,9 +90,9 @@ function App() {
         )}
 
         {token && user_type === 'admin' ? (
-            <Route path="/Admin/-Juegos-Mesa/:productId" element={<EditGames />} />
+            <Route path="/Admin/Editar-Juegos-Mesa/:productId" element={<EditGames />} />
         ) : (
-          <Route path="/Admin/-Juegos-Mesa/:productId" element={<Main />} />
+          <Route path="/Admin/Editar-Juegos-Mesa/:productId" element={<Main />} />
         )}
 
         {token && user_type === 'admin' ? (
@@ -102,9 +102,9 @@ function App() {
         )}
 
         {token && user_type === 'admin' ? (
-            <Route path="/Admin/-Tecnologia/:productId" element={<EditTechnology />} />
+            <Route path="/Admin/Editar-Tecnologia/:productId" element={<EditTechnology />} />
         ) : (
-          <Route path="/Admin/-Tecnologia/:productId" element={<Main />} />
+          <Route path="/Admin/Editar-Tecnologia/:productId" element={<Main />} />
         )}
 
         {token && user_type === 'admin' ? (

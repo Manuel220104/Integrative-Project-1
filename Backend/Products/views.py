@@ -18,7 +18,7 @@ class ProductView(viewsets.ModelViewSet):
 class UltimoRegistro(APIView):
     def get(self, request):
         ultimo_registro = Product.objects.latest('ProductId')
-        serializer = ProductSerializer(ultimo_registro, many=True)
+        serializer = ProductSerializer(ultimo_registro)
         return Response(serializer.data)
     
 

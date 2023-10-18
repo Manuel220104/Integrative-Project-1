@@ -11,7 +11,8 @@ import { getAllSubcategory } from '../../../../api/Subcategories.api.js'
 
 
 export function CreateBook() {
-    const { register, handleSubmit, formState: { errors }, setValue, } = useForm();
+    const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm();
+    
     const [Categories, setCategories] = useState([]);
 
     const location = useLocation();
@@ -55,7 +56,7 @@ export function CreateBook() {
 
         formData.append("Category", data.Category);
 
-        if (data.Subcategory!='General'){
+        if (data.Subcategory != 'General') {
             formData.append("Subcategory", data.Subcategory);
         }
 
@@ -78,6 +79,9 @@ export function CreateBook() {
         return ProductData
     }
 
+    const [isCreated, setIsCreated] = useState(false);
+    const [message, setMessage] = useState('');
+
     const onSubmitBook = handleSubmit(async (data) => {
         console.log(data)
         if (data.image.length > 0 || data.ImageUrl != "") {
@@ -90,7 +94,7 @@ export function CreateBook() {
 
             try {
                 await CreateProducts(ProductData);
-                // navigate('/Productos');
+
             } catch (error) {
                 console.error('Error al crear el producto:', error);
                 console.log('Respuesta del servidor:', error.response);
@@ -108,15 +112,16 @@ export function CreateBook() {
                 BookData.Product = id;
                 console.log(BookData)
                 await createBooks(BookData);
+                setIsCreated(true);
+                setMessage('Producto creado con éxito.')
             } catch (error) {
                 console.error('Error al crear el libro:', error);
                 console.log('Respuesta del servidor:', error.response);
             }
         }
-        else{
+        else {
             alert('Se requiere una imagen para crear producto')
         }
-
     });
 
     const [selectedCategoryid, setSelectedCategory] = useState('');
@@ -273,7 +278,7 @@ export function CreateBook() {
                         <label className="atributo" htmlFor="ImageUrl">
                             Imagen URL:
                         </label>
-                        <input 
+                        <input
                             className="Ingresar-Dato"
                             type="url"
                             {...register("ImageUrl", {
@@ -309,6 +314,7 @@ export function CreateBook() {
                             id="category"
                             {...register("Category")}
                             onChange={handleCategoryChange}
+                            defaultValue="General"
                         >
                             {Categories.map((Category, index) => {
                                 return (
@@ -344,9 +350,13 @@ export function CreateBook() {
 
                 <button className="Boton-Guardar mb-5">Crear Libro</button>
 
+                {isCreated && (
+                    <div className="confirmation-message mb-5 to-blue-600" onClick={() => reset()}>
+                        {message}
+                    </div>
+                )}
+
             </form>
-
         </div>
-
     )
 }

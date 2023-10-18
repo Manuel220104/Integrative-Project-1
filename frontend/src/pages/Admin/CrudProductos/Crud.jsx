@@ -74,7 +74,7 @@ export function Crud() {
                                             <td>{product.Discount}</td>
                                             <td>{product.Quantity}</td>
                                             <td>
-                                                <Link to={`/Editar-Libro/${product.ProductId}`} state={{ Product: product }}>
+                                                <Link to={`/Admin/Editar-Libro/${product.ProductId}`} state={{ Product: product }}>
                                                     <span className='edit'>Editar</span>
                                                 </Link>
                                             </td>
@@ -113,7 +113,7 @@ export function Crud() {
                                             <td>{product.Discount}</td>
                                             <td>{product.Quantity}</td>
                                             <td>
-                                                <Link to={`/Editar-Instrumentos-Musicales/${product.ProductId}`} state={{ Product: product }}>
+                                                <Link to={`/Admin/Editar-Instrumentos-Musicales/${product.ProductId}`} state={{ Product: product }}>
                                                     <span className='edit'>Editar</span>
                                                 </Link>
                                             </td>
@@ -151,7 +151,7 @@ export function Crud() {
                                             <td>{product.Discount}</td>
                                             <td>{product.Quantity}</td>
                                             <td>
-                                                <Link to={`/Editar-Juegos-Mesa/${product.ProductId}`} state={{ Product: product }}>
+                                                <Link to={`/Admin/Editar-Juegos-Mesa/${product.ProductId}`} state={{ Product: product }}>
                                                     <span className='edit'>Editar</span>
                                                 </Link>
                                             </td>
@@ -189,7 +189,7 @@ export function Crud() {
                                             <td>{product.Discount}</td>
                                             <td>{product.Quantity}</td>
                                             <td>
-                                                <Link to={`/Editar-Tecnologia/${product.ProductId}`} state={{ Product: product }}>
+                                                <Link to={`/Admin/Editar-Tecnologia/${product.ProductId}`} state={{ Product: product }}>
                                                     <span className='edit'>Editar</span>
                                                 </Link>
                                             </td>

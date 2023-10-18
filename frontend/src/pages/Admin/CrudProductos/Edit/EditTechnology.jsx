@@ -1,29 +1,72 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useForm } from 'react-hook-form'
-import { updateProduct } from '../../../../api/Product.api.js'
+import { updateProduct, deleteProduct } from '../../../../api/Product.api.js'
 import { updateTechnologys } from '../../../../api/Tech.api.js'
 import { useNavigate, useParams, useLocation } from 'react-router-dom'
+import { getAllCategories } from '../../../../api/Categories.api.js'
+import { getAllSubcategory } from '../../../../api/Subcategories.api.js'
 
 export function EditTechnology() {
+    const navigate = useNavigate();
     const location = useLocation();
     const product = location.state ? location.state.Product : null;
     console.log(product)
     const idtech = product.technology.TechnologyId
     const idproduct = product.ProductId    
     const { register, handleSubmit, formState: { errors }, setValue, } = useForm();
+    const [Categories, setCategories] = useState([]);
+
+    const loadCategories = useCallback(async () => {
+        const res = await getAllCategories();
+        setCategories(res.data);
+        console.log(res.data)
+    }, []);
+
+    const [Subcategories, setSubcategories] = useState([]);
+
+    const loadSubcategories = useCallback(async () => {
+        const res = await getAllSubcategory();
+        setSubcategories(res.data);
+        console.log(res.data)
+    }, []);
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            await loadCategories();
+            await loadSubcategories();
+        };
+
+        fetchData();
+    }, [location]);
+
 
     function GetDataOfProduct(data) {
-        const ProductData = {
-            Name: data.Name,
-            Price: data.Price,
-            Description: data.Description,
-            ImageUrl: data.ImageUrl,
-            Quantity: data.Quantity,
-            Discount: data.Discount,
-            ProductType: data.ProductType
-        };
-        return ProductData
+        const formData = new FormData();
+        formData.append("Name", data.Name);
+        formData.append("Price", data.Price);
+        formData.append("Description", data.Description);
+
+        if (data.ImageUrl != "") {
+            formData.append("ImageUrl", data.ImageUrl);
+        }
+
+        formData.append("Quantity", data.Quantity);
+        formData.append("Discount", data.Discount);
+        formData.append("ProductType", data.ProductType);
+
+        formData.append("Category", data.Category);
+
+        if (data.Subcategory != 'General') {
+            formData.append("Subcategory", data.Subcategory);
+        }
+
+        if (data.image.length > 0) {
+            formData.append("Image", data.image[0]);
+        }
+
+        return formData;
     }
 
     function GetDataOfTech(data) {
@@ -62,6 +105,12 @@ export function EditTechnology() {
         }
     });
 
+    const [selectedCategoryid, setSelectedCategory] = useState('');
+    const handleCategoryChange = (e) => {
+        const selectedCategoryInt = e.target.value;
+        setSelectedCategory(selectedCategoryInt);
+    }
+
     return (
         <div className="CreateProductPage">
             <h1 className="Title mb-3">Editar producto</h1>
@@ -94,9 +143,25 @@ export function EditTechnology() {
                             {errors.Description && <span className="error" >Descripcion es requerido</span>}
                         </div>
                         <div>
-                            <label className="atributo" htmlFor="ImageUrl">Imagen URL:</label>
-                            <input className="Ingresar-Dato" type="text" defaultValue={product.ImageUrl} {...register("ImageUrl", { required: true })} />
-                            {errors.ImageUrl && <span className="error" >Imagen Url es requerido</span>}
+                            <label className="atributo" htmlFor="ImageUrl">
+                                Imagen URL:
+                            </label>
+                            <input
+                                className="Ingresar-Dato"
+                                type="url"
+                                defaultValue={product.ImageUrl}
+                                {...register("ImageUrl", {
+                                    pattern: {
+                                        value: /^(ftp|http|https):\/\/[^ "]+$/,
+                                        message: "Ingrese una URL válida",
+                                    },
+                                })}
+                            />
+                        </div>
+
+                        <div>
+                            <label className="atributo" htmlFor="image">Imagen:</label>
+                            <input type="file" name="image" id="image" accept="image/*" defaultValue={product.image}{...register("image")} />
                         </div>
                         <div>
                             <label className="atributo" htmlFor="Quantity">Cantidad:</label>
@@ -109,6 +174,45 @@ export function EditTechnology() {
                             {errors.Discount && <span className="error" >Descuento es requerido</span>}
                         </div>
 
+                                                
+                        <div className="selector">
+                            <label className="atributo" htmlFor="category">Tipo de Categoría</label>
+                            <select
+                                defaultValue={product.Category}
+                                className="Seleccionar-Dato"
+                                id="category"
+                                {...register("Category")}
+                                onChange={handleCategoryChange}
+                            >
+                                {Categories.map((Category, index) => {
+                                    return (
+                                        <option key={index} value={Category.Name}>
+                                            {Category.Name}
+                                        </option>
+                                    );
+                                })}
+                            </select>
+                        </div>
+
+                        <div className="selector">
+                            <label className="atributo" htmlFor="subcategory">Tipo de subcategoría si desea</label>
+                            <select className="Seleccionar-Dato" id="subcategory" defaultValue={product.Subcategory} {...register("Subcategory")}>
+                                <option value="General">Seleccione una subcategoría</option>
+                                {
+                                    Subcategories.map((Subcategory, index) => {
+                                        if (Subcategory.Category === selectedCategoryid) {
+                                            return (
+                                                <option key={index} value={Subcategory.Name}>
+                                                    {Subcategory.Name}
+                                                </option>
+                                            );
+                                        }
+                                        return
+                                    })
+                                }
+                            </select>
+                        </div>
+
                     </div>
 
                     <input type="hidden" name="ProductType" value="Tecnologia" {...register("ProductType")} />
@@ -116,6 +220,15 @@ export function EditTechnology() {
                     <button className="Boton-Guardar mb-5">Actualizar Artículo Tecnológico</button>
 
                 </form>
+
+                <button className="Boton-Eliminar mb-5" onClick={async () => {
+                    try {
+                        await deleteProduct(product.ProductId);
+                        navigate('/Admin/Gestionar-Productos');
+                    } catch (error) {
+                        console.error('Error deleting product:', error);
+                    }
+                }}>Eliminar Artículo Tecnológico</button>
 
             </div>
         </div>

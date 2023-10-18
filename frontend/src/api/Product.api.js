@@ -26,5 +26,8 @@ export const getLast10Products = () => ProductApi.get(urlBack+'Products/api/v1/L
 
 export const updateProduct = (id, updateProductData) => ProductApi.put(`${id}/`, updateProductData);
 
+export const deleteProduct = (id) => ProductApi.delete(`${id}/`);
+
+
 
 

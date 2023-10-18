@@ -396,6 +396,18 @@ a:hover {
   border-radius: 9px;
 }
 
+.Boton-Eliminar{
+  display: block;
+  margin-top: 25px;
+  background-color: #fd5555;
+  color: #ffffff; 
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
+  transition: background-color 0.3s, color 0.3s;
+  padding: 5px; 
+  cursor: pointer;
+  border-radius: 9px;
+}
+
 
 
 .Boton-InicioSesion{
@@ -414,6 +426,10 @@ a:hover {
 
 .Boton-InicioSesion:hover, .Boton-Guardar:hover {
   background-color:#4693c1 !important;
+}
+
+.Boton-Eliminar:hover {
+  background-color:#f44126 !important;
 }
 
 .Boton{
