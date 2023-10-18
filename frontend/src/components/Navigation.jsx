@@ -146,11 +146,6 @@ export function Navigation() {
                         <span onClick={toggleSidebar} className="navbar-item sidebar-item enlace">Usuario: {username_or_email}</span>
                     </div>
                 ) : null}
-
-
-
-
-
             </div>
 
 

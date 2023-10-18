@@ -43,6 +43,12 @@ export function ProductDetail() {
               </h3>
             </div>
 
+            <div className="flex">
+              <h3 className="text-sm title-font text-gray-500 tracking-widest mb-2">
+                ISBN: {Product.book.ISBN}
+              </h3>
+            </div>
+
             <p className="leading-relaxed mb-4 text-xl text-gray-900">
               {Product.Description}
             </p>
@@ -82,14 +88,11 @@ export function ProductDetail() {
               Autor: {}
             </h2>
             <div className="flex">
-              <h3 className="text-sm title-font text-gray-500 tracking-widest mb-2">
-                Editorial: {}
+            <h3 className="text-sm title-font text-gray-500 tracking-widest mb-2">
+                Marca: {Product.musical_instrument.Brand}
               </h3>
               <h3 className="text-sm title-font text-gray-500 tracking-widest ml-3">
-                Año De Publicación: {}
-              </h3>
-              <h3 className="text-sm title-font text-gray-500 tracking-widest ml-3">
-                Idioma: {}
+                Modelo: {Product.musical_instrument.Model}
               </h3>
             </div>
 
@@ -131,13 +134,10 @@ export function ProductDetail() {
             </h2>
             <div className="flex">
               <h3 className="text-sm title-font text-gray-500 tracking-widest mb-2">
-                Editorial: {}
+                Numero De Jugadores: {Product.table_game.Players_Number}
               </h3>
               <h3 className="text-sm title-font text-gray-500 tracking-widest ml-3">
-                Año De Publicación: {}
-              </h3>
-              <h3 className="text-sm title-font text-gray-500 tracking-widest ml-3">
-                Idioma: {}
+                Fabricante: {Product.table_game.Maker}
               </h3>
             </div>
 
@@ -179,13 +179,10 @@ export function ProductDetail() {
             </h2>
             <div className="flex">
               <h3 className="text-sm title-font text-gray-500 tracking-widest mb-2">
-                Editorial: {}
+                Marca: {Product.technology.Brand}
               </h3>
               <h3 className="text-sm title-font text-gray-500 tracking-widest ml-3">
-                Año De Publicación: {}
-              </h3>
-              <h3 className="text-sm title-font text-gray-500 tracking-widest ml-3">
-                Idioma: {}
+                Modelo: {Product.technology.Model}
               </h3>
             </div>
 

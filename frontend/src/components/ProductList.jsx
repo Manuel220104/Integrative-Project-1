@@ -329,10 +329,20 @@ export function ProductList() {
                                 if (product.Name.toLowerCase().includes(searchTermLowerCase)) {
                                     return <ProductCard key={product.ProductId} Product={product} />;
                                 }
+                                if (product.ProductType === "Libro"){
+                                    if (product.book.Authors.toLowerCase().includes(searchTermLowerCase)) {
+                                        return <ProductCard key={product.ProductId} Product={product} />;
+                                    }
+                                }
+                                if (product.ProductType === "Libro"){
+                                    if (product.book.ISBN === parseInt(searchTermLowerCase, 10)){
+                                        return <ProductCard key={product.ProductId} Product={product} />;
+                                    }
+                                }
+
                             }
                             // Filtros
-                            
-                            if (location.pathname.includes('/Libros')){
+                            else if (location.pathname.includes('/Libros')){
                                 if (product.ProductType == "Libro") {
                                     return <ProductCard key={product.ProductId} Product={product} />;
                                 }
@@ -362,8 +372,6 @@ export function ProductList() {
                             }
                             return null
 
-                            
-                        
                         })}
                     </div>
                 </div>
