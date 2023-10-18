@@ -108,9 +108,9 @@ function App() {
         )}
 
         {token && user_type === 'admin' ? (
-            <Route path="/Admin/-Informacion-Carrusel" element={<CreateCarouselInfo />} />
+            <Route path="/Admin/Crear-Informacion-Carrusel" element={<CreateCarouselInfo />} />
         ) : (
-          <Route path="/Admin/-Informacion-Carrusel" element={<Main />} />
+          <Route path="/Admin/Crear-Informacion-Carrusel" element={<Main />} />
 
         )}
 
