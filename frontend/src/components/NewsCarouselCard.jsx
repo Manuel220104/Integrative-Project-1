@@ -4,7 +4,12 @@ import like from '../assets/icons/like.png'
 import cart from '../assets/icons/cart.png'
 
 const MaxLength = 30;
-
+function formatNumberWithCommas(input) {
+    if (typeof input !== 'number') {
+        input = parseFloat(input.replace(/,/g, ''));
+    }
+    return input.toLocaleString('es-ES');
+}
 export function NewsCarouselCard({Product}) {
     const truncatedName = Product.Name.length > MaxLength ? `${Product.Name.substring(0, MaxLength)}...` : Product.Name;
     return (
@@ -12,7 +17,7 @@ export function NewsCarouselCard({Product}) {
                 <img className="imagencarrusel" src={Product.ImageUrl}></img>
             <div className="infoNews">
                 <span className='TitleCardNews'>{truncatedName}</span>
-                <h2>${Product.Price}</h2>
+                <span className='PriceCard'>$ {formatNumberWithCommas(Product.Price)}</span>
                 <h2 className="tipoproducto">{Product.ProductType}</h2>
                 <hr/>
                 <div className="iconsCard">
@@ -21,7 +26,7 @@ export function NewsCarouselCard({Product}) {
                             </Link>
                             <img className="navbar-item cart-icon" src={cart} alt="Carrito" />
                         </div>
-                        <Link to={`/Productos/DetalleProducto`}>
+                        <Link to={`/Productos/DetalleProducto/${Product.ProductId}`} state={{ Product: Product }}>
                             <span className="seeCard">Ver más</span>
                         </Link>
             </div>
