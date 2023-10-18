@@ -5,8 +5,7 @@ from django.apps import apps
 from django.contrib import admin
 
 class Category(models.Model):
-    CategoryId = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
-    Name = models.CharField(max_length=200, unique=True)
+    Name = models.CharField(max_length=200, unique=True, primary_key=True)
 
     class Meta:
         verbose_name_plural = "Categories"

@@ -121,7 +121,7 @@ export function CreateBook() {
 
     const [selectedCategoryid, setSelectedCategory] = useState('');
     const handleCategoryChange = (e) => {
-        const selectedCategoryInt = parseInt(e.target.value, 10);
+        const selectedCategoryInt = e.target.value;
         setSelectedCategory(selectedCategoryInt);
     }
 
@@ -310,9 +310,9 @@ export function CreateBook() {
                             {...register("Category")}
                             onChange={handleCategoryChange}
                         >
-                            {Categories.map((Category) => {
+                            {Categories.map((Category, index) => {
                                 return (
-                                    <option key={Category.CategoryId} value={Category.CategoryId}>
+                                    <option key={index} value={Category.Name}>
                                         {Category.Name}
                                     </option>
                                 );
@@ -325,10 +325,10 @@ export function CreateBook() {
                         <select className="Seleccionar-Dato" id="subcategory" {...register("Subcategory")}>
                             <option value="General">Seleccione una subcategoría</option>
                             {
-                                Subcategories.map((Subcategory) => {
+                                Subcategories.map((Subcategory, index) => {
                                     if (Subcategory.Category === selectedCategoryid) {
                                         return (
-                                            <option key={Subcategory.SubcategoryId} value={Subcategory.SubcategoryId}>
+                                            <option key={index} value={Subcategory.Name}>
                                                 {Subcategory.Name}
                                             </option>
                                         );
