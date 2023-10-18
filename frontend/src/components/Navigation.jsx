@@ -137,11 +137,20 @@ export function Navigation() {
                 <Link to="/Nosotros">
                     <div onClick={toggleSidebar} className="navbar-item sidebar-item enlace">Acerca de nosotros</div>
                 </Link>
-                <Link to="/">
-                    <div className="navbar-item sidebar-item enlace " onClick={() => {handleLogout();toggleSidebar();}}>Cerrar sesión</div>
-                
-                </Link>
-                <span onClick={toggleSidebar} className="navbar-item sidebar-item enlace">Usuario: {username_or_email}</span>
+
+                {token ? (
+                    <div>
+                        <Link to="/">
+                            <div className="navbar-item sidebar-item enlace " onClick={() => { handleLogout(); toggleSidebar(); }}>Cerrar sesión</div>
+                        </Link>
+                        <span onClick={toggleSidebar} className="navbar-item sidebar-item enlace">Usuario: {username_or_email}</span>
+                    </div>
+                ) : null}
+
+
+
+
+
             </div>
 
 

@@ -24,6 +24,11 @@ export function ModulesAdmin(){
                 <p>Añadir un Librero</p>
             </Link>
         </div>
+        <div className='module'>
+            <Link to="/Admin/Analitica-de-Datos">
+                <p>Analitica de datos</p>
+            </Link>
+        </div>
 
     </div>
     )

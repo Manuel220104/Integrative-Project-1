@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, useLocation, redirect } from 'react-router-dom';
 import { Main } from './pages/User/Main';
 import { AboutUs } from './pages/User/AboutUs';
-import { MyAccount } from './pages/User/MyAccount';
+//import { MyAccount } from './pages/User/MyAccount';
 import { ProductPage } from './pages/User/ProductPage';
 import { Admin } from './pages/Admin/Admin';
 import { CreateCategories } from './pages/Admin/CreateCategories';
@@ -17,6 +17,7 @@ import { EditMusicalIns } from './pages/Admin/CrudProductos/Edit/EditMusicalIns'
 import { EditTechnology } from './pages/Admin/CrudProductos/Edit/EditTechnology';
 import { Crud } from './pages/Admin/CrudProductos/Crud';
 import { CreateCarouselInfo } from './pages/Admin/CreateCarouselInfo';
+import { ProductAnalysis } from './pages/Admin/AnaliticaDatos';
 import { Navigation } from './components/Navigation';
 import { Footer } from './components/Footer';
 import { ProductDetail } from './components/ProductDetail';
@@ -68,7 +69,7 @@ function App() {
         <Route path="/Iniciar-Sesion" element={<Login />} />
         <Route path="/Registro-Usuario" element={<Signup />} />
         <Route path="/Nosotros" element={<AboutUs />} />
-        <Route path="/Mi-cuenta" element={<MyAccount />} />
+        {/* <Route path="/Mi-cuenta" element={<MyAccount />} /> */}
 
         {token && user_type === 'admin' ? (
           <Route path="/Admin" element={<Admin />} />
@@ -129,6 +130,12 @@ function App() {
           <Route path="/Admin/Crear-Librero" element={<CreateLibrero />} />
         ) : (
           <Route path="/Admin/Crear-librero" element={<Main />} />
+        )}
+
+        {token && user_type === 'admin' ? (
+          <Route path="/Admin/Analitica-de-Datos" element={<ProductAnalysis />} />
+        ) : (
+          <Route path="/Admin/Analitica-de-Datos" element={<Main />} />
         )}
 
 

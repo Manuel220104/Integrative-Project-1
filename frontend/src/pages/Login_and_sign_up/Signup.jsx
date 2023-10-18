@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { registerUser } from './../../api/Accounts.api';
+import { useNavigate } from 'react-router-dom';
 
 export function Signup() {
     const [registerData, setRegisterData] = useState({
@@ -10,19 +11,43 @@ export function Signup() {
         password: '',
     });
 
+
+    const [usernameError, setUsernameError] = useState('');
+    const [emailError, setEmailError] = useState('');
+
+    const navigate = useNavigate();
+
     const handleRegister = async (e) => {
         e.preventDefault();
+    
+        // Limpiar los errores previos
+        setUsernameError('');
+        setEmailError('');
     
         // Muestra el JSON que se enviará en la solicitud POST
         console.log('Datos a enviar:', registerData);
     
         try {
             const response = await registerUser(registerData);
-            // Manejar la respuesta, redireccionar, mostrar mensajes, etc.
+            navigate('/Iniciar-Sesion');
         } catch (error) {
-            // Manejar errores
+            // Accede al mensaje de error en la respuesta
+            if (error.response && error.response.data && error.response.data.error) {
+                // Verifica el tipo de error y muestra el mensaje en el campo correspondiente
+                if (error.response.data.error.includes('nombre de usuario')) {
+                    setUsernameError('El nombre de usuario ya está en uso.');
+                } else if (error.response.data.error.includes('correo electrónico')) {
+                    setEmailError('El correo electrónico ya está registrado.');
+                } else {
+                    console.error('Error:', error.response.data.error);
+                }
+            } else {
+                console.error('Error inesperado:', error);
+            }
         }
     };
+    
+    
     
     return (
         <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -46,7 +71,7 @@ export function Signup() {
                                     value={registerData.first_name}
                                     onChange={(e) => setRegisterData({ ...registerData, first_name: e.target.value })}
                                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    placeholder="Ingrese su first_name"
+                                    placeholder="Ingrese su Primer Nombre"
                                 />
                             </div>
                         </div>
@@ -87,6 +112,7 @@ export function Signup() {
                                     placeholder="Ingrese su Correo Electrónico"
                                 />
                             </div>
+                            <p className="text-red-500 text-sm">{emailError}</p>
                         </div>
 
                         <div>
@@ -103,9 +129,10 @@ export function Signup() {
                                     value={registerData.username}
                                     onChange={(e) => setRegisterData({ ...registerData, username: e.target.value })}
                                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    placeholder="Ingrese su first_name de Usuario"
+                                    placeholder="Ingrese su Nombre de Usuario"
                                 />
                             </div>
+                            <p className="text-red-500 text-sm">{usernameError}</p>
                         </div>
 
                         <div>
