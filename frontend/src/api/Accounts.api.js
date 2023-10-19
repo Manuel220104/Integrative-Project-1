@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const urlBack = "https://acentosapi.dis.eafit.edu.co/"
-//const urlBack = "http://localhost:8000/"
+// const urlBack = "https://acentosapi.dis.eafit.edu.co/"
+const urlBack = "http://localhost:8000/"
 
 const AccountsApi = axios.create({
     baseURL: urlBack+"accounts/api/v1/"
@@ -9,7 +9,7 @@ const AccountsApi = axios.create({
     //baseserver
 });
 
-export const getAllAccounts = () => AccountsApi.get('/')
+export const getAllAccounts = () => AccountsApi.get('users/')
 
 export const registerUser = (userData) => AccountsApi.post('register/', userData);
 

@@ -992,4 +992,8 @@ button.navbar-item:focus {
   font-weight: 700;
 }
 
+/* MyAccount */
 
+.MyAccountContainer{
+  margin: 4vw 15vw 0vw 6vw ;
+}

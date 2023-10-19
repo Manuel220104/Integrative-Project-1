@@ -93,7 +93,7 @@ export function Navigation() {
                     <div className="navbar-login">
                         {token ? ( // Si hay un token, el usuario ha iniciado sesión
                             <div className="login"  >
-                                <Link to="/Mi-cuenta">
+                                <Link to="/Mi-Cuenta">
                                     <img className="login-icon mi-cuenta-icon" src={login} alt="login" />
                                 </Link>
                                 <div onClick={handleLogout}>
@@ -137,6 +137,14 @@ export function Navigation() {
                 <Link to="/Nosotros">
                     <div onClick={toggleSidebar} className="navbar-item sidebar-item enlace">Acerca de nosotros</div>
                 </Link>
+
+                {token && user_type === 'admin' ? (
+                    <Link to="/Admin">
+                    <div onClick={toggleSidebar} className="navbar-item sidebar-item enlace">Admin</div>
+                </Link>
+                ) : (
+                    null
+                )}
 
                 {token ? (
                     <div>

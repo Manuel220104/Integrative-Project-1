@@ -111,9 +111,9 @@ export function ProductAnalysis() {
         <div className="container">
 
             <div className="row gridAnalitic">
-                <div className="col-md-6 ">
+                <div className="col-md-6">
                     <h3 className="mt-4 Subtitle_Analitic SubtitleAnalitic">Productos con Category "general"</h3>
-                    <table className="table table-striped table-custom ">
+                    <table className="table table-striped table-custom">
                         <thead>
                             <tr>
                                 <th>Producto ID</th>
@@ -133,7 +133,7 @@ export function ProductAnalysis() {
                     </table>
                 </div>
 
-                <div className="col-md-6 ">
+                <div className="col-md-6">
                     <h3 className="mt-4 Subtitle_Analitic SubtitleAnalitic">Lista de Productos con descuento</h3>
                     <table className="table table-striped table-custom">
                         <thead>
@@ -156,8 +156,6 @@ export function ProductAnalysis() {
                 </div>
             </div>
             <div className="row gridAnalitic">
-
-
                 <div className="col-sm-6">
                     <h3 className="mt-4 SubtitleAnalitic">Últimos 10 Productos Agregados</h3>
                     <table className="table table-striped table-custom">
@@ -181,26 +179,22 @@ export function ProductAnalysis() {
                         </tbody>
                     </table>
                 </div>
-                <div className="col-sm-4 offset-md-1 ">
-                    <div className='Diagrama-torta'>
+                <div className="col-sm-6 col-md-4 offset-md-2">
+                    <div className="Diagrama-torta">
                         <canvas id="categoryPieChart"></canvas>
                     </div>
                 </div>
-                <div className="row gridAnalitic">
-                    <div className="col-sm-1">
-                        <div className="info-box">
-                            <div className="content-wrapper">
-                                <div className="circle">
-                                    <p className="display-4 SubtitleAnalitic">Cantidad total de productos:</p>
-                                    <p className="display-4 Number">{totalProducts}</p>
-                                </div>
+            </div>
+            <div className="row gridAnalitic">
+                <div className=".col-md-1">
+                    <div className="info-box">
+                        <div className="content-wrapper">
+                            <div className="circle">
+                                <p className="display-4 SubtitleAnalitic">Cantidad total de productos:</p>
+                                <p className="display-4 Number">{totalProducts}</p>
                             </div>
                         </div>
-
                     </div>
-
-
-
                 </div>
             </div>
         </div>
