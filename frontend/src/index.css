@@ -997,3 +997,13 @@ button.navbar-item:focus {
 .MyAccountContainer{
   margin: 4vw 15vw 0vw 6vw ;
 }
+
+/* Estilos para la imagen en todas las pantallas */
+.CarouselInfo {
+  min-height: 120px; /* Alto de la imagen predeterminado */
+}
+
+
+
+
+

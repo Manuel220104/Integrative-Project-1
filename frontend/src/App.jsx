@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, useLocation, redirect } from 'react-router-dom';
 import { Main } from './pages/User/Main';
 import { AboutUs } from './pages/User/AboutUs';
-//import { MyAccount } from './pages/User/MyAccount';   Aqui esta el de myAccount
+import { MyAccount } from './pages/User/MyAccount';
 import { ProductPage } from './pages/User/ProductPage';
 
 import { Admin } from './pages/Admin/Admin';
@@ -70,7 +70,7 @@ function App() {
         <Route path="/Iniciar-Sesion" element={<Login />} />
         <Route path="/Registro-Usuario" element={<Signup />} />
         <Route path="/Nosotros" element={<AboutUs />} />
-        {/* <Route path="/Mi-Cuenta" element={<MyAccount />} /> */}
+        <Route path="/Mi-Cuenta" element={<MyAccount />} />
         
         
 
