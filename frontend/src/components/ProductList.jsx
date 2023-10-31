@@ -133,20 +133,33 @@ export function ProductList() {
         // Actualiza el estado local de los filtros
         setLocalFilters(updatedFilters);
 
-        // Realiza otras acciones específicas si es necesario
-        if (checked) {
-            console.log(section.id);
-            console.log(`Se marcó ${option.label}`);
-            console.log(option);
-        } else {
-            console.log(section.id);
-            console.log(`Se desmarcó ${option.label}`);
-            console.log(option);
-        }
     }
-    
 
-    
+    const [localFiltersToApply, setFiltersToApply] = useState([]);
+
+    useEffect(() => {
+
+        const filterstoapply = []
+        var flag = false
+        localFilters.map((filter)=>{
+            flag = false
+            filter.options.map((subcat)=>{
+                if(subcat.checked === true && flag === false){
+                    const dict = {
+                        Category: filter.id, 
+                        Subcategory: subcat.label
+                    }
+                    filterstoapply.push(dict)
+                    if(subcat.label === 'Todas'){
+                        flag = true
+                    }
+                }
+            })
+        })
+        console.log(filterstoapply)
+        setFiltersToApply(filterstoapply)
+
+    }, [localFilters]);
 
     // get all products 
    
@@ -228,7 +241,6 @@ export function ProductList() {
                                 {({ open }) => (
                                     <>
                                         <h3 className="-mx-2 -my-3 flow-root">
-                                            
                                             <Disclosure.Button  className="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
                                                 <span className="font-medium text-gray-900">{section.name}</span>
                                                 <span
@@ -417,6 +429,26 @@ export function ProductList() {
                     {/* Product grid */}
                     <div className="lg:col-span-3 productosOrganizados">
                         {ProductsAndChild.map(product => {
+                            var show = true
+                            // analisis filters
+                            if (localFiltersToApply.length != 0) {
+                                show = false
+                                localFiltersToApply.map((filter) => {
+                                    if(filter.Subcategory === 'Todas'){
+                                        if (product.Category == filter.Category){
+                                            show = true
+                                        }
+                                    }
+                                    else if (product.Category == filter.Category && product.Subcategory == filter.Subcategory){
+                                        show = true
+                                    }
+                                })
+                            } 
+
+                            if  (!show) {
+                                return
+                            }
+
                             // Busqueda
                             if (searchTerm !== null){
                                 const searchTermLowerCase = searchTerm.toLowerCase();
@@ -433,9 +465,9 @@ export function ProductList() {
                                         return <ProductCard key={product.ProductId} Product={product} />;
                                     }
                                 }
-
                             }
-                            // Filtros
+                        
+                            // Filtros por tipo de producto
                             else if (location.pathname.includes('/Libros')){
                                 if (product.ProductType == "Libro") {
                                     return <ProductCard key={product.ProductId} Product={product} />;
@@ -459,6 +491,7 @@ export function ProductList() {
                                     return <ProductCard key={product.ProductId} Product={product} />;
                                 }
                             } 
+
                             else {
                                 return <ProductCard key={product.ProductId} Product={product} />;
                             }
@@ -471,23 +504,6 @@ export function ProductList() {
             </main>
             </div>
         </div>
-    </div>
-
-    <div>
-        {localFilters.map((filter, filterIndex) => (
-            <div key={filterIndex}>
-            <p>ID: {filter.id}</p>
-            <p>Name: {filter.name}</p>
-            <ul>
-                {filter.options.map((option, optionIndex) => (
-                <li key={optionIndex}>
-                    {option.label}
-                    {option.checked ? ' (Checked)' : ' (Not Checked)'}
-                </li>
-                ))}
-            </ul>
-            </div>
-        ))}
     </div>
 
 </div>
