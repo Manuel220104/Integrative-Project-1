@@ -14,6 +14,7 @@ urlpatterns = [
     path('InformationCarousel/', include('InformationCarousel.urls')),
     path('accounts/', include('accounts.urls')),
     path('Categories/', include('Categories.urls')),
-    path('Subcategories/', include('Subcategories.urls')),    
+    path('Subcategories/', include('Subcategories.urls')),
+    path('Likes/', include('Likes.urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

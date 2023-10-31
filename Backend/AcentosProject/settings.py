@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'accounts',
     'Categories',
     'Subcategories',
+    'Likes',
 ]
 
 MIDDLEWARE = [

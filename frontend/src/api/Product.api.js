@@ -10,6 +10,7 @@ const ProductApi = axios.create({
 });
 
 
+
 export const getAllProducts = () => ProductApi.get('/')
 
 export const CreateProducts = (product) => ProductApi.post('/', product)
