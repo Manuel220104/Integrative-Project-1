@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import dislike from '../assets/icons/like.png';
-import like from '../assets/icons/likefull.png';
-import { createLike } from '../api/Likes.api';
+import like from '../assets/icons/like.png';
+import likefull from '../assets/icons/likefull.png';
+import { createLike, getAllLikes, getUserLikes } from '../api/Likes.api';
 import cart from '../assets/icons/cart.png';
-import { getAllLikes } from '../api/Likes.api';
-
-
 
 const MaxLength = 30;
 function formatNumberWithCommas(input) {
@@ -15,6 +12,8 @@ function formatNumberWithCommas(input) {
     }
     return input.toLocaleString('es-ES');
 }
+const token = localStorage.getItem('token');
+const username_or_email = localStorage.getItem('username_or_email');
 
 export function NewsCarouselCard({ Product }) {
     const truncatedName =
@@ -22,49 +21,63 @@ export function NewsCarouselCard({ Product }) {
             ? `${Product.Name.substring(0, MaxLength)}...`
             : Product.Name;
 
-    const [liked, setLiked] = useState(false); // Inicialmente, no se ha hecho "like"
+    const [liked, setLiked] = useState(false);
+    const [isLikedProduct, setIsLikedProduct] = useState(false); // Estado para indicar si el producto está en la lista de "Me gusta"
 
-    useEffect(() => {
-        // Obtener el nombre de usuario o email del almacenamiento local
-        const username_or_email = localStorage.getItem('username_or_email');
-
-        // Realizar una solicitud para obtener los "likes" del usuario
-        getAllLikes()
+    const fetchUserLikes = () => {
+        getUserLikes(username_or_email)
             .then((response) => {
                 if (response.status === 200) {
-                    // Verificar si el usuario ha dado "like" al producto actual
-                    const userLikes = response.data;
-                    const hasLiked = userLikes.some((dislike) => dislike.product_id === Product.ProductId);
-                    setLiked(hasLiked);
+                    const likes = response.data;
+                    const productIds = likes.map(like => like.product);
+
+                    // Verificar si el producto actual está en la lista de "Me gusta"
+                    const currentProductIsLiked = productIds.includes(Product.ProductId);
+                    setIsLikedProduct(currentProductIsLiked);
+
+                    const numberOfLikes = likes.length;
+                    console.log('Número de likes del usuario:', username_or_email, ":", numberOfLikes);
+                    console.log('isLikedProduct:', currentProductIsLiked);
                 }
             })
             .catch((error) => {
-                console.error('Error al obtener los "likes":', error);
+                console.error('Error al obtener los likes del usuario:', error);
             });
-    }, [Product.ProductId]); // Ejecutar cuando cambie el ID del producto
+    };
+
+    useEffect(() => {
+        // Llamar a la función para obtener los likes del usuario cuando el componente se monta
+        fetchUserLikes();
+    }, []);
+
     const handleLikeClick = () => {
-        setLiked((currentLiked) => !currentLiked);
+        if (token) {
+            setLiked((currentLiked) => !currentLiked);
 
-        const product_id = Product.ProductId;
+            const product_id = Product.ProductId;
 
-        const data = {
-            product_id: Product.ProductId,
-            username: "bb", // Puedes reemplazar "bb" con el valor del nombre de usuario que desees
-        };
-        console.log(data);
-        // Envía una solicitud POST a la API de Likes con el token de autenticación en los encabezados
-        createLike(data)
-            .then((response) => {
-                if (response.status === 201) {
-                    // "Me gusta" registrado con éxito
-                } else if (response.status === 204) {
-                    // "Me gusta" eliminado con éxito
-                }
-            })
-            .catch((error) => {
-                console.error('Error al interactuar con la API:', error);
-                console.error(error);
-            });
+            const data = {
+                product_id: Product.ProductId,
+                username: username_or_email,
+            };
+            console.log(data);
+
+            createLike(data)
+                .then((response) => {
+                    if (response.status === 201) {
+                        // "Me gusta" registrado con éxito
+                        fetchUserLikes();
+                    } else if (response.status === 204) {
+                        // "Me gusta" eliminado con éxito
+                        fetchUserLikes();
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error al interactuar con la API:', error);
+                });
+        } else {
+            console.log('El usuario no ha iniciado sesión');
+        }
     };
 
     return (
@@ -78,7 +91,7 @@ export function NewsCarouselCard({ Product }) {
                 <div className="iconsCard">
                     <img
                         className="navbar-item like-icon"
-                        src={liked ? like : dislike}
+                        src={isLikedProduct ? likefull : like}
                         alt="Me gusta"
                         onClick={handleLikeClick}
                     />

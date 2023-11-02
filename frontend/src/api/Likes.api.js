@@ -8,10 +8,13 @@ const LikesAPI = axios.create({
 });
 
 
-export const getAllLikes = () => LikesAPI.get('/likes/');
+export const getAllLikes = () => LikesAPI.get('likes/');
 
 export const createLike = (likeData) => LikesAPI.post('like_product/', likeData);
 
 
 export const getLikeDetail = (like_id) => LikesAPI.get(`Likes/${like_id}/`);
+
+export const getUserLikes = (username) => LikesAPI.get(`user_likes/${username}/`);
+
 

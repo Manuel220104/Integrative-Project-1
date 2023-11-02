@@ -1,6 +1,6 @@
 from rest_framework import generics
 from .models import Like
-from .serializer import LikeSerializer
+from .serializer import LikeSerializer, CustomLikeSerializer
 from rest_framework import status
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
@@ -15,8 +15,21 @@ class LikeCreateView(generics.CreateAPIView):
 
 class LikeListView(generics.ListAPIView):
     queryset = Like.objects.all()
+    serializer_class = CustomLikeSerializer
+
+class UserLikesListView(generics.ListAPIView):
     serializer_class = LikeSerializer
 
+    def get_queryset(self):
+        # Obtén el nombre de usuario de los parámetros de la URL
+        username = self.kwargs['username']
+        
+        # Obtén el usuario
+        user = Usuarios.objects.get(username=username)
+
+        # Filtra los likes por el usuario específico
+        queryset = Like.objects.filter(user=user)
+        return queryset
 class LikeDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Like.objects.all()
     serializer_class = LikeSerializer
