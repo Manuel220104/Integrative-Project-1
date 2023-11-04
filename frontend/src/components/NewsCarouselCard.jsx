@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import like from '../assets/icons/like.png';
 import likefull from '../assets/icons/likefull.png';
-import { createLike, getAllLikes, getUserLikes } from '../api/Likes.api';
+import { createLike, getUserLikes } from '../api/Likes.api';
 import cart from '../assets/icons/cart.png';
 
 const MaxLength = 30;
