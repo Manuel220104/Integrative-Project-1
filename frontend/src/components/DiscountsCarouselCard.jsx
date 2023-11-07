@@ -92,12 +92,20 @@ export function DiscountsCarouselCard({ Product }) {
 
                 <hr />
                 <div className="iconsCard">
-                    <img
-                        className="navbar-item like-icon"
-                        src={isLikedProduct ? likefull : like}
-                        alt="Me gusta"
-                        onClick={handleLikeClick}
-                    />
+                    {token ? (
+                        <img
+                            className="navbar-item like-icon"
+                            src={isLikedProduct ? likefull : like}
+                            alt="Me gusta"
+                            onClick={handleLikeClick}
+                        />
+                    ) : (
+                        <img
+                            className="navbar-item like-icon"
+                            src={like}
+                            alt="Me gusta"
+                            onClick={handleLikeClick}
+                        />)}
                     <img className="navbar-item cart-icon" src={cart} alt="Carrito" />
                 </div>
                 <Link to={`/Productos/DetalleProducto/${Product.ProductId}`} state={{ Product: Product }}>

@@ -50,6 +50,7 @@ export function Navigation() {
         // Realizar otras tareas de cierre de sesión, si es necesario
         // Redirigir al usuario a la página de inicio de sesión, por ejemplo
         navigate('/');
+        window.location.reload();
     };
 
     return (

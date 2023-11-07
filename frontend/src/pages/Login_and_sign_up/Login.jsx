@@ -40,6 +40,7 @@ export function Login() {
     
                 setLoginSuccess(true);
                 navigate('/');
+                window.location.reload();
             } else {
                 setLoginSuccess(false);
                 console.log('Inicio de sesión fallido');

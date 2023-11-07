@@ -69,7 +69,7 @@ export function LastProductDiscount() {
                 </Slider>
 
             </div>
-            
+
         </div>
     );
 }

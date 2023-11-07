@@ -89,12 +89,20 @@ export function NewsCarouselCard({ Product }) {
                 <h2 className="tipoproducto">{Product.ProductType}</h2>
                 <hr />
                 <div className="iconsCard">
+                    {token ? (
                     <img
                         className="navbar-item like-icon"
                         src={isLikedProduct ? likefull : like}
                         alt="Me gusta"
                         onClick={handleLikeClick}
                     />
+                    ):(
+                    <img
+                        className="navbar-item like-icon"
+                        src={like}
+                        alt="Me gusta"
+                        onClick={handleLikeClick}
+                    />)}
                     <img className="navbar-item cart-icon" src={cart} alt="Carrito" />
                 </div>
                 <Link to={`/Productos/DetalleProducto/${Product.ProductId}`} state={{ Product }}>

@@ -96,12 +96,20 @@ export function ProductCard({ Product }) {
                         <span className='AuthorsCard'>{Product.book.Authors}</span>
                         <span className='PriceCard'>$ {formatNumberWithCommas(Product.Price)}</span>
                         <div className="iconsCard">
-                            <img
-                                className="navbar-item like-icon"
-                                src={isLikedProduct ? likefull : like}
-                                alt="Me gusta"
-                                onClick={handleLikeClick}
-                            />
+                            {token ? (
+                                <img
+                                    className="navbar-item like-icon"
+                                    src={isLikedProduct ? likefull : like}
+                                    alt="Me gusta"
+                                    onClick={handleLikeClick}
+                                />
+                            ) : (
+                                <img
+                                    className="navbar-item like-icon"
+                                    src={like}
+                                    alt="Me gusta"
+                                    onClick={handleLikeClick}
+                                />)}
                             <img className="navbar-item cart-icon" src={cart} alt="Carrito" />
                         </div>
                         <Link to={`/Productos/DetalleProducto/${Product.ProductId}`} state={{ Product: Product }}>
@@ -126,12 +134,20 @@ export function ProductCard({ Product }) {
                         <span className='AuthorsCard'>{Product.musical_instrument.Brand}</span>
                         <span className='PriceCard'>$ {formatNumberWithCommas(Product.Price)}</span>
                         <div className="iconsCard">
-                            <img
-                                className="navbar-item like-icon"
-                                src={isLikedProduct ? likefull : like}
-                                alt="Me gusta"
-                                onClick={handleLikeClick}
-                            />
+                            {token ? (
+                                <img
+                                    className="navbar-item like-icon"
+                                    src={isLikedProduct ? likefull : like}
+                                    alt="Me gusta"
+                                    onClick={handleLikeClick}
+                                />
+                            ) : (
+                                <img
+                                    className="navbar-item like-icon"
+                                    src={like}
+                                    alt="Me gusta"
+                                    onClick={handleLikeClick}
+                                />)}
                             <img className="navbar-item cart-icon" src={cart} alt="Carrito" />
                         </div>
                         <Link to={`/Productos/DetalleProducto/${Product.ProductId}`} state={{ Product: Product }}>
@@ -156,12 +172,20 @@ export function ProductCard({ Product }) {
                         <span className='AuthorsCard'>{Product.technology.Brand}</span>
                         <span className='PriceCard'>$ {formatNumberWithCommas(Product.Price)}</span>
                         <div className="iconsCard">
-                            <img
-                                className="navbar-item like-icon"
-                                src={isLikedProduct ? likefull : like}
-                                alt="Me gusta"
-                                onClick={handleLikeClick}
-                            />
+                            {token ? (
+                                <img
+                                    className="navbar-item like-icon"
+                                    src={isLikedProduct ? likefull : like}
+                                    alt="Me gusta"
+                                    onClick={handleLikeClick}
+                                />
+                            ) : (
+                                <img
+                                    className="navbar-item like-icon"
+                                    src={like}
+                                    alt="Me gusta"
+                                    onClick={handleLikeClick}
+                                />)}
                             <img className="navbar-item cart-icon" src={cart} alt="Carrito" />
                         </div>
                         <Link to={`/Productos/DetalleProducto/${Product.ProductId}`} state={{ Product: Product }}>
@@ -186,12 +210,20 @@ export function ProductCard({ Product }) {
                         <span className='AuthorsCard'>{Product.table_game.Maker}</span>
                         <span className='PriceCard'>$ {formatNumberWithCommas(Product.Price)}</span>
                         <div className="iconsCard">
-                            <img
-                                className="navbar-item like-icon"
-                                src={isLikedProduct ? likefull : like}
-                                alt="Me gusta"
-                                onClick={handleLikeClick}
-                            />
+                            {token ? (
+                                <img
+                                    className="navbar-item like-icon"
+                                    src={isLikedProduct ? likefull : like}
+                                    alt="Me gusta"
+                                    onClick={handleLikeClick}
+                                />
+                            ) : (
+                                <img
+                                    className="navbar-item like-icon"
+                                    src={like}
+                                    alt="Me gusta"
+                                    onClick={handleLikeClick}
+                                />)}
                             <img className="navbar-item cart-icon" src={cart} alt="Carrito" />
                         </div>
                         <Link to={`/Productos/DetalleProducto/${Product.ProductId}`} state={{ Product: Product }}>

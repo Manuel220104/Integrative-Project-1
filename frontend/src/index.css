@@ -267,14 +267,14 @@ a:hover {
   width: 90%;
 }
 
-
 .Title{
   font-weight: 500;
   font-size: 35px;
   letter-spacing: -2px;
   width: auto;
   display: block;
-  
+  font-family: var(--fuentePrincipal);
+  margin-left: -10px;
   }
 .Subtitle{
   font-weight: 400;
@@ -344,7 +344,11 @@ a:hover {
 }
 
 
-
+.borderInput{
+  border-radius: 10px;
+  border: 1px solid #5ABCF4;
+  padding-left: 10px;
+}
 
 .Ingresar-Dato{
   background-color: rgb(255, 255, 255); 
@@ -797,6 +801,11 @@ Carrusel novedades con date
 .title {
   font-size: 35px;
   margin: 0 16px;
+  font-weight: bold;
+}
+
+.titleMyAccount{
+  font-size: 35px;
   font-weight: bold;
 }
 

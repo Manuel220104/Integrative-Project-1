@@ -7,6 +7,7 @@ from .models import Usuarios  # Importa el modelo Usuarios en lugar de User
 from .serializer import UsuariosCreateSerializer  # Importa el serializador UsuariosCreateSerializer
 from .serializer import UsuariosSerializer
 from rest_framework import generics
+from rest_framework.generics import RetrieveUpdateAPIView
 
 class UserListView(generics.ListAPIView):
     queryset = Usuarios.objects.all()
@@ -80,3 +81,9 @@ def login(request):
 def logout_view(request):
     logout(request)
     return Response({'message': 'Sesión cerrada correctamente.'}, status=status.HTTP_200_OK)
+
+class UserUpdateView(RetrieveUpdateAPIView):
+    queryset = Usuarios.objects.all()
+    serializer_class = UsuariosSerializer
+
+    lookup_field = 'username'
