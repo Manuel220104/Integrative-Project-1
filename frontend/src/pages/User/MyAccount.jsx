@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { updateUser } from '../../api/Accounts.api'; // Reemplaza con la ruta correcta a tu archivo de API
 import { PaperClipIcon } from '@heroicons/react/20/solid'
+import Profile from '../../assets/Images/Profile.png'
+
 
 export function MyAccount() {
     const [userData, setUserData] = useState({});
@@ -47,8 +49,25 @@ export function MyAccount() {
 
     return (
         <div className='MyAccountContainer'>
+            <div class="container text-left">
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <img class="Profile-logo" src={Profile} alt="Profile" />
+                    </div>
+                    <div class="col-sm-4">
+                        <h3 class="Title_MyAccount">Hola !</h3>
+                        <h3 class="Subtitle_MyAccount">Bienvenido a tu cuenta</h3>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
             <div className="px-4 sm:px-0">
-                <h3 className="Title">Informacion de mi Cuenta</h3>
+                <h3 className="Title">Tu Cuenta</h3>
             </div>
 
             <div className="mt-6 border-t border-gray-100">
@@ -130,7 +149,7 @@ export function MyAccount() {
                             <input
                                 className="borderInput"
                                 type="text"
-                                name="City"
+                                name="city"
                                 value={userData.city}
                                 onChange={handleChange}
                             />
@@ -163,10 +182,10 @@ export function MyAccount() {
                                 onChange={handleChange}
                             />
                         ) : (
-                            <span>{userData.City}</span>
+                            <span>{userData.details}</span>
                         )}
                     </div>
-                    
+
                     {isEditing ? (
                         <button className="Boton-Guardar mb-5" onClick={handleSave}>Guardar</button>
                     ) : (
