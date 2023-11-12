@@ -213,7 +213,7 @@ export function EditGames() {
                     <input type="hidden" name="ProductType" value="Juego de mesa" {...register("ProductType")} />
 
                     <button className="Boton-Guardar mb-5">Actualizar Juego De Mesa</button>
-                </form>
+                </form>    
                 <button className="Boton-Eliminar mb-5" onClick={async () => {
                     try {
                         await deleteProduct(product.ProductId);

@@ -1,0 +1,32 @@
+<div className="selector ">
+<label className="atributo" htmlFor="category">Tipo de Categoría</label>
+<select className="Seleccionar-Dato" id="category" {...registerSubCategory("Category", { required: true })}>
+    <option value="">Seleccione una categoría</option>
+    {Categories.map((Category, index) => {
+        return (
+            <option key={index} value={Category.CategoryId}>{Category.Name}</option>
+        );
+    })}
+</select>
+{errorsSubCategory.Category && <span className="error mt-2">Categoría es requerida</span>}
+</div>
+
+
+<div className="selector">
+<label className="atributo" htmlFor="category">Tipo de Categoría</label>
+<select
+    className="Seleccionar-Dato"
+    id="category"
+    {...register("Category")}
+    onChange={handleCategoryChange1}
+    defaultValue="General"
+>
+    {Categories.map((Category, index) => {
+        return (
+            <option key={index} value={Category.Name}>
+                {Category.Name}
+            </option>
+        );
+    })}
+</select>
+</div>

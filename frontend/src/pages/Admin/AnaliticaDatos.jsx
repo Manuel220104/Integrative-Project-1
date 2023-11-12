@@ -176,7 +176,8 @@ export function ProductAnalysis() {
 
     return (
         <div className="container">
-            <div className="row gridAnalitic">
+
+            <div className=" gridAnalitic">
                 <div className=".col-md-1">
                     <div className="info-box">
                         <div className="content-wrapper">
@@ -188,6 +189,7 @@ export function ProductAnalysis() {
                     </div>
                 </div>
             </div>
+
             <div className="row gridAnalitic">
                 <div className="col-md-6">
                     <h3 className="mt-4 Subtitle_Analitic SubtitleAnalitic">Productos con Category "general"</h3>
@@ -233,6 +235,7 @@ export function ProductAnalysis() {
                     </table>
                 </div>
             </div>
+
             <div className="row gridAnalitic">
                 <div className="col-sm-6">
                     <h3 className="mt-4 SubtitleAnalitic">Últimos 10 Productos Agregados</h3>
@@ -257,20 +260,23 @@ export function ProductAnalysis() {
                         </tbody>
                     </table>
                 </div>
-                <div className="col-sm-6 col-md-4 offset-md-2">
-                    <div className="Diagrama-torta">
+
+                <div>
+                    <div className="Diagrama-torta ml-10">
                         <canvas id="categoryPieChart"></canvas>
                     </div>
                 </div>
+
             </div>
             
             
-            <div>
+            <div className='mb-7'>
                 <h3 className="mt-4 SubtitleAnalitic">Los 10 productos con mas Likes</h3>
-                <div style={{ width: '60%'}}>
+                <div style={{ width: '80%'}}>
                     <Bar data={data} options={options} />
                 </div>
             </div>
+
         </div>
     );
 }

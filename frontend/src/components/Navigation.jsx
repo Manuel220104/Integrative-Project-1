@@ -160,13 +160,13 @@ export function Navigation() {
 
             <div className={`search flex justify-content-start items-center justify-center ${searchOpen ? 'active' : ''}`}>
                 <Link to="/">
-                    <img className="ml-3 mr-0 navbar-logo ocultar2" src={Logo} alt="Logo" />
+                    <img className="ml-5 mr-0 navbar-logo ocultar2" src={Logo} alt="Logo" />
                 </Link>
                 <div className='mid-search w-full h-full flex items-center justify-center'>
                     <input onChange={(e) => setSearchTerm(e.target.value)} onKeyDown={handleSearchKeyDown} className="navbar-item search-bar" type="text" placeholder="" />
                     <button onClick={handleSearch} className="navbar-item search-icon "><img src={search} alt="Buscar" /></button>
+                    <FontAwesomeIcon className="" icon={faX} onClick={toggleSearch} style={{ color: "#5abcf4", }} />
                 </div>
-                <FontAwesomeIcon className="mr-10" icon={faX} onClick={toggleSearch} style={{ color: "#5abcf4", }} />
             </div>
 
 

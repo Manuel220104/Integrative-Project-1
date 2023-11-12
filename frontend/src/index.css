@@ -88,13 +88,14 @@ a:hover {
 .mi-cuenta-icon{
   display: flex;
 }
+
 .search-icon, .cart-icon, .login-icon, .like-icon{
   width: 16px;
   height: 16px;
 }
 
 .search-bar{
-  margin-left: 20px;
+  /* margin-left: 20px; */
   text-align: left;
   padding-left: 12px;
   max-width: 350px;
@@ -448,6 +449,11 @@ a:hover {
   border-radius: 9px;
 }
 
+.B-cat, .B-sub{
+  margin: 0;
+}
+
+
 .Seleccionar{
   font-size: 20px;
   font-weight: 450;
@@ -468,7 +474,6 @@ a:hover {
 
 .error{
   display: block;
-  margin-top: -20px;
   margin-bottom: 10px;
   color:#bd4e4e;
 }
@@ -617,7 +622,9 @@ CATEGORIAS DISEÑO
 /*
 Carrusel novedades con date
 */
-
+.carousel{
+  margin-bottom: 10px;
+}
 .CaruselDate{
   width: 10px;
 }
@@ -826,7 +833,7 @@ Carrusel novedades con date
 }
 
 .CarouselNews{
-  margin-top: 50px;
+  margin-top: 30px;
   margin-left: 6vw;
   margin-right: 6vw !important;
 }
@@ -841,6 +848,7 @@ Carrusel novedades con date
   background-color: #cfcfcf !important;
   border-color: #ffffff !important ;
   color: #6e6e6e !important; /* Cambia esto al color deseado para el texto */
+  margin-right: 5px;
   
 }
 
@@ -965,7 +973,6 @@ button.navbar-item:focus {
 }
 
 .gridAnalitic{
-
   margin-bottom: 50px;
 }
 
@@ -1009,12 +1016,8 @@ button.navbar-item:focus {
 
 /* Estilos para la imagen en todas las pantallas */
 .CarouselInfo {
-  min-height: 120px; /* Alto de la imagen predeterminado */
+  min-height: 170px; /* Alto de la imagen predeterminado */
 }
-
-
-
-
 
 .Profile-logo {
   max-width: 90%; /* La imagen se ajustará al contenedor */
@@ -1047,5 +1050,11 @@ button.navbar-item:focus {
 
   .col-sm-4 {
     text-align: center;
+  }
+}
+
+@media (max-width: 532px) {
+  .error{
+    margin-top: 0;
   }
 }

@@ -8,6 +8,3 @@ from rest_framework.response import Response
 class CategoryView(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
-
-
-

@@ -16,7 +16,7 @@ export function ModulesAdmin(){
         </div>
         <div className='module'>
             <Link to="/Admin/Crear-Categoria">
-                <p>Crear Categoría</p>
+                <p>Gestionar Categorías</p>
             </Link>
         </div>
         <div className='module'>
