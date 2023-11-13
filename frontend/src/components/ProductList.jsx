@@ -304,7 +304,7 @@ export function ProductList() {
 
                 <div className="flex items-center">
                     <Menu as="div" className="relative inline-block text-left">
-                    <div>
+                    {/* <div>
                         <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
                         Sort
                         <ChevronDownIcon
@@ -312,7 +312,7 @@ export function ProductList() {
                             aria-hidden="true"
                         />
                         </Menu.Button>
-                    </div>
+                    </div> */}
 
                     <Transition
                         as={Fragment}
@@ -346,10 +346,10 @@ export function ProductList() {
                     </Transition>
                     </Menu>
 
-                    <button type="button" className="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7">
+                    {/* <button type="button" className="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7">
                     <span className="sr-only">View grid</span>
                     <Squares2X2Icon className="h-5 w-5" aria-hidden="true" />
-                    </button>
+                    </button> */}
                     <button
                     type="button"
                     className="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden"
@@ -446,7 +446,7 @@ export function ProductList() {
                             } 
 
                             if  (!show) {
-                                return
+                                return null
                             }
 
                             // Busqueda
@@ -495,7 +495,8 @@ export function ProductList() {
                             else {
                                 return <ProductCard key={product.ProductId} Product={product} />;
                             }
-                            return null
+                            
+                            return
 
                         })}
                     </div>

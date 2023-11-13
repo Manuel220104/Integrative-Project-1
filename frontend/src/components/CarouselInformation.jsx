@@ -28,7 +28,7 @@ export function CarruselDeImagenes() {
 
     return (
         <div className="carruselInformacion">
-            <Carousel activeIndex={activeIndex} onSelect={handleSelect} controls={false}>
+            <Carousel activeIndex={activeIndex} onSelect={handleSelect} controls={false} interval={7000}>
 
                 {ultimoProducto.map((product) => (
                     <Carousel.Item  key={product.id}>

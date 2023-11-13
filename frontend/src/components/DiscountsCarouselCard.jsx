@@ -80,6 +80,13 @@ export function DiscountsCarouselCard({ Product }) {
         }
     };
 
+    const handleClickCart = (Product) => {
+        const phoneNumber = '+573003462864';
+        const message = `¡Hola Acentos! Estoy interesado en el producto ${Product.Name} - ${Product.ProductType}`;
+        const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        window.open(whatsappLink, '_blank');
+    };
+
 
     return (
         <div className="cardNews">
@@ -106,7 +113,12 @@ export function DiscountsCarouselCard({ Product }) {
                             alt="Me gusta"
                             onClick={handleLikeClick}
                         />)}
-                    <img className="navbar-item cart-icon" src={cart} alt="Carrito" />
+                    <img
+                        onClick={() => handleClickCart(Product)}
+                        className="navbar-item cart-icon"
+                        src={cart}
+                        alt="Carrito"
+                    />
                 </div>
                 <Link to={`/Productos/DetalleProducto/${Product.ProductId}`} state={{ Product: Product }}>
                     <span className="seeCard">Ver más</span>

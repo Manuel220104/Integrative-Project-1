@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useForm } from 'react-hook-form'
-import { createCategory, getAllCategories, updateCategory } from '../../api/Categories.api.js'
-import { createSubcategory, getAllSubcategory } from '../../api/Subcategories.api.js'
+import { createCategory, getAllCategories, deleteCategory } from '../../api/Categories.api.js'
+import { createSubcategory, getAllSubcategory, deleteSubcategory } from '../../api/Subcategories.api.js'
 
 
 import { useLocation } from 'react-router-dom';
@@ -29,54 +29,59 @@ export function CreateCategories() {
         console.log(res.data)
     }, []);
 
+
     useEffect(() => {
         const fetchData = async () => {
             await loadCategories();
             await loadSubcategories();
         };
-
         fetchData();
     }, [location]);
 
     const onSubmitCategory = handleSubmit(async (data) => {
         try {
             await createCategory(data);
-            loadCategories();
+            await loadCategories();
         } catch (error) {
             console.error('Error al crear el categoria:', error);
             console.log('Respuesta del servidor:', error.response);
         }
     });
 
+    const deleteCategoryf = handleChaSubmitCategory(async (data) => {
+        console.log(data);
+        if(data.Category!='General'){
+            try {
+                await deleteCategory(data.Category);
+                await loadCategories();
+              } catch (error) {
+                console.error('Error al actualizar la categoria:', error);
+                console.log('Respuesta del servidor:', error.response);
+              }
+        }
+      });
+
     const onSubmitSubCategory = handleSubmitSubCategory(async (data) => {
         try {
             await createSubcategory(data);
+            await loadSubcategories();
         } catch (error) {
             console.error('Error al crear la subcategoría:', error);
             console.log('Respuesta del servidor:', error.response);
         }
     });
 
-    const editCategory = handleChaSubmitCategory(async (data) => {
-        console.log(data);
-        try {
-          await updateCategory(data.Category, { Name: data.Name });
-        } catch (error) {
-          console.error('Error al actualizar la categoria:', error);
-          console.log('Respuesta del servidor:', error.response);
-        }
-      });
-
-    const editSubCategory = handleChaSubmitSubCategory(async (data) => {
+    const deleteSubCategoryf = handleChaSubmitSubCategory(async (data) => {
         console.log(data)
-        console.log('2')
-
-        // try {
-        //     await createSubcategory(data);
-        // } catch (error) {
-        //     console.error('Error al crear la subcategoría:', error);
-        //     console.log('Respuesta del servidor:', error.response);
-        // }
+        if(data.Category!='General'){
+            try {
+                await deleteSubcategory(data.Subcategory);
+                await loadSubcategories();
+            } catch (error) {
+                console.error('Error al crear la subcategoría:', error);
+                console.log('Respuesta del servidor:', error.response);
+            }
+        }
     });
 
     const [selectedCategoryid, setSelectedCategory] = useState('');
@@ -92,6 +97,8 @@ export function CreateCategories() {
         console.log(selected)
         setSubCategory(selected);
     }
+
+
 
 
 
@@ -143,9 +150,9 @@ export function CreateCategories() {
                 </form>
 
 
-                <form onSubmit={editCategory} className="flex flex-wrap">
+                <form onSubmit={deleteCategoryf} className="flex flex-wrap">
                     <div>
-                        <label className="Seleccionar" htmlFor="Name">Editar Categoría:</label>
+                        <label className="Seleccionar" htmlFor="Name">Eliminar Categoría:</label>
 
                         <div className="selector">
                             <label className="atributo" htmlFor="category">Tipo de Categoría</label>
@@ -167,25 +174,13 @@ export function CreateCategories() {
                             </select>
                         </div>
 
-                        <label className="atributo" htmlFor="Name">Nombre Nuevo De La Categoría:</label>
-                        <div>
-                            <input
-                                className="Ingresar-Dato mr-5"
-                                type="text"
-                                {...registerChaCategory("Name", { required: true })}
-                            />
-                            <button className="Boton B-sub" type="submit">Editar Categoría</button>
-                        </div>
-
-                        <div >
-                            {errorsChaCategory.Name && <span className="error">Nombre es requerido</span>}
-                        </div>
+                        <button className="Boton-Eliminar B-sub mb-5" type="submit">Eliminar Categoría</button>
                     </div>
                 </form>
 
-                <form onSubmit={editSubCategory} className="flex flex-wrap">
+                <form onSubmit={deleteSubCategoryf} className="flex flex-wrap">
                     <div>
-                        <label className="Seleccionar" htmlFor="Name">Editar Subcategoría:</label>
+                        <label className="Seleccionar" htmlFor="Name">Eliminar Subcategoría:</label>
 
                         <div className="selector">
                             <label className="atributo" htmlFor="category">Tipo de Categoría</label>
@@ -224,19 +219,7 @@ export function CreateCategories() {
                             </select>
                         </div>
 
-                        <label className="atributo" htmlFor="Name">Nombre De La Subcategoría:</label>
-                        <div>
-                            <input
-                                className="Ingresar-Dato mr-5"
-                                type="text"
-                                {...registerChaSubCategory("Name", { required: true })}
-                            />
-                            <button className="Boton B-sub" type="submit">Editar Categoría</button>
-                        </div>
-
-                        <div >
-                            {errorsChaSubCategory.Name && <span className="error">Nombre es requerido</span>}
-                        </div>
+                         <button className="Boton-Eliminar B-sub mb-5" type="submit">Eliminar Subcategoría</button>
                     </div>
                 </form>
 

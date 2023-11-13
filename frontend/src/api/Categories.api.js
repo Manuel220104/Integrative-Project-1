@@ -11,6 +11,6 @@ export const getAllCategories = () => CategoriesApi.get('/');
 
 export const createCategory = (Category) => CategoriesApi.post('/', Category);
 
-export const updateCategory = (categoryName, updatedCategoryData) => CategoriesApi.put(`${categoryName}/`, updatedCategoryData)
+export const deleteCategory = (categoryName) => CategoriesApi.delete(`${categoryName}/`)
 
 

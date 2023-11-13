@@ -908,7 +908,7 @@ Carrusel novedades con date
 
 .productosOrganizados{
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Cambia el tamaño mínimo según tus necesidades */
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
   column-gap: 2rem;
   row-gap: 2rem ;
   

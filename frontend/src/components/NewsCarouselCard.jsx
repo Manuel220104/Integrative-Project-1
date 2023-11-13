@@ -80,6 +80,13 @@ export function NewsCarouselCard({ Product }) {
         }
     };
 
+    const handleClickCart = (Product) => {
+        const phoneNumber = '+573003462864';
+        const message = `¡Hola Acentos! Estoy interesado en el producto ${Product.Name} - ${Product.ProductType}`;
+        const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        window.open(whatsappLink, '_blank');
+    };
+
     return (
         <div className="cardNews">
             <img className="imagencarrusel" src={Product.ImageUrl} alt={truncatedName} />
@@ -90,20 +97,25 @@ export function NewsCarouselCard({ Product }) {
                 <hr />
                 <div className="iconsCard">
                     {token ? (
+                        <img
+                            className="navbar-item like-icon"
+                            src={isLikedProduct ? likefull : like}
+                            alt="Me gusta"
+                            onClick={handleLikeClick}
+                        />
+                    ) : (
+                        <img
+                            className="navbar-item like-icon"
+                            src={like}
+                            alt="Me gusta"
+                            onClick={handleLikeClick}
+                        />)}
                     <img
-                        className="navbar-item like-icon"
-                        src={isLikedProduct ? likefull : like}
-                        alt="Me gusta"
-                        onClick={handleLikeClick}
+                        onClick={() => handleClickCart(Product)}
+                        className="navbar-item cart-icon"
+                        src={cart}
+                        alt="Carrito"
                     />
-                    ):(
-                    <img
-                        className="navbar-item like-icon"
-                        src={like}
-                        alt="Me gusta"
-                        onClick={handleLikeClick}
-                    />)}
-                    <img className="navbar-item cart-icon" src={cart} alt="Carrito" />
                 </div>
                 <Link to={`/Productos/DetalleProducto/${Product.ProductId}`} state={{ Product }}>
                     <span className="seeCard">Ver más</span>

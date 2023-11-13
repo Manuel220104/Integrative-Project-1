@@ -13,4 +13,7 @@ export const CreateInformationCarousel = (information) => InformationCarouselApi
 
 export const getLastCarouselInfo = () => InformationCarouselApi.get(urlBack+'InformationCarousel/api/v1/ultimo_registro_CarouselInfo/');
 
+export const deleteCarouselInfo = (id) => InformationCarouselApi.delete(`${id}/`)
+
+
 

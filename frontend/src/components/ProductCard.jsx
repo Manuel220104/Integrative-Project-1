@@ -44,7 +44,6 @@ export function ProductCard({ Product }) {
     };
 
     useEffect(() => {
-        // Llamar a la función para obtener los likes del usuario cuando el componente se monta
         fetchUserLikes();
     }, []);
 
@@ -76,6 +75,14 @@ export function ProductCard({ Product }) {
         } else {
             console.log('El usuario no ha iniciado sesión');
         }
+    };
+
+
+    const handleClickCart = (Product) => {
+        const phoneNumber = '+573003462864'; 
+        const message = `¡Hola Acentos! Estoy interesado en el producto ${Product.Name} - ${Product.ProductType}`;
+        const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        window.open(whatsappLink, '_blank');
     };
 
     return (
@@ -110,7 +117,13 @@ export function ProductCard({ Product }) {
                                     alt="Me gusta"
                                     onClick={handleLikeClick}
                                 />)}
-                            <img className="navbar-item cart-icon" src={cart} alt="Carrito" />
+
+                                <img
+                                    onClick={() => handleClickCart(Product)}
+                                    className="navbar-item cart-icon"
+                                    src={cart}
+                                    alt="Carrito"
+                                />
                         </div>
                         <Link to={`/Productos/DetalleProducto/${Product.ProductId}`} state={{ Product: Product }}>
                             <span className="seeCard">Ver más</span>
@@ -148,7 +161,13 @@ export function ProductCard({ Product }) {
                                     alt="Me gusta"
                                     onClick={handleLikeClick}
                                 />)}
-                            <img className="navbar-item cart-icon" src={cart} alt="Carrito" />
+                            
+                                <img
+                                        onClick={() => handleClickCart(Product)}
+                                        className="navbar-item cart-icon"
+                                        src={cart}
+                                        alt="Carrito"
+                                    />
                         </div>
                         <Link to={`/Productos/DetalleProducto/${Product.ProductId}`} state={{ Product: Product }}>
                             <span className="seeCard">Ver más</span>
@@ -186,7 +205,13 @@ export function ProductCard({ Product }) {
                                     alt="Me gusta"
                                     onClick={handleLikeClick}
                                 />)}
-                            <img className="navbar-item cart-icon" src={cart} alt="Carrito" />
+                            
+                                <img
+                                        onClick={() => handleClickCart(Product)}
+                                        className="navbar-item cart-icon"
+                                        src={cart}
+                                        alt="Carrito"
+                                    />
                         </div>
                         <Link to={`/Productos/DetalleProducto/${Product.ProductId}`} state={{ Product: Product }}>
                             <span className="seeCard">Ver más</span>
@@ -224,7 +249,13 @@ export function ProductCard({ Product }) {
                                     alt="Me gusta"
                                     onClick={handleLikeClick}
                                 />)}
-                            <img className="navbar-item cart-icon" src={cart} alt="Carrito" />
+                            
+                                <img
+                                        onClick={() => handleClickCart(Product)}
+                                        className="navbar-item cart-icon"
+                                        src={cart}
+                                        alt="Carrito"
+                                    />
                         </div>
                         <Link to={`/Productos/DetalleProducto/${Product.ProductId}`} state={{ Product: Product }}>
                             <span className="seeCard">Ver más</span>

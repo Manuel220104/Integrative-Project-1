@@ -11,4 +11,5 @@ export const getAllSubcategory = () => Subcategories.get('/');
 
 export const createSubcategory = (Subcategory) => Subcategories.post('/', Subcategory);
 
+export const deleteSubcategory = (subcategoryName) => Subcategories.delete(`${subcategoryName}/`)
 

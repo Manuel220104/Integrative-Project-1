@@ -29,7 +29,7 @@ function App() {
   useEffect(() => {
     const currentURL = location.pathname;
     console.log(currentURL)
-    if (currentURL === '/' || currentURL === '/Nosotros' || currentURL === '/Mis-MeGusta' || currentURL.includes('/Productos/DetalleProducto/') || currentURL === '/Productos') {
+    if (currentURL === '/' || currentURL === '/Nosotros' || currentURL === '/Mis-MeGusta' || currentURL.includes('/Productos/DetalleProducto/') || currentURL === '/Productos' || currentURL === '/Productos/Libros' || currentURL === '/Productos/InstrumentosMusicales'  || currentURL === '/Productos/JuegosDeMesa'  || currentURL === '/Productos/Tecnologia') {
       setshowFooter(true);
     }
     else {

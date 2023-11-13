@@ -86,7 +86,7 @@ export function Navigation() {
 
                     <a href="#" className="navbar-item search-icon" onClick={toggleSearch}><img src={search} alt="Buscar" /></a>
 
-                    <img className="navbar-item cart-icon" src={cart} alt="Carrito" />
+                    {/* <img className="navbar-item cart-icon" src={cart} alt="Carrito" /> */}
                     <Link to="/Mis-MeGusta">
                         <img className="navbar-item like-icon" src={like} alt="Me gusta" />
                     </Link>

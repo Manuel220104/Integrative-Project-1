@@ -11,7 +11,14 @@ export function ProductDetail() {
         input = parseFloat(input.replace(/,/g, ''));
     }
     return input.toLocaleString('es-ES');
-}
+  }
+
+  const handleClickCart = (Product) => {
+    const phoneNumber = '+573003462864'; 
+    const message = `¡Hola Acentos! Estoy interesado en el producto ${Product.Name} - ${Product.ProductType}`;
+    const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappLink, '_blank');
+  };
   return (
     <div>
     {Product.ProductType == 'Libro' && (
@@ -58,7 +65,7 @@ export function ProductDetail() {
               </span>
 
               
-              <button className="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded">
+              <button onClick={() => handleClickCart(Product)} className="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded">
                 Obtener
               </button>
               <button className="rounded-full w-10 h-10 bg-gray-100 p-0 border-0 inline-flex items-center justify-center  ml-4">
@@ -103,7 +110,7 @@ export function ProductDetail() {
             <span className="lg:text-2xl md:text-2xl sm:text-2xl title-font font-medium mt-2  text-gray-900">
               $ {formatNumberWithCommas(Product.Price)}
               </span>
-              <button className="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded">
+              <button onClick={() => handleClickCart(Product)} className="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded">
                 Obtener
               </button>
               <button className="rounded-full w-10 h-10 bg-gray-100 p-0 border-0 inline-flex items-center justify-center  ml-4">
@@ -148,7 +155,7 @@ export function ProductDetail() {
             <span className="lg:text-2xl md:text-2xl sm:text-2xl title-font font-medium mt-2  text-gray-900">
               $ {formatNumberWithCommas(Product.Price)}
               </span>
-              <button className="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded">
+              <button onClick={() => handleClickCart(Product)} className="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded">
                 Obtener
               </button>
               <button className="rounded-full w-10 h-10 bg-gray-100 p-0 border-0 inline-flex items-center justify-center  ml-4">
@@ -193,7 +200,7 @@ export function ProductDetail() {
             <span className="lg:text-2xl md:text-2xl sm:text-2xl title-font font-medium mt-2  text-gray-900">
               $ {formatNumberWithCommas(Product.Price)}
               </span>
-              <button className="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded">
+              <button onClick={() => handleClickCart(Product)} className="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded">
                 Obtener
               </button>
               <button className="rounded-full w-10 h-10 bg-gray-100 p-0 border-0 inline-flex items-center justify-center  ml-4">
