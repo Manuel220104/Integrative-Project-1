@@ -7,9 +7,9 @@ from Subcategories.models import Subcategory
 
 class Product(models.Model):
     ProductId = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
-    Name = models.CharField(max_length= 200)
+    Name = models.CharField(max_length= 1000)
     Price = models.PositiveIntegerField()
-    Description = models.CharField(max_length = 500)
+    Description = models.CharField(max_length = 10000)
     ImageUrl = models.URLField(blank = True, null=True, max_length=1000)
     Image = models.ImageField(upload_to='./Products/Productimages/', null=True, blank=True)
     Quantity = models.PositiveIntegerField(default=0)
