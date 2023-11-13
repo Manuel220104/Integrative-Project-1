@@ -1,5 +1,5 @@
 # how to run 
-#  python manage.py shell
+# python manage.py shell
 # exec(open('AcentosProject/scripts/import.py').read())
 
 import pandas as pd
@@ -9,66 +9,70 @@ from Categories.models import Category
 from Subcategories.models import Subcategory
 
 # Construye la ruta al archivo data.xlsx en el mismo directorio que el script
-file_path = 'AcentosProject/scripts/data.xlsx'
+file_path = 'AcentosProject/scripts/books.xlsx'
 
 df = pd.read_excel(file_path)
 
 # ...
 
 for index, row in df.iterrows():
-    # Crear una instancia de Product
-    product_instance = Product.objects.create(
-        Name=row['Name'],
-        Price=row['Price'],
-        Description=row['Description'],
-        ImageUrl=row['ImageUrl'],
-        Quantity=row['Quantity'],
-        Discount=row['Discount'],
-        ProductType=row['ProductType'],
-    )
+    print(row['Name'])
+    create = True
 
-
-    '''
-
-    category_name = row['Category']
-    subcategory_name = row['Subcategory']
-
-    # Verificar si los valores son "NaN" y asignar "General" en su lugar
-    if pd.isna(category_name):
-        category_name = 'General'
-    if pd.isna(subcategory_name):
-        subcategory_name = 'General'
-
-    # Obtener o crear instancias de Category y Subcategory usando el campo Name
-    category, _ = Category.objects.get_or_create(Name=category_name)
-
-    # Verificar si ya existe una Subcategory con el mismo nombre
-    subcategory, created = Subcategory.objects.get_or_create(Name=subcategory_name, Category=category)
+    # Verificar si el ISBN ya existe en la base de datos
+    existing_book = Book.objects.filter(ISBN=row['ISBN']).first()
     
-    if (category_name=='General'):
+    #Verificar si la subcategoria existe
+    existing_subcategory = Subcategory.objects.filter(Name=row['Subcategory']).first()
+    if existing_subcategory:
+        category_of_subcategory = existing_subcategory.Category
+        if category_of_subcategory.Name != row['Category']:
+            print(f"No se puede crear el producto {row['Name']} porque la subcategoria '{row['Subcategory']}' ya esta creada en la categoria '{category_of_subcategory.Name}' \n")
+            create = False
+
+    if existing_book:
+        # El ISBN ya existe, mostrar un mensaje o manejar la lógica correspondiente
+        print(f"El ISBN {row['ISBN']} ya esta registrado con el nombre del producto {existing_book.Product.Name} \n")
+        create = False
+
+    if create:
+        # Crear una instancia de Product
+        product_instance = Product.objects.create(
+            Name=row['Name'],
+            Price=row['Price'],
+            Description=row['Description'],
+            ImageUrl=row['ImageUrl'],
+            Quantity=row['Quantity'],
+            Discount=row['Discount'],
+            ProductType=row['ProductType'],
+        )
+
+        # Lógica para las categorías
+        category_name = row['Category']
+        if pd.isna(category_name):
+            category, _ = Category.objects.get_or_create(Name="General")
+        else:
+            category, _ = Category.objects.get_or_create(Name=category_name)
+
         product_instance.Category = category
-    else:
-        product_instance.Category = category
-        if(subcategory_name!='General'):
+
+        # Lógica para las subcategorías
+        subcategory_name = row['Subcategory']
+        if not pd.isna(subcategory_name):
+            subcategory, _ = Subcategory.objects.get_or_create(Name=subcategory_name, Category=category)
             product_instance.Subcategory = subcategory
-    '''
-    
-    category, _ = Category.objects.get_or_create(Name="General")
-    product_instance.Category = category
-    product_instance.save()
 
-    # Crear una instancia de Book asociada al Product
-    book_instance = Book.objects.create(
-        ISBN=row['ISBN'],
-        Authors=row['Authors'],
-        Editorial=row['Editorial'],
-        Language=row['Language'],
-        YearPublication=row['YearPublication'],
-        Product=product_instance,
-    )
+        product_instance.save()
 
-# ...
-
+        # Crear una instancia de Book asociada al Product
+        book_instance = Book.objects.create(
+            ISBN=row['ISBN'],
+            Authors=row['Authors'],
+            Editorial=row['Editorial'],
+            Language=row['Language'],
+            YearPublication=row['YearPublication'],
+            Product=product_instance,
+        )
 
 print(df)
 print("Datos importados correctamente.")
