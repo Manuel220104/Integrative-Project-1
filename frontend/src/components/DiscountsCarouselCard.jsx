@@ -36,8 +36,8 @@ export function DiscountsCarouselCard({ Product }) {
                     setIsLikedProduct(currentProductIsLiked);
 
                     const numberOfLikes = likes.length;
-                    console.log('Número de likes del usuario:', username_or_email, ":", numberOfLikes);
-                    console.log('isLikedProduct:', currentProductIsLiked);
+                    // console.log('Número de likes del usuario:', username_or_email, ":", numberOfLikes);
+                    // console.log('isLikedProduct:', currentProductIsLiked);
                 }
             })
             .catch((error) => {

@@ -1058,3 +1058,34 @@ button.navbar-item:focus {
     margin-top: 0;
   }
 }
+
+.pagination {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 60px;
+  max-width: 400px; /* Puedes ajustar este valor según tus necesidades */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pagination button {
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+}
+
+.pagination button:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 14px;
+  color: #555;
+}
