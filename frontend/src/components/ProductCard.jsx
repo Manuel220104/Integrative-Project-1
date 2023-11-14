@@ -12,7 +12,7 @@ const username_or_email = localStorage.getItem('username_or_email');
 
 export function ProductCard({ Product }) {
     const truncatedName = Product.Name.length > MaxLength ? `${Product.Name.substring(0, MaxLength)}...` : Product.Name;
-
+    
     function formatNumberWithCommas(input) {
         if (typeof input !== 'number') {
             input = parseFloat(input.replace(/,/g, ''));
@@ -74,6 +74,7 @@ export function ProductCard({ Product }) {
                 });
         } else {
             console.log('El usuario no ha iniciado sesión');
+            alert('Debes iniciar sesión para dar "Me gusta"');
         }
     };
 

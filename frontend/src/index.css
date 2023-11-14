@@ -1020,27 +1020,28 @@ button.navbar-item:focus {
 }
 
 .Profile-logo {
-  max-width: 90%; /* La imagen se ajustará al contenedor */
-  height: auto; /* Mantendrá la proporción de aspecto */
-  margin-top: -40px;
-  margin-left: -50px;
-  margin-bottom: 20px;
+  width: 300px; /* Establecer el ancho al 100% del contenedor */
+  height: 210px; /* Mantener la proporción original de la imagen */
+  max-width: 200px; /* O establecer un ancho máximo si lo prefieres */
+  margin-left: -30px;
 }
+
 
 .Title_MyAccount {
   font-weight: 500;
-  font-size: 35px;
+  font-size: 2rem;
   letter-spacing: -2px;
   font-family: var(--fuentePrincipal);
-  margin-left: -10vw;
-  margin-top: 40px;
+  margin-left: auto;
+  margin-top: auto;
 }
 
 .Subtitle_MyAccount {
   font-weight: 400;
-  font-size: 20px;
-  margin-left: -150px;
+  font-size: 1.25rem;
+  margin-left: auto;
 }
+
 
 /* Estilos adicionales para pantallas pequeñas (menos de 576px) */
 @media (max-width: 575.98px) {
@@ -1088,4 +1089,15 @@ button.navbar-item:focus {
 .pagination span {
   font-size: 14px;
   color: #555;
+}
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.space{
+  margin-bottom: 20px;
 }

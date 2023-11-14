@@ -53,15 +53,15 @@ export function NewsCarouselCard({ Product }) {
     const handleLikeClick = () => {
         if (token) {
             setLiked((currentLiked) => !currentLiked);
-
+    
             const product_id = Product.ProductId;
-
+    
             const data = {
                 product_id: Product.ProductId,
                 username: username_or_email,
             };
             console.log(data);
-
+    
             createLike(data)
                 .then((response) => {
                     if (response.status === 201) {
@@ -77,8 +77,12 @@ export function NewsCarouselCard({ Product }) {
                 });
         } else {
             console.log('El usuario no ha iniciado sesión');
+            alert('Debes iniciar sesión para dar "Me gusta"');
+
+            // Mostrar mensaje de inicio de sesión aquí (puedes usar alert o algún modal)
         }
     };
+    
 
     const handleClickCart = (Product) => {
         const phoneNumber = '+573003462864';

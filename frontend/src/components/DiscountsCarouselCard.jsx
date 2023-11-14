@@ -77,6 +77,7 @@ export function DiscountsCarouselCard({ Product }) {
                 });
         } else {
             console.log('El usuario no ha iniciado sesión');
+            alert('Debes iniciar sesión para dar "Me gusta"');
         }
     };
 

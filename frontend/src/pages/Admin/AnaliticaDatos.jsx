@@ -11,6 +11,8 @@ export function ProductAnalysis() {
     const [latestProducts, setLatestProducts] = useState([]);
     const chartRef = useRef(null);
     const [productCounts, setProductCounts] = useState({});
+    const [showAllDiscountProducts, setShowAllDiscountProducts] = useState(false);
+
 
 
     useEffect(() => {
@@ -161,14 +163,14 @@ export function ProductAnalysis() {
             x: {
                 title: {
                     display: true,
-                    text: 'Productos',
+                    text: 'ID del producto',
                 },
             },
             y: {
                 beginAtZero: true,
                 title: {
                     display: true,
-                    text: 'Cantidad',
+                    text: 'Cantidad de likes',
                 },
             },
         },
@@ -192,26 +194,34 @@ export function ProductAnalysis() {
 
             <div className="row gridAnalitic">
                 <div className="col-md-6">
-                    <h3 className="mt-4 Subtitle_Analitic SubtitleAnalitic">Productos con Category "general"</h3>
+                    <h3 className="mt-4 Subtitle_Analitic SubtitleAnalitic">Lista de Productos con descuento</h3>
                     <table className="table table-striped table-custom">
                         <thead>
                             <tr>
                                 <th>Producto ID</th>
                                 <th>Nombre</th>
-                                <th>Categoria</th>
+                                <th>Descuento</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {generalCategoryProducts.map(product => (
+                            {productsWithDiscount.slice(0, showAllDiscountProducts ? productsWithDiscount.length : 10).map(product => (
                                 <tr key={product.ProductId}>
                                     <td>{product.ProductId}</td>
                                     <td>{product.Name}</td>
-                                    <td>{product.Category}</td>
+                                    <td>{product.Discount}%</td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
+                    <button
+                        className="toggle-button"
+                        style={{ fontWeight: 'bold', fontSize: '16px' }}
+                        onClick={() => setShowAllDiscountProducts(!showAllDiscountProducts)}
+                    >
+                        {showAllDiscountProducts ? 'Ver menos' : 'Ver más'}
+                    </button>
                 </div>
+
 
                 <div className="col-md-6">
                     <h3 className="mt-4 Subtitle_Analitic SubtitleAnalitic">Lista de Productos con descuento</h3>
@@ -224,7 +234,7 @@ export function ProductAnalysis() {
                             </tr>
                         </thead>
                         <tbody>
-                            {productsWithDiscount.map(product => (
+                            {productsWithDiscount.slice(0, showAllDiscountProducts ? productsWithDiscount.length : 10).map(product => (
                                 <tr key={product.ProductId}>
                                     <td>{product.ProductId}</td>
                                     <td>{product.Name}</td>
@@ -232,6 +242,13 @@ export function ProductAnalysis() {
                                 </tr>
                             ))}
                         </tbody>
+                        <button
+                            className="toggle-button"
+                            style={{ fontWeight: 'bold', fontSize: '16px' }}
+                            onClick={() => setShowAllDiscountProducts(!showAllDiscountProducts)}
+                        >
+                            {showAllDiscountProducts ? 'Ver menos' : 'Ver más'}
+                        </button>
                     </table>
                 </div>
             </div>
@@ -268,11 +285,11 @@ export function ProductAnalysis() {
                 </div>
 
             </div>
-            
-            
+
+
             <div className='mb-7'>
                 <h3 className="mt-4 SubtitleAnalitic">Los 10 productos con mas Likes</h3>
-                <div style={{ width: '80%'}}>
+                <div style={{ width: '80%' }}>
                     <Bar data={data} options={options} />
                 </div>
             </div>

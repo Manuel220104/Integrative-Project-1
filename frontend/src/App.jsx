@@ -66,7 +66,7 @@ function App() {
         <Route path="/Admin/-Categoria" element={<CreateCategories />} />
         <Route path="/Admin/Gestionar-Productos" element={<Crud />} />
         */}
-        <Route path="/Mis-MeGusta" element={<Liked />} />
+
         <Route path="/Iniciar-Sesion" element={<Login />} />
         <Route path="/Registro-Usuario" element={<Signup />} />
         <Route path="/Nosotros" element={<AboutUs />} />
@@ -141,6 +141,11 @@ function App() {
           <Route path="/Admin/Analitica-de-Datos" element={<Main />} />
         )}
 
+        {token ? (
+          <Route path="/Mis-MeGusta" element={<Liked />} />
+        ) : (
+          <Route path="/Mis-MeGusta" element={<Main />} />
+        )}
 
 
 
