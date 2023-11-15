@@ -13,7 +13,7 @@ export function EditTechnology() {
     const product = location.state ? location.state.Product : null;
     console.log(product)
     const idtech = product.technology.TechnologyId
-    const idproduct = product.ProductId    
+    const idproduct = product.ProductId
     const { register, handleSubmit, formState: { errors }, setValue, } = useForm();
     const [Categories, setCategories] = useState([]);
 
@@ -55,19 +55,28 @@ export function EditTechnology() {
         formData.append("Quantity", data.Quantity);
         formData.append("Discount", data.Discount);
         formData.append("ProductType", data.ProductType);
-
         formData.append("Category", data.Category);
 
-        if (data.Subcategory != 'General') {
-            formData.append("Subcategory", data.Subcategory);
+        if (data.Category != product.Category) {
+            const foundItem = Subcategories.find(item => item.Name === data.Subcategory && item.Category === data.Category);
+            if (foundItem) {
+                formData.append("Subcategory", data.Subcategory);
+            }
+            else if (data.Subcategory != null && data.Subcategory != "Seleccione una subcategoría") {
+                formData.append("Subcategory", "");
+            }
+        } else {
+            if (data.Subcategory != null && data.Subcategory != "Seleccione una subcategoría") {
+                formData.append("Subcategory", data.Subcategory);
+            }
         }
 
         if (data.image.length > 0) {
             formData.append("Image", data.image[0]);
         }
-
         return formData;
     }
+
 
     function GetDataOfTech(data) {
         const ProductData = {
@@ -131,26 +140,83 @@ export function EditTechnology() {
                             })} />
                             {errors.Name && <span className="error">Nombre es requerido</span>}
                         </div>
+
                         <div>
-                            <label className="atributo" htmlFor="Brand" >Marca:</label>
-                            <input className="Ingresar-Dato" type="text" defaultValue={product.technology.Brand} {...register("Brand", { required: true })} />
+                            <label className="atributo" htmlFor="Brand">Marca:</label>
+                            <input
+                                className="Ingresar-Dato"
+                                type="text"
+                                defaultValue={product.technology.Brand}
+                                {...register("Brand", { required: true })}
+                                onInput={(e) => {
+                                    if (e.target.value.length > 100) {
+                                        e.target.setCustomValidity("La marca no puede tener más de 100 caracteres");
+                                    } else {
+                                        e.target.setCustomValidity("");
+                                    }
+                                }}
+                            />
                             {errors.Brand && <span className="error">Marca es requerida</span>}
                         </div>
+
                         <div>
-                            <label className="atributo" htmlFor="Model" >Modelo:</label>
-                            <input className="Ingresar-Dato" type="text" defaultValue={product.technology.Model} {...register("Model", { required: true })} />
+                            <label className="atributo" htmlFor="Model">Modelo:</label>
+                            <input
+                                className="Ingresar-Dato"
+                                type="text"
+                                defaultValue={product.technology.Model}
+                                {...register("Model", { required: true })}
+                                onInput={(e) => {
+                                    if (e.target.value.length > 100) {
+                                        e.target.setCustomValidity("El modelo no puede tener más de 100 caracteres");
+                                    } else {
+                                        e.target.setCustomValidity("");
+                                    }
+                                }}
+                            />
                             {errors.Model && <span className="error">Modelo es requerida</span>}
                         </div>
+
+
                         <div>
-                            <label className="atributo" htmlFor="Price">Precio:</label>
-                            <input className="Ingresar-Dato" type="number" step="000.001" defaultValue={product.Price}  {...register("Price", { required: true })} />
-                            {errors.Price && <span className="error">Precio es requerido</span>}
+                            <label className="atributo" htmlFor="Price">
+                                Precio:
+                            </label>
+                            <input
+                                className="Ingresar-Dato"
+                                type="number"
+                                defaultValue={product.Price}
+                                {...register("Price", {
+                                    required: "El precio es requerido",
+                                    pattern: {
+                                        value: /^[1-9]\d*$/,
+                                        message: "Ingrese un número entero positivo para el precio",
+                                    },
+                                })}
+                            />
+                            {errors.Price && (
+                                <span className="error">{errors.Price.message}</span>
+                            )}
                         </div>
+
                         <div>
-                            <label className="atributo" htmlFor="Description">Descripcion:</label>
-                            <textarea className="Ingresar-Descripcion" type="text"  defaultValue={product.Description} {...register("Description", { required: true })} />
-                            {errors.Description && <span className="error" >Descripcion es requerido</span>}
+                            <label className="atributo" htmlFor="Description"> Descripción: </label>
+                            <textarea className="Ingresar-Descripcion"
+                                defaultValue={product.Description}
+                                {...register("Description", {
+                                    required: "La descripción es requerida",
+                                    maxLength: {
+                                        value: 10000,
+                                        message: "La descripción no debe superar los 10000 caracteres",
+                                    },
+                                })}
+                            />
+                            {errors.Description && (
+                                <span className="error">{errors.Description.message}</span>
+                            )}
                         </div>
+
+
                         <div>
                             <label className="atributo" htmlFor="ImageUrl">
                                 Imagen URL:
@@ -170,29 +236,51 @@ export function EditTechnology() {
 
                         <div>
                             <label className="atributo" htmlFor="image">Imagen:</label>
-                            <input type="file" name="image" id="image" accept="image/*" defaultValue={product.image}{...register("image")} />
+                            <input type="file" className="mb-3" name="image" id="image" accept="image/*" defaultValue={product.image}{...register("image")} />
                         </div>
+
                         <div>
-                            <label className="atributo" htmlFor="Quantity">Cantidad:</label>
-                            <input className="Ingresar-Dato" type="number" defaultValue={product.Quantity} {...register("Quantity", { required: true })} />
-                            {errors.Quantity && <span className="error">Cantidad es requerido</span>}
+                            <label className="atributo" htmlFor="Quantity">
+                                Cantidad:
+                            </label>
+                            <input
+                                className="Ingresar-Dato"
+                                type="number"
+                                defaultValue={product.Quantity}
+                                {...register("Quantity", {
+                                    required: "La cantidad es requerida",
+                                    pattern: {
+                                        value: /^[0-9]\d*$/,
+                                        message: "Ingrese un número entero positivo para la cantidad",
+                                    },
+                                })}
+                            />
+                            {errors.Quantity && (
+                                <span className="error">{errors.Quantity.message}</span>
+                            )}
                         </div>
+
+
                         <div>
                             <label className="atributo" htmlFor="Discount">Descuento:</label>
-                            <input className="Ingresar-Dato" type="number" defaultValue={product.Discount} {...register("Discount", { required: true })} />
+                            <input className="Ingresar-Dato" type="number" min="0" max="100" defaultValue={product.Discount} {...register("Discount", { required: true })} />
                             {errors.Discount && <span className="error" >Descuento es requerido</span>}
                         </div>
 
-                                                
+                        <div className='flex items-center'>
+                            <div>Categoría: {product.Category} <br /> Subcategoría: {product.Subcategory}</div>
+                        </div>
+
                         <div className="selector">
                             <label className="atributo" htmlFor="category">Tipo de Categoría</label>
                             <select
-                                defaultValue={product.Category}
                                 className="Seleccionar-Dato"
                                 id="category"
                                 {...register("Category")}
                                 onChange={handleCategoryChange}
+                                defaultValue="General"
                             >
+                                <option value={product.Category}>Seleccione una Categoría</option>
                                 {Categories.map((Category, index) => {
                                     return (
                                         <option key={index} value={Category.Name}>
@@ -205,8 +293,8 @@ export function EditTechnology() {
 
                         <div className="selector">
                             <label className="atributo" htmlFor="subcategory">Tipo de subcategoría si desea</label>
-                            <select className="Seleccionar-Dato" id="subcategory" defaultValue={product.Subcategory} {...register("Subcategory")}>
-                                <option value="General">Seleccione una subcategoría</option>
+                            <select className="Seleccionar-Dato" id="subcategory" {...register("Subcategory")}>
+                                <option value={product.Subcategory}>Seleccione una subcategoría</option>
                                 {
                                     Subcategories.map((Subcategory, index) => {
                                         if (Subcategory.Category === selectedCategoryid) {

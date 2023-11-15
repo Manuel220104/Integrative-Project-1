@@ -19,7 +19,7 @@ export function CreateBook() {
     const loadCategories = useCallback(async () => {
         const res = await getAllCategories();
         setCategories(res.data);
-        console.log(res.data)
+        // console.log(res.data)
     }, []);
 
     const [Subcategories, setSubcategories] = useState([]);
@@ -27,7 +27,7 @@ export function CreateBook() {
     const loadSubcategories = useCallback(async () => {
         const res = await getAllSubcategory();
         setSubcategories(res.data);
-        console.log(res.data)
+        // console.log(res.data)
     }, []);
 
 
@@ -114,7 +114,7 @@ export function CreateBook() {
                 await createBooks(BookData);
                 setIsCreated(true);
                 setMessage('Producto creado con éxito.')
-                reset()
+                // reset()
             } catch (error) {
                 console.error('Error al crear el libro:', error);
                 console.log('Respuesta del servidor:', error.response);
@@ -337,6 +337,7 @@ export function CreateBook() {
                             onChange={handleCategoryChange}
                             defaultValue="General"
                         >
+                            <option value="General">Seleccione una Categoría</option>
                             {Categories.map((Category, index) => {
                                 return (
                                     <option key={index} value={Category.Name}>
@@ -365,6 +366,7 @@ export function CreateBook() {
                             }
                         </select>
                     </div>
+
                 </div>
 
                 <input type="hidden" name="ProductType" value="Libro" {...register("ProductType")} />

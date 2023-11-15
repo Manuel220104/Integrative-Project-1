@@ -8,7 +8,7 @@ import { getAllCategories } from '../../../../api/Categories.api.js'
 import { useLocation } from 'react-router-dom';
 import { getAllSubcategory } from '../../../../api/Subcategories.api.js'
 
-export function CreateTechnology() {    
+export function CreateTechnology() {
     const { register, handleSubmit, formState: { errors }, setValue, } = useForm();
 
     const location = useLocation();
@@ -143,26 +143,80 @@ export function CreateTechnology() {
                         })} />
                         {errors.Name && <span className="error">Nombre es requerido</span>}
                     </div>
+
                     <div>
-                        <label className="atributo" htmlFor="Brand" >Marca:</label>
-                        <input className="Ingresar-Dato" type="text" {...register("Brand", { required: true })} />
+                        <label className="atributo" htmlFor="Brand">Marca:</label>
+                        <input
+                            className="Ingresar-Dato"
+                            type="text"
+                            {...register("Brand", { required: true })}
+                            onInput={(e) => {
+                                if (e.target.value.length > 100) {
+                                    e.target.setCustomValidity("La marca no puede tener más de 100 caracteres");
+                                } else {
+                                    e.target.setCustomValidity("");
+                                }
+                            }}
+                        />
                         {errors.Brand && <span className="error">Marca es requerida</span>}
                     </div>
+
                     <div>
-                        <label className="atributo" htmlFor="Model" >Modelo:</label>
-                        <input className="Ingresar-Dato" type="text" {...register("Model", { required: true })} />
+                        <label className="atributo" htmlFor="Model">Modelo:</label>
+                        <input
+                            className="Ingresar-Dato"
+                            type="text"
+                            {...register("Model", { required: true })}
+                            onInput={(e) => {
+                                if (e.target.value.length > 100) {
+                                    e.target.setCustomValidity("El modelo no puede tener más de 100 caracteres");
+                                } else {
+                                    e.target.setCustomValidity("");
+                                }
+                            }}
+                        />
                         {errors.Model && <span className="error">Modelo es requerida</span>}
                     </div>
+
+
                     <div>
-                        <label className="atributo" htmlFor="Price">Precio:</label>
-                        <input className="Ingresar-Dato" type="number" step="000.001" {...register("Price", { required: true })} />
-                        {errors.Price && <span className="error">Precio es requerido</span>}
+                        <label className="atributo" htmlFor="Price">
+                            Precio:
+                        </label>
+                        <input
+                            className="Ingresar-Dato"
+                            type="number"
+                            {...register("Price", {
+                                required: "El precio es requerido",
+                                pattern: {
+                                    value: /^[1-9]\d*$/,
+                                    message: "Ingrese un número entero positivo para el precio",
+                                },
+                            })}
+                        />
+                        {errors.Price && (
+                            <span className="error">{errors.Price.message}</span>
+                        )}
                     </div>
+
+
+
                     <div>
-                        <label className="atributo" htmlFor="Description">Descripcion:</label>
-                        <textarea className="Ingresar-Descripcion" type="text"  {...register("Description", { required: true })} />
-                        {errors.Description && <span className="error" >Descripcion es requerido</span>}
+                        <label className="atributo" htmlFor="Description"> Descripción: </label>
+                        <textarea className="Ingresar-Descripcion"
+                            {...register("Description", {
+                                required: "La descripción es requerida",
+                                maxLength: {
+                                    value: 10000,
+                                    message: "La descripción no debe superar los 10000 caracteres",
+                                },
+                            })}
+                        />
+                        {errors.Description && (
+                            <span className="error">{errors.Description.message}</span>
+                        )}
                     </div>
+
 
                     <div>
                         <label className="atributo" htmlFor="ImageUrl">
@@ -179,21 +233,39 @@ export function CreateTechnology() {
                             })}
                         />
                     </div>
-                    
+
                     <div>
                         <label className="atributo" htmlFor="image">Imagen:</label>
-                        <input type="file" name="image" id="image" accept="image/*" {...register("image")} />
+                        <input className="mb-3" type="file" name="image" id="image" accept="image/*" {...register("image")} />
                     </div>
+
                     <div>
-                        <label className="atributo" htmlFor="Quantity">Cantidad:</label>
-                        <input className="Ingresar-Dato" type="number" {...register("Quantity", { required: true })} />
-                        {errors.Quantity && <span className="error">Cantidad es requerido</span>}
+                        <label className="atributo" htmlFor="Quantity">
+                            Cantidad:
+                        </label>
+                        <input
+                            className="Ingresar-Dato"
+                            type="number"
+                            {...register("Quantity", {
+                                required: "La cantidad es requerida",
+                                pattern: {
+                                    value: /^[0-9]\d*$/,
+                                    message: "Ingrese un número entero positivo para la cantidad",
+                                },
+                            })}
+                        />
+                        {errors.Quantity && (
+                            <span className="error">{errors.Quantity.message}</span>
+                        )}
                     </div>
+
+
                     <div>
                         <label className="atributo" htmlFor="Discount">Descuento:</label>
-                        <input className="Ingresar-Dato" type="number" {...register("Discount", { required: true })} />
-                        {errors.Discount && <span className="error" >Descuento es requerido</span>}
+                        <input className="Ingresar-Dato" type="number" min="0" max="100" {...register("Discount", { required: true })} />
+                        {errors.Discount && <span className="error">Descuento es requerido</span>}
                     </div>
+
                     <div className="selector">
                         <label className="atributo" htmlFor="category">Tipo de Categoría</label>
                         <select
@@ -203,6 +275,7 @@ export function CreateTechnology() {
                             onChange={handleCategoryChange}
                             defaultValue="General"
                         >
+                            <option value="General">Seleccione una Categoría</option>
                             {Categories.map((Category, index) => {
                                 return (
                                     <option key={index} value={Category.Name}>
@@ -231,6 +304,7 @@ export function CreateTechnology() {
                             }
                         </select>
                     </div>
+
                 </div>
 
                 <input type="hidden" name="ProductType" value="Tecnologia" {...register("ProductType")} />

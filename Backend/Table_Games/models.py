@@ -3,7 +3,7 @@ from Products.models import Product
 
 class Table_Game(models.Model):
     Table_GameId = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
-    Maker = models.CharField(max_length =100 )
+    Maker = models.CharField(max_length=100)
     Players_Number= models.PositiveIntegerField()
     Product = models.OneToOneField(Product, on_delete=models.CASCADE)
 

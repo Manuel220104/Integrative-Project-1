@@ -121,14 +121,15 @@ export function CreateGames() {
         const selectedCategoryInt = e.target.value;
         setSelectedCategory(selectedCategoryInt);
     }
-    
+
     return (
         <div className="form Bookform" id="BookForm" >
             <form onSubmit={onSubmitGame}>
                 <div className='Atributos'>
+
                     <div>
                         <label className="atributo" htmlFor="Name">Nombre:</label>
-                        <input className="Ingresar-Dato" type="text" {...register("Name",{
+                        <input className="Ingresar-Dato" type="text" {...register("Name", {
                             required: {
                                 value: true,
                                 message: "Nombre es requerido",
@@ -140,27 +141,76 @@ export function CreateGames() {
                         })} />
                         {errors.Name && <span className="error">Nombre es requerido</span>}
                     </div>
+
                     <div>
-                        <label className="atributo" htmlFor="Maker" >Fabricante:</label>
-                        <input className="Ingresar-Dato" type="text" {...register("Maker", { required: true })} />
-                        {errors.Maker && <span className="error">Fabricante es requerida</span>}
-                    </div>
-                    <div>
-                        <label className="atributo" htmlFor="Players_Number">Numero De Jugadores:</label>
-                        <input className="Ingresar-Dato" type="number" step="1" {...register("Players_Number", { required: true })} />
-                        {errors.Players_Number && <span className="error">Precio es requerido</span>}
-                    </div>
-                    <div>
-                        <label className="atributo" htmlFor="Price">Precio:</label>
-                        <input className="Ingresar-Dato" type="number" step="000.001" {...register("Price", { required: true })} />
-                        {errors.Price && <span className="error">Precio es requerido</span>}
-                    </div>
-                    <div>
-                        <label className="atributo" htmlFor="Description">Descripcion:</label>
-                        <textarea className="Ingresar-Descripcion" type="text"  {...register("Description", { required: true })} />
-                        {errors.Description && <span className="error" >Descripcion es requerido</span>}
+                        <label className="atributo" htmlFor="Maker">Fabricante:</label>
+                        <input
+                            className="Ingresar-Dato"
+                            type="text"
+                            {...register("Maker", {
+                                required: "Fabricante es requerido",
+                                maxLength: {
+                                    value: 100,
+                                    message: "El nombre del fabricante no debe tener más de 100 caracteres",
+                                },
+                            })}
+                        />
+                        {errors.Maker && <span className="error">{errors.Maker.message}</span>}
                     </div>
 
+                    <div>
+                        <label className="atributo" htmlFor="Players_Number">Numero De Jugadores:</label>
+                        <input
+                            className="Ingresar-Dato"
+                            type="number"
+                            step="1"
+                            {...register("Players_Number", {
+                                required: "Número de jugadores es requerido",
+                                min: {
+                                    value: 0,
+                                    message: "Ingrese un número entero positivo para el número de jugadores",
+                                },
+                            })}
+                        />
+                        {errors.Players_Number && <span className="error">{errors.Players_Number.message}</span>}
+                    </div>
+
+
+                    <div>
+                        <label className="atributo" htmlFor="Price">
+                            Precio:
+                        </label>
+                        <input
+                            className="Ingresar-Dato"
+                            type="number"
+                            {...register("Price", {
+                                required: "El precio es requerido",
+                                pattern: {
+                                    value: /^[1-9]\d*$/,
+                                    message: "Ingrese un número entero positivo para el precio",
+                                },
+                            })}
+                        />
+                        {errors.Price && (
+                            <span className="error">{errors.Price.message}</span>
+                        )}
+                    </div>
+
+                    <div>
+                        <label className="atributo" htmlFor="Description"> Descripción: </label>
+                        <textarea className="Ingresar-Descripcion"
+                            {...register("Description", {
+                                required: "La descripción es requerida",
+                                maxLength: {
+                                    value: 10000,
+                                    message: "La descripción no debe superar los 10000 caracteres",
+                                },
+                            })}
+                        />
+                        {errors.Description && (
+                            <span className="error">{errors.Description.message}</span>
+                        )}
+                    </div>
 
                     <div>
                         <label className="atributo" htmlFor="ImageUrl">
@@ -180,18 +230,36 @@ export function CreateGames() {
 
                     <div>
                         <label className="atributo" htmlFor="image">Imagen:</label>
-                        <input type="file" name="image" id="image" accept="image/*" {...register("image")} />
+                        <input className="mb-3" type="file" name="image" id="image" accept="image/*" {...register("image")} />
                     </div>
+
                     <div>
-                        <label className="atributo" htmlFor="Quantity">Cantidad:</label>
-                        <input className="Ingresar-Dato" type="number" {...register("Quantity", { required: true })} />
-                        {errors.Quantity && <span className="error">Cantidad es requerido</span>}
+                        <label className="atributo" htmlFor="Quantity">
+                            Cantidad:
+                        </label>
+                        <input
+                            className="Ingresar-Dato"
+                            type="number"
+                            {...register("Quantity", {
+                                required: "La cantidad es requerida",
+                                pattern: {
+                                    value: /^[0-9]\d*$/,
+                                    message: "Ingrese un número entero positivo para la cantidad",
+                                },
+                            })}
+                        />
+                        {errors.Quantity && (
+                            <span className="error">{errors.Quantity.message}</span>
+                        )}
                     </div>
+
                     <div>
                         <label className="atributo" htmlFor="Discount">Descuento:</label>
-                        <input className="Ingresar-Dato" type="number" {...register("Discount", { required: true })} />
-                        {errors.Discount && <span className="error" >Descuento es requerido</span>}
+                        <input className="Ingresar-Dato" type="number" min="0" max="100" {...register("Discount", { required: true })} />
+                        {errors.Discount && <span className="error">Descuento es requerido</span>}
                     </div>
+
+
                     <div className="selector">
                         <label className="atributo" htmlFor="category">Tipo de Categoría</label>
                         <select
@@ -201,6 +269,7 @@ export function CreateGames() {
                             onChange={handleCategoryChange}
                             defaultValue="General"
                         >
+                            <option value="General">Seleccione una Categoría</option>
                             {Categories.map((Category, index) => {
                                 return (
                                     <option key={index} value={Category.Name}>
@@ -229,6 +298,8 @@ export function CreateGames() {
                             }
                         </select>
                     </div>
+
+
                 </div>
 
                 <input type="hidden" name="ProductType" value="Juego de mesa" {...register("ProductType")} />

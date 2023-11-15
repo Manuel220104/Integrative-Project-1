@@ -57,8 +57,18 @@ export function EditBook() {
         formData.append("ProductType", data.ProductType);
         formData.append("Category", data.Category);
 
-        if (data.Subcategory != 'General') {
-            formData.append("Subcategory", data.Subcategory);
+        if (data.Category != product.Category) {
+            const foundItem = Subcategories.find(item => item.Name === data.Subcategory && item.Category === data.Category);
+            if (foundItem) {
+                formData.append("Subcategory", data.Subcategory);
+            }
+            else if (data.Subcategory != null && data.Subcategory != "Seleccione una subcategoría") {
+                formData.append("Subcategory", "");
+            }
+        } else {
+            if (data.Subcategory != null && data.Subcategory != "Seleccione una subcategoría") {
+                formData.append("Subcategory", data.Subcategory);
+            }
         }
 
         if (data.image.length > 0) {
@@ -312,9 +322,9 @@ export function EditBook() {
                             {errors.Discount && <span className="error" >Descuento es requerido</span>}
                         </div>
 
-                        <div> Categoría: {product.Category}</div>
-                        <div> Subcategoría: {product.Subcategory}</div>
-
+                        <div className='flex items-center'>
+                            <div>Categoría: {product.Category} <br /> Subcategoría: {product.Subcategory}</div>
+                        </div>
 
                         <div className="selector">
                             <label className="atributo" htmlFor="category">Tipo de Categoría</label>
@@ -323,7 +333,9 @@ export function EditBook() {
                                 id="category"
                                 {...register("Category")}
                                 onChange={handleCategoryChange}
+                                defaultValue="General"
                             >
+                                <option value={product.Category}>Seleccione una Categoría</option>
                                 {Categories.map((Category, index) => {
                                     return (
                                         <option key={index} value={Category.Name}>
@@ -336,8 +348,8 @@ export function EditBook() {
 
                         <div className="selector">
                             <label className="atributo" htmlFor="subcategory">Tipo de subcategoría si desea</label>
-                            <select className="Seleccionar-Dato" id="subcategory"{...register("Subcategory")}>
-                                <option value="General">Seleccione una subcategoría</option>
+                            <select className="Seleccionar-Dato" id="subcategory" {...register("Subcategory")}>
+                                <option value={product.Subcategory}>Seleccione una subcategoría</option>
                                 {
                                     Subcategories.map((Subcategory, index) => {
                                         if (Subcategory.Category === selectedCategoryid) {
@@ -347,7 +359,7 @@ export function EditBook() {
                                                 </option>
                                             );
                                         }
-                                        return null;
+                                        return
                                     })
                                 }
                             </select>
