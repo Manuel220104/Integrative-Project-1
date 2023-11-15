@@ -55,7 +55,6 @@ export function EditBook() {
         formData.append("Quantity", data.Quantity);
         formData.append("Discount", data.Discount);
         formData.append("ProductType", data.ProductType);
-
         formData.append("Category", data.Category);
 
         if (data.Subcategory != 'General') {
@@ -65,7 +64,6 @@ export function EditBook() {
         if (data.image.length > 0) {
             formData.append("Image", data.image[0]);
         }
-
         return formData;
     }
 
@@ -103,7 +101,7 @@ export function EditBook() {
         }
     });
 
-    const [selectedCategoryid, setSelectedCategory] = useState('');
+    const [selectedCategoryid, setSelectedCategory] = useState(product.Category);
     const handleCategoryChange = (e) => {
         const selectedCategoryInt = e.target.value;
         setSelectedCategory(selectedCategoryInt);
@@ -125,21 +123,30 @@ export function EditBook() {
                                     message: "Titulo es requerido",
                                 },
                                 maxLength: {
-                                    value: 200,
-                                    message: "El nombre no debe tener más de 200 caracteres"
+                                    value: 1000,
+                                    message: "El nombre no debe tener más de 1000 caracteres"
                                 }
                             })} />
                             {errors.Name && <span className="error">{errors.Name.message}</span>}
                         </div>
 
                         <div>
-                            <label className="atributo" htmlFor="ISBN"  >ISBN:</label>
-                            <input className="Ingresar-Dato" type="number" defaultValue={product.book.ISBN}  {...register("ISBN", {
-                                required: {
-                                    value: true,
-                                    message: "ISBN es requerido",
-                                }
-                            })} />
+                            <label className="atributo" htmlFor="ISBN">ISBN:</label>
+                            <input
+                                className="Ingresar-Dato"
+                                type="number"
+                                defaultValue={product.book.ISBN}
+                                {...register("ISBN", {
+                                    required: {
+                                        value: true,
+                                        message: "ISBN es requerido",
+                                    },
+                                    pattern: {
+                                        value: /^[1-9]\d*$/,
+                                        message: "Ingrese un número entero positivo para el ISBN",
+                                    },
+                                })}
+                            />
                             {errors.ISBN && <span className="error">{errors.ISBN.message}</span>}
                         </div>
 
@@ -215,32 +222,27 @@ export function EditBook() {
                             )}
                         </div>
 
+
                         <div>
                             <label className="atributo" htmlFor="Price">
                                 Precio:
                             </label>
                             <input
                                 className="Ingresar-Dato"
-                                type="int"
+                                type="number"
                                 defaultValue={product.Price}
                                 {...register("Price", {
                                     required: "El precio es requerido",
-                                    validate: {
-                                        validPrice: (value) => {
-                                            // Validar que el precio tenga un máximo de 7 dígitos en la parte entera
-                                            const priceRegex = /^[0-9]{1,7}$/;
-                                            return priceRegex.test(value);
-                                        },
+                                    pattern: {
+                                        value: /^[1-9]\d*$/,
+                                        message: "Ingrese un número entero positivo para el precio",
                                     },
                                 })}
-
                             />
                             {errors.Price && (
                                 <span className="error">{errors.Price.message}</span>
                             )}
                         </div>
-
-
 
                         <div>
                             <label className="atributo" htmlFor="Description"> Descripción: </label>
@@ -249,8 +251,8 @@ export function EditBook() {
                                 {...register("Description", {
                                     required: "La descripción es requerida",
                                     maxLength: {
-                                        value: 500,
-                                        message: "La descripción no debe superar los 500 caracteres",
+                                        value: 10000,
+                                        message: "La descripción no debe superar los 10000 caracteres",
                                     },
                                 })}
                             />
@@ -279,14 +281,30 @@ export function EditBook() {
 
                         <div>
                             <label className="atributo" htmlFor="image">Imagen:</label>
-                            <input type="file" name="image" id="image" accept="image/*" defaultValue={product.image}{...register("image")} />
+                            <input type="file" className="mb-3" name="image" id="image" accept="image/*" defaultValue={product.image}{...register("image")} />
                         </div>
 
                         <div>
-                            <label className="atributo" htmlFor="Quantity">Cantidad:</label>
-                            <input className="Ingresar-Dato" type="number" defaultValue={product.Quantity} {...register("Quantity", { required: true })} />
-                            {errors.Quantity && <span className="error">Cantidad es requerido</span>}
+                            <label className="atributo" htmlFor="Quantity">
+                                Cantidad:
+                            </label>
+                            <input
+                                className="Ingresar-Dato"
+                                type="number"
+                                defaultValue={product.Quantity}
+                                {...register("Quantity", {
+                                    required: "La cantidad es requerida",
+                                    pattern: {
+                                        value: /^[0-9]\d*$/,
+                                        message: "Ingrese un número entero positivo para la cantidad",
+                                    },
+                                })}
+                            />
+                            {errors.Quantity && (
+                                <span className="error">{errors.Quantity.message}</span>
+                            )}
                         </div>
+
 
                         <div>
                             <label className="atributo" htmlFor="Discount">Descuento:</label>
@@ -294,10 +312,13 @@ export function EditBook() {
                             {errors.Discount && <span className="error" >Descuento es requerido</span>}
                         </div>
 
+                        <div> Categoría: {product.Category}</div>
+                        <div> Subcategoría: {product.Subcategory}</div>
+
+
                         <div className="selector">
                             <label className="atributo" htmlFor="category">Tipo de Categoría</label>
                             <select
-                                defaultValue={product.Category}
                                 className="Seleccionar-Dato"
                                 id="category"
                                 {...register("Category")}
@@ -315,7 +336,7 @@ export function EditBook() {
 
                         <div className="selector">
                             <label className="atributo" htmlFor="subcategory">Tipo de subcategoría si desea</label>
-                            <select className="Seleccionar-Dato" id="subcategory" defaultValue={product.Subcategory} {...register("Subcategory")}>
+                            <select className="Seleccionar-Dato" id="subcategory"{...register("Subcategory")}>
                                 <option value="General">Seleccione una subcategoría</option>
                                 {
                                     Subcategories.map((Subcategory, index) => {
@@ -326,7 +347,7 @@ export function EditBook() {
                                                 </option>
                                             );
                                         }
-                                        return
+                                        return null;
                                     })
                                 }
                             </select>

@@ -279,13 +279,7 @@ export function ProductList() {
         setCurrentPage(page);
         scrollToTop();
     };
-
-   
-
-
-
-
-    
+ 
     return(
         <div className="Category">
             <div className="Page-Category">
@@ -531,15 +525,15 @@ export function ProductList() {
 
                     
                     </form>
-
+                    
                     {/* Product grid */}
                     <div className="lg:col-span-3 productosOrganizados">
                         {currentProducts.map(product => {
                             return <ProductCard key={product.ProductId} Product={product} />;
                         })}
                     </div>
-                </div>
 
+                </div>
                 <div className="pagination">
                     <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
                         Anterior

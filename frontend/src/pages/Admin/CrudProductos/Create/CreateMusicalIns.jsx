@@ -9,7 +9,7 @@ import { useLocation } from 'react-router-dom';
 import { getAllSubcategory } from '../../../../api/Subcategories.api.js'
 
 export function CreateMusicalIns() {
-    const { register, handleSubmit, formState: { errors }, setValue, } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset, setValue, } = useForm();
 
     const location = useLocation();
 
@@ -106,6 +106,7 @@ export function CreateMusicalIns() {
                 await createMusic(MusicData);
                 setIsCreated(true);
                 setMessage('Producto creado con éxito.')
+                reset();
             } catch (error) {
                 console.error('Error al crear el music:', error);
                 console.log('Respuesta del servidor:', error.response);
@@ -129,7 +130,16 @@ export function CreateMusicalIns() {
                 <div className='Atributos'>
                     <div>
                         <label className="atributo" htmlFor="Name">Nombre:</label>
-                        <input className="Ingresar-Dato" type="text" {...register("Name", { required: true })} />
+                        <input className="Ingresar-Dato" type="text" {...register("Name", {
+                            required: {
+                                value: true,
+                                message: "Nombre es requerido",
+                            },
+                            maxLength: {
+                                value: 1000,
+                                message: "El nombre no debe tener más de 1000 caracteres"
+                            }
+                        })} />
                         {errors.Name && <span className="error">Nombre es requerido</span>}
                     </div>
                     <div>

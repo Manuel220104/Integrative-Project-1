@@ -119,7 +119,16 @@ export function EditTechnology() {
                     <div className='Atributos'>
                         <div>
                             <label className="atributo" htmlFor="Name">Nombre:</label>
-                            <input className="Ingresar-Dato" type="text" defaultValue={product.Name} {...register("Name", { required: true })} />
+                            <input className="Ingresar-Dato" type="text" defaultValue={product.Name} {...register("Name", {
+                                required: {
+                                    value: true,
+                                    message: "Nombre es requerido",
+                                },
+                                maxLength: {
+                                    value: 1000,
+                                    message: "El nombre no debe tener más de 1000 caracteres"
+                                }
+                            })} />
                             {errors.Name && <span className="error">Nombre es requerido</span>}
                         </div>
                         <div>

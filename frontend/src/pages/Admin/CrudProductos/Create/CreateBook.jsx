@@ -12,7 +12,7 @@ import { getAllSubcategory } from '../../../../api/Subcategories.api.js'
 
 export function CreateBook() {
     const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm();
-    
+
     const [Categories, setCategories] = useState([]);
 
     const location = useLocation();
@@ -114,6 +114,7 @@ export function CreateBook() {
                 await createBooks(BookData);
                 setIsCreated(true);
                 setMessage('Producto creado con éxito.')
+                reset()
             } catch (error) {
                 console.error('Error al crear el libro:', error);
                 console.log('Respuesta del servidor:', error.response);
@@ -134,6 +135,7 @@ export function CreateBook() {
         <div className="form Bookform" id="BookForm" >
             <form onSubmit={onSubmitBook}>
                 <div className='Atributos' encType="multipart/form-data">
+
                     <div>
                         <label className="atributo" htmlFor="Name" >Titulo:</label>
                         <input className="Ingresar-Dato" type="text" {...register("Name", {
@@ -142,21 +144,29 @@ export function CreateBook() {
                                 message: "Titulo es requerido",
                             },
                             maxLength: {
-                                value: 200,
-                                message: "El nombre no debe tener más de 200 caracteres"
+                                value: 1000,
+                                message: "El nombre no debe tener más de 1000 caracteres"
                             }
                         })} />
                         {errors.Name && <span className="error">{errors.Name.message}</span>}
                     </div>
 
                     <div>
-                        <label className="atributo" htmlFor="ISBN" >ISBN:</label>
-                        <input className="Ingresar-Dato" type="number" {...register("ISBN", {
-                            required: {
-                                value: true,
-                                message: "ISBN es requerido",
-                            }
-                        })} />
+                        <label className="atributo" htmlFor="ISBN">ISBN:</label>
+                        <input
+                            className="Ingresar-Dato"
+                            type="number"
+                            {...register("ISBN", {
+                                required: {
+                                    value: true,
+                                    message: "ISBN es requerido",
+                                },
+                                pattern: {
+                                    value: /^[1-9]\d*$/,
+                                    message: "Ingrese un número entero positivo para el ISBN",
+                                },
+                            })}
+                        />
                         {errors.ISBN && <span className="error">{errors.ISBN.message}</span>}
                     </div>
 
@@ -237,18 +247,14 @@ export function CreateBook() {
                         </label>
                         <input
                             className="Ingresar-Dato"
-                            type="int"
+                            type="number"
                             {...register("Price", {
                                 required: "El precio es requerido",
-                                validate: {
-                                    validPrice: (value) => {
-                                        // Validar que el precio tenga un máximo de 7 dígitos en la parte entera
-                                        const priceRegex = /^[0-9]{1,7}$/;
-                                        return priceRegex.test(value);
-                                    },
+                                pattern: {
+                                    value: /^[1-9]\d*$/,
+                                    message: "Ingrese un número entero positivo para el precio",
                                 },
                             })}
-
                         />
                         {errors.Price && (
                             <span className="error">{errors.Price.message}</span>
@@ -263,8 +269,8 @@ export function CreateBook() {
                             {...register("Description", {
                                 required: "La descripción es requerida",
                                 maxLength: {
-                                    value: 500,
-                                    message: "La descripción no debe superar los 500 caracteres",
+                                    value: 10000,
+                                    message: "La descripción no debe superar los 10000 caracteres",
                                 },
                             })}
                         />
@@ -292,19 +298,34 @@ export function CreateBook() {
 
                     <div>
                         <label className="atributo" htmlFor="image">Imagen:</label>
-                        <input type="file" name="image" id="image" accept="image/*" {...register("image")} />
+                        <input className="mb-3" type="file" name="image" id="image" accept="image/*" {...register("image")} />
                     </div>
 
                     <div>
-                        <label className="atributo" htmlFor="Quantity">Cantidad:</label>
-                        <input className="Ingresar-Dato" type="number" {...register("Quantity", { required: true })} />
-                        {errors.Quantity && <span className="error">Cantidad es requerido</span>}
+                        <label className="atributo" htmlFor="Quantity">
+                            Cantidad:
+                        </label>
+                        <input
+                            className="Ingresar-Dato"
+                            type="number"
+                            {...register("Quantity", {
+                                required: "La cantidad es requerida",
+                                pattern: {
+                                    value: /^[0-9]\d*$/,
+                                    message: "Ingrese un número entero positivo para la cantidad",
+                                },
+                            })}
+                        />
+                        {errors.Quantity && (
+                            <span className="error">{errors.Quantity.message}</span>
+                        )}
                     </div>
+
 
                     <div>
                         <label className="atributo" htmlFor="Discount">Descuento:</label>
                         <input className="Ingresar-Dato" type="number" min="0" max="100" {...register("Discount", { required: true })} />
-                        {errors.Discount && <span className="error" >Descuento es requerido</span>}
+                        {errors.Discount && <span className="error">Descuento es requerido</span>}
                     </div>
 
                     <div className="selector">
