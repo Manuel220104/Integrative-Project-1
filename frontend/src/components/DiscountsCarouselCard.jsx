@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import like from '../assets/icons/like.png'
-import likefull from '../assets/icons/likefull.png';
+import likefull from '../assets/icons/likeFull.png';
 import { createLike, getUserLikes } from '../api/Likes.api';
 import cart from '../assets/icons/cart.png'
 
