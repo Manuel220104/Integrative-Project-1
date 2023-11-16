@@ -104,6 +104,7 @@ export function EditGames() {
         try {
             GameData.Product = idproduct;
             await updateGames(idgame, GameData);
+            navigate('/Admin/Gestionar-Productos')
         } catch (error) {
             console.error('Error al crear el tecnologia:', error);
             console.log('Respuesta del servidor:', error.response);

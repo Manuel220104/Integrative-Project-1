@@ -105,6 +105,7 @@ export function EditBook() {
         try {
             BookData.Product = idproduct;
             await updateBook(idbook, BookData);
+            navigate('/Admin/Gestionar-Productos')
         } catch (error) {
             console.error('Error al actualizar el libro:', error);
             console.log('Respuesta del servidor:', error.response);

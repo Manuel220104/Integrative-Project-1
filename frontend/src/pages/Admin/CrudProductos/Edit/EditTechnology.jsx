@@ -108,6 +108,7 @@ export function EditTechnology() {
             TechData.Product = idproduct;
             console.log(TechData)
             await updateTechnologys(idtech, TechData);
+            navigate('/Admin/Gestionar-Productos')
         } catch (error) {
             console.error('Error al crear el tecnologia:', error);
             console.log('Respuesta del servidor:', error.response);

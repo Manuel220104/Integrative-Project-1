@@ -10,8 +10,9 @@ import { getAllSubcategory } from '../../../../api/Subcategories.api.js'
 
 
 
+
 export function CreateBook() {
-    const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
     const [Categories, setCategories] = useState([]);
 

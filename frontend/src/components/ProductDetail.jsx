@@ -55,7 +55,7 @@ export function ProductDetail() {
 
       const data = {
         product_id: Product.ProductId,
-        username: username_or_email,
+        identifier: username_or_email,
       };
       console.log(data);
 

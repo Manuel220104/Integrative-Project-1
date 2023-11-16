@@ -8,6 +8,8 @@ from .serializer import UsuariosCreateSerializer  # Importa el serializador Usua
 from .serializer import UsuariosSerializer
 from rest_framework import generics
 from rest_framework.generics import RetrieveUpdateAPIView
+from django.db.models import Q
+from django.shortcuts import get_object_or_404
 
 class UserListView(generics.ListAPIView):
     queryset = Usuarios.objects.all()
@@ -83,7 +85,11 @@ def logout_view(request):
     return Response({'message': 'Sesión cerrada correctamente.'}, status=status.HTTP_200_OK)
 
 class UserUpdateView(RetrieveUpdateAPIView):
-    queryset = Usuarios.objects.all()
     serializer_class = UsuariosSerializer
 
-    lookup_field = 'username'
+    def get_object(self):
+        username_or_email = self.kwargs.get('username_or_email')
+        # Buscar el usuario por username o email
+        user = get_object_or_404(Usuarios, Q(username=username_or_email) | Q(email=username_or_email))
+        self.check_object_permissions(self.request, user)
+        return user

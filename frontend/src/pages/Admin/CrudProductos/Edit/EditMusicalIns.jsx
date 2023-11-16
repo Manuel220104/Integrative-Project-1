@@ -103,6 +103,7 @@ export function EditMusicalIns() {
         try {
             MusicData.Product = idproduct;
             await updateMusic(idmusic, MusicData);
+            navigate('/Admin/Gestionar-Productos')
         } catch (error) {
             console.error('Error al crear el tecnologia:', error);
             console.log('Respuesta del servidor:', error.response);

@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404
 from Products.models import Product
 from rest_framework.decorators import api_view
 from accounts.models import Usuarios
+from django.db.models import Q
 
 
 class LikeCreateView(generics.CreateAPIView):
@@ -21,15 +22,13 @@ class UserLikesListView(generics.ListAPIView):
     serializer_class = LikeSerializer
 
     def get_queryset(self):
-        # Obtén el nombre de usuario de los parámetros de la URL
-        username = self.kwargs['username']
-        
-        # Obtén el usuario
-        user = Usuarios.objects.get(username=username)
+        # Obtén el identificador (puede ser nombre de usuario o correo electrónico) de los parámetros de la URL
+        identifier = self.kwargs['identifier']
 
-        # Filtra los likes por el usuario específico
-        queryset = Like.objects.filter(user=user)
+        # Filtra los likes por el usuario específico (nombre de usuario o correo electrónico)
+        queryset = Like.objects.filter(Q(user__username=identifier) | Q(user__email=identifier))
         return queryset
+
 class LikeDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Like.objects.all()
     serializer_class = LikeSerializer
@@ -37,25 +36,26 @@ class LikeDetailView(generics.RetrieveUpdateDestroyAPIView):
 @api_view(['POST'])
 def like_product(request):
     # Obtener el producto
-    product_id = request.data.get('product_id')  # Obtener el product_id del cuerpo de la solicitud
+    product_id = request.data.get('product_id')
     product = get_object_or_404(Product, pk=product_id)
 
-    # Obtener el usuario por su nombre de usuario (username)
-    username = request.data.get('username')  # Asegúrate de enviar 'username' en el cuerpo de la solicitud POST
-    user = Usuarios.objects.get(username=username)
+    # Obtener el usuario por su nombre de usuario (username) o correo electrónico
+    identifier = request.data.get('identifier')  # Use 'identifier' instead of 'username'
+    user = Usuarios.objects.filter(Q(username=identifier) | Q(email=identifier)).first()
 
-    # Verificar si el like ya existe
-    try:
-        like = Like.objects.get(user=user, product=product)
-        # Si el like ya existe y coincide con el producto y el usuario, lo eliminamos (quitar el like)
-        if like.product == product and like.user == user:
-            like.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        else:
-            # Si el like ya existe pero no coincide con el producto y el usuario, no hacemos nada
-            return Response(status=status.HTTP_204_NO_CONTENT)
-    except Like.DoesNotExist:
-        # Si el like no existe, lo creamos (dar like)
-        like = Like(user=user, product=product)
-        like.save()
-        return Response(status=status.HTTP_201_CREATED)
+    if user:
+        # Verificar si el like ya existe
+        try:
+            like = Like.objects.get(user=user, product=product)
+            if like.product == product and like.user == user:
+                like.delete()
+                return Response(status=status.HTTP_204_NO_CONTENT)
+            else:
+                return Response(status=status.HTTP_204_NO_CONTENT)
+        except Like.DoesNotExist:
+            # Si el like no existe, lo creamos (dar like)
+            like = Like(user=user, product=product)
+            like.save()
+            return Response(status=status.HTTP_201_CREATED)
+    else:
+        return Response({"error": "User not found."}, status=status.HTTP_404_NOT_FOUND)

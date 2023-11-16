@@ -107,6 +107,10 @@ export function CreateGames() {
                 await createGames(GameData);
                 setIsCreated(true);
                 setMessage('Producto creado con éxito.')
+                Object.keys(data).forEach((key) => {
+                    setValue(key, ''); // Reset each field to an empty string
+                });
+                
             } catch (error) {
                 console.error('Error al crear el libro:', error);
                 console.log('Respuesta del servidor:', error.response);

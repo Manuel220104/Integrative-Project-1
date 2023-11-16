@@ -8,11 +8,13 @@ import { useLocation } from 'react-router-dom';
 
 
 export function CreateCategories() {
-    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm();
     const { register: registerSubCategory, handleSubmit: handleSubmitSubCategory, formState: { errors: errorsSubCategory } } = useForm();
     const { register: registerChaSubCategory, handleSubmit: handleChaSubmitSubCategory, formState: { errors: errorsChaSubCategory } } = useForm();
     const { register: registerChaCategory, handleSubmit: handleChaSubmitCategory, formState: { errors: errorsChaCategory } } = useForm();
+    const [successMessage, setSuccessMessage] = useState('');
 
+    
     const [Categories, setCategories] = useState([]);
 
     const loadCategories = useCallback(async () => {
@@ -42,6 +44,9 @@ export function CreateCategories() {
         try {
             await createCategory(data);
             await loadCategories();
+            Object.keys(data).forEach((key) => {
+                setValue(key, ''); // Reset each field to an empty string
+            });
         } catch (error) {
             console.error('Error al crear el categoria:', error);
             console.log('Respuesta del servidor:', error.response);
@@ -50,21 +55,25 @@ export function CreateCategories() {
 
     const deleteCategoryf = handleChaSubmitCategory(async (data) => {
         console.log(data);
-        if(data.Category!='General'){
+        if (data.Category != 'General') {
             try {
                 await deleteCategory(data.Category);
                 await loadCategories();
-              } catch (error) {
+
+            } catch (error) {
                 console.error('Error al actualizar la categoria:', error);
                 console.log('Respuesta del servidor:', error.response);
-              }
+            }
         }
-      });
+    });
 
     const onSubmitSubCategory = handleSubmitSubCategory(async (data) => {
         try {
             await createSubcategory(data);
             await loadSubcategories();
+            Object.keys(data).forEach((key) => {
+                setValue(key, ''); // Reset each field to an empty string
+            });
         } catch (error) {
             console.error('Error al crear la subcategoría:', error);
             console.log('Respuesta del servidor:', error.response);
@@ -73,7 +82,7 @@ export function CreateCategories() {
 
     const deleteSubCategoryf = handleChaSubmitSubCategory(async (data) => {
         console.log(data)
-        if(data.Category!='General'){
+        if (data.Category != 'General') {
             try {
                 await deleteSubcategory(data.Subcategory);
                 await loadSubcategories();
@@ -159,11 +168,11 @@ export function CreateCategories() {
                             <select
                                 className="Seleccionar-Dato"
                                 id="category"
-                
+
                                 defaultValue="General"
                                 {...registerChaCategory("Category", { required: true })}
                             >
-                            
+
                                 {Categories.map((Category, index) => {
                                     return (
                                         <option key={index} value={Category.Name}>
@@ -219,7 +228,7 @@ export function CreateCategories() {
                             </select>
                         </div>
 
-                         <button className="Boton-Eliminar B-sub mb-5" type="submit">Eliminar Subcategoría</button>
+                        <button className="Boton-Eliminar B-sub mb-5" type="submit">Eliminar Subcategoría</button>
                     </div>
                 </form>
 

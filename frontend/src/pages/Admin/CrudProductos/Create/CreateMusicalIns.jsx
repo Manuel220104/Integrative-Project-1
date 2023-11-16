@@ -106,7 +106,10 @@ export function CreateMusicalIns() {
                 await createMusic(MusicData);
                 setIsCreated(true);
                 setMessage('Producto creado con éxito.')
-                reset();
+                
+                Object.keys(data).forEach((key) => {
+                    setValue(key, ''); // Reset each field to an empty string
+                });
             } catch (error) {
                 console.error('Error al crear el music:', error);
                 console.log('Respuesta del servidor:', error.response);

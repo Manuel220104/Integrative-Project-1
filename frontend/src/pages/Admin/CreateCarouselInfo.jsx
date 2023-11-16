@@ -45,28 +45,28 @@ export function CreateCarouselInfo() {
     };
 
     return (
-       
-            <div className="CreateProductPage">
-                <div>
-                    <h1 className="Title mb-3">Crear Información Carrusel</h1>
-                    <div className="form" id="CarouselForm">
-                        <form className="" onSubmit={onSubmit} encType="multipart/form-data">
 
-                            <label className="atributo" htmlFor="image">Imagen:</label>
-                            <input className="mb-4" type="file" name="image" id="image" accept="image/*" {...register("image", { required: true })} />
+        <div className="CreateProductPage">
+            <div>
+                <h1 className="Title mb-3">Crear Información Carrusel</h1>
+                <div className="form" id="CarouselForm">
+                    <form className="" onSubmit={onSubmit} encType="multipart/form-data">
 
-                            {errors.Image && <span className="error">Imagen es requerida</span>}
+                        <label className="atributo" htmlFor="image">Imagen:</label>
+                        <input className="mb-4" type="file" name="image" id="image" accept="image/*" {...register("image", { required: true })} />
 
-                            <label className="atributo" htmlFor="Text">Texto:</label>
-                            <input className="Ingresar-Dato" type="Text" name="Text" id="Text" {...register("Text", { required: true })} />
-                            {errors.Text && <span className="error">Texto es requerido</span>}
+                        {errors.Image && <span className="error">Imagen es requerida</span>}
 
-                            <button className="Boton-Guardar">Crear</button>
-                        </form>
-                    </div>
+                        <label className="atributo" htmlFor="Text">Texto:</label>
+                        <input className="Ingresar-Dato" type="Text" name="Text" id="Text" {...register("Text", { required: true })} />
+                        {errors.Text && <span className="error">Texto es requerido</span>}
+
+                        <button className="Boton-Guardar">Crear</button>
+                    </form>
                 </div>
+            </div>
 
-                <table className="table mt-5" style={{ maxWidth: "800px" }}>
+            <table className="table mt-5" style={{ maxWidth: "800px" }}>
                 <thead>
                     <tr>
                         <th scope="col">id</th>
@@ -82,15 +82,21 @@ export function CreateCarouselInfo() {
                                 <img src={nove.image} alt="novedad" />
                             </td>
                             <td>
-                                <span className='seeCard' onClick={() => deletenove(nove.id)}>Delete</span>
+                                <span
+                                    className='seeCard'
+                                    onClick={() => deletenove(nove.id)}
+                                    style={{ cursor: 'pointer' }}
+                                >
+                                    Delete
+                                </span>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
 
-            </div>
+        </div>
 
-  
+
     );
 }

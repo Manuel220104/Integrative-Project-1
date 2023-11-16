@@ -49,7 +49,7 @@ export function MyAccount() {
 
     return (
         <div className='container MyAccountContainer'>
-            <div class="row ">
+            <div className="row ">
                 <div className="col-md-4 text-left">
                     <div className="row">
                         {/* Left Column */}
