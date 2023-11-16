@@ -91,7 +91,7 @@ export function DiscountsCarouselCard({ Product }) {
 
     return (
         <div className="cardNews">
-            <img className="imagencarrusel" src={Product.ImageUrl}></img>
+            <img className="imagencarrusel" src={Product.ImageUrl != null ? Product.ImageUrl : Product.Image} alt={truncatedName} />
             <div className="infoNews">
                 <h2 className="Discount"> {Product.Discount}%</h2>
                 <span className='TitleCardNews'>{truncatedName}</span>

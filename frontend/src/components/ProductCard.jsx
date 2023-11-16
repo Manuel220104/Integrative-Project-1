@@ -12,7 +12,7 @@ const username_or_email = localStorage.getItem('username_or_email');
 
 export function ProductCard({ Product }) {
     const truncatedName = Product.Name.length > MaxLength ? `${Product.Name.substring(0, MaxLength)}...` : Product.Name;
-    
+
     function formatNumberWithCommas(input) {
         if (typeof input !== 'number') {
             input = parseFloat(input.replace(/,/g, ''));
@@ -80,7 +80,7 @@ export function ProductCard({ Product }) {
 
 
     const handleClickCart = (Product) => {
-        const phoneNumber = '+573003462864'; 
+        const phoneNumber = '+573003462864';
         const message = `¡Hola Acentos! Estoy interesado en el producto ${Product.Name} - ${Product.ProductType}`;
         const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
         window.open(whatsappLink, '_blank');
@@ -119,12 +119,12 @@ export function ProductCard({ Product }) {
                                     onClick={handleLikeClick}
                                 />)}
 
-                                <img
-                                    onClick={() => handleClickCart(Product)}
-                                    className="navbar-item cart-icon"
-                                    src={cart}
-                                    alt="Carrito"
-                                />
+                            <img
+                                onClick={() => handleClickCart(Product)}
+                                className="navbar-item cart-icon"
+                                src={cart}
+                                alt="Carrito"
+                            />
                         </div>
                         <Link to={`/Productos/DetalleProducto/${Product.ProductId}`} state={{ Product: Product }}>
                             <span className="seeCard">Ver más</span>
@@ -162,13 +162,13 @@ export function ProductCard({ Product }) {
                                     alt="Me gusta"
                                     onClick={handleLikeClick}
                                 />)}
-                            
-                                <img
-                                        onClick={() => handleClickCart(Product)}
-                                        className="navbar-item cart-icon"
-                                        src={cart}
-                                        alt="Carrito"
-                                    />
+
+                            <img
+                                onClick={() => handleClickCart(Product)}
+                                className="navbar-item cart-icon"
+                                src={cart}
+                                alt="Carrito"
+                            />
                         </div>
                         <Link to={`/Productos/DetalleProducto/${Product.ProductId}`} state={{ Product: Product }}>
                             <span className="seeCard">Ver más</span>
@@ -206,13 +206,13 @@ export function ProductCard({ Product }) {
                                     alt="Me gusta"
                                     onClick={handleLikeClick}
                                 />)}
-                            
-                                <img
-                                        onClick={() => handleClickCart(Product)}
-                                        className="navbar-item cart-icon"
-                                        src={cart}
-                                        alt="Carrito"
-                                    />
+
+                            <img
+                                onClick={() => handleClickCart(Product)}
+                                className="navbar-item cart-icon"
+                                src={cart}
+                                alt="Carrito"
+                            />
                         </div>
                         <Link to={`/Productos/DetalleProducto/${Product.ProductId}`} state={{ Product: Product }}>
                             <span className="seeCard">Ver más</span>
@@ -250,13 +250,13 @@ export function ProductCard({ Product }) {
                                     alt="Me gusta"
                                     onClick={handleLikeClick}
                                 />)}
-                            
-                                <img
-                                        onClick={() => handleClickCart(Product)}
-                                        className="navbar-item cart-icon"
-                                        src={cart}
-                                        alt="Carrito"
-                                    />
+
+                            <img
+                                onClick={() => handleClickCart(Product)}
+                                className="navbar-item cart-icon"
+                                src={cart}
+                                alt="Carrito"
+                            />
                         </div>
                         <Link to={`/Productos/DetalleProducto/${Product.ProductId}`} state={{ Product: Product }}>
                             <span className="seeCard">Ver más</span>

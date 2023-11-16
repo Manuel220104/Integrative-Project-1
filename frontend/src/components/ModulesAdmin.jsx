@@ -26,7 +26,7 @@ export function ModulesAdmin(){
         </div>
         <div className='module'>
             <Link to="/Admin/Analitica-de-Datos">
-                <p>Analitica de datos</p>
+                <p>Analítica de datos</p>
             </Link>
         </div>
 

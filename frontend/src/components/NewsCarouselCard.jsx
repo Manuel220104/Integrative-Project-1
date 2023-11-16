@@ -53,15 +53,15 @@ export function NewsCarouselCard({ Product }) {
     const handleLikeClick = () => {
         if (token) {
             setLiked((currentLiked) => !currentLiked);
-    
+
             const product_id = Product.ProductId;
-    
+
             const data = {
                 product_id: Product.ProductId,
                 identifier: username_or_email,
             };
             console.log(data);
-    
+
             createLike(data)
                 .then((response) => {
                     if (response.status === 201) {
@@ -82,7 +82,7 @@ export function NewsCarouselCard({ Product }) {
             // Mostrar mensaje de inicio de sesión aquí (puedes usar alert o algún modal)
         }
     };
-    
+
 
     const handleClickCart = (Product) => {
         const phoneNumber = '+573003462864';
@@ -93,7 +93,7 @@ export function NewsCarouselCard({ Product }) {
 
     return (
         <div className="cardNews">
-            <img className="imagencarrusel" src={Product.ImageUrl} alt={truncatedName} />
+            <img className="imagencarrusel" src={Product.ImageUrl != null ? Product.ImageUrl : Product.Image} alt={truncatedName} />
             <div className="infoNews">
                 <span className="TitleCardNews">{truncatedName}</span>
                 <span className="PriceCard">$ {formatNumberWithCommas(Product.Price)}</span>

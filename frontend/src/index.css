@@ -9,6 +9,12 @@
   --fuenteSecundaria: 'Open Sans';
 }
 
+.h1, h2, p, span, label{
+    text-transform: capitalize;
+  
+}
+
+
 body {
   background: white;
   font-family: 'Inter', sans-serif;

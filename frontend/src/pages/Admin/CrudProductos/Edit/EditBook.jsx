@@ -127,11 +127,11 @@ export function EditBook() {
                 <form onSubmit={onSubmit}>
                     <div className='Atributos'>
                         <div>
-                            <label className="atributo" htmlFor="Name" >Titulo:</label>
+                            <label className="atributo" htmlFor="Name" >Título:</label>
                             <input className="Ingresar-Dato" type="text" defaultValue={product.Name} {...register("Name", {
                                 required: {
                                     value: true,
-                                    message: "Titulo es requerido",
+                                    message: "Título es requerido",
                                 },
                                 maxLength: {
                                     value: 1000,

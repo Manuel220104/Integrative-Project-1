@@ -138,11 +138,11 @@ export function CreateBook() {
                 <div className='Atributos' encType="multipart/form-data">
 
                     <div>
-                        <label className="atributo" htmlFor="Name" >Titulo:</label>
+                        <label className="atributo" htmlFor="Name" >Título:</label>
                         <input className="Ingresar-Dato" type="text" {...register("Name", {
                             required: {
                                 value: true,
-                                message: "Titulo es requerido",
+                                message: "Título es requerido",
                             },
                             maxLength: {
                                 value: 1000,
