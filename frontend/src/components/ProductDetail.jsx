@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import like from '../assets/icons/like.png'
-import likefull from '../assets/icons/likefull.png';
+import likefull from '../assets/icons/likeFull.png';
 import { createLike, getUserLikes } from '../api/Likes.api';
 const token = localStorage.getItem('token');
 const username_or_email = localStorage.getItem('username_or_email');
