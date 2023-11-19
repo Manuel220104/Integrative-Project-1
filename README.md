@@ -34,3 +34,40 @@ For all the nitty-gritty details, usability magic, and performance goals, take a
     -   Open another terminal and navigate to the frontend folder with the "cd frontend" command.
     -   Run inside the frontend folder with the "npm run dev" command.
     -   You must enter the address "http://localhost:3000/" where you can view the project.
+
+## How to launch the application on a server🖥️
+
+### Server Configuration 
+
+1. Install Basic Dependencies:
+
+    -    Install Git: sudo apt-get install git
+    -    Install Docker: Docker Installation 'https://docs.docker.com/get-docker/'
+    -    Install Node.js: Node.js Installation 'https://nodejs.org/en'
+    -    Install Django: pip install django
+    
+2. Clone the Repository 'git clone https://github.com/Manuel220104/Integrative-Project-1'
+
+### Backend Configuration
+
+1. Install Backend Dependecies:
+    -    cd Integrative-Project-1\Backend
+    -    pip install -r requirements.txt 
+2. Run the Backend:
+    -   python manage.py makemigrations
+    -   python manage.py migrate  (Apply database migrations)
+    -   python manage.py runserver  (Start the Django server)
+
+### Frontend Configuration
+
+1. Install frontend Dependencies:
+    -    cd Integrative-Project-1\front
+    -    npm install
+
+2. Build and Run the frontend Container:
+    -    sudo docker build -t front .
+    -    sudo docker run -d -p 4000:3000 front
+
+
+ 
+   
