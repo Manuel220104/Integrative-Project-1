@@ -73,8 +73,30 @@ For all the nitty-gritty details, usability magic, and performance goals, take a
     -    sudo docker build -t front .
     -    sudo docker run -d -p 4000:3000 front
    
-## Web Server Configuration
+## Web Server Configuration (nginx)
 
-
- 
-   
+1. Nginx
+    -    Install Nginx
+    -    Configurate Nginx
+           Like this:
+         
+                       events{
+                            }
+                        http {
+                            # Configuration specific to HTTP and affecting all virtual servers
+                        
+                            server {
+                            listen 3000;
+                            listen [::]:3000;
+                            # server_name ${host};
+                            location / {
+                                proxy_pass http://192.168.10.78:4000/;
+                           }
+                        }
+                        }
+                            
+                        
+                        
+                        
+                         
+                           
