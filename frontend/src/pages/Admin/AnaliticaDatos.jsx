@@ -12,7 +12,7 @@ export function ProductAnalysis() {
     const chartRef = useRef(null);
     const [productCounts, setProductCounts] = useState({});
     const [showAllDiscountProducts, setShowAllDiscountProducts] = useState(false);
-
+    const [selectedDays, setSelectedDays] = useState(7);
 
 
     useEffect(() => {
@@ -119,31 +119,40 @@ export function ProductAnalysis() {
     };
 
     useEffect(() => {
-        getAllLikes()
-            .then(response => {
+        const fetchData = async () => {
+            try {
+                const response = await getAllLikes();
                 const likesData = response.data;
 
-                const products = likesData.map(like => like.product);
-                const productCounts = {};
-                products.forEach(product => {
-                    productCounts[product] = (productCounts[product] || 0) + 1;
+                // Filtra los productos creados en los últimos "selectedDays" días
+                const lastDate = new Date();
+                lastDate.setDate(lastDate.getDate() - selectedDays);
+
+                const filteredLikes = likesData.filter(like => new Date(like.created_at) > lastDate);
+
+                const counts = {};
+                filteredLikes.forEach(like => {
+                    const productId = like.product;
+                    counts[productId] = (counts[productId] || 0) + 1;
                 });
 
                 // Ordena los productos por frecuencia en orden descendente y selecciona los 10 primeros.
-                const sortedProducts = Object.keys(productCounts).sort((a, b) => productCounts[b] - productCounts[a]).slice(0, 10);
+                const sortedProducts = Object.keys(counts).sort((a, b) => counts[b] - counts[a]).slice(0, 10);
 
                 // Crea un objeto con los 10 productos más vendidos.
-                const top10ProductCounts = {};
+                const top10Counts = {};
                 sortedProducts.forEach(product => {
-                    top10ProductCounts[product] = productCounts[product];
+                    top10Counts[product] = counts[product];
                 });
 
-                setProductCounts(top10ProductCounts);
-            })
-            .catch(error => {
+                setProductCounts(top10Counts);
+            } catch (error) {
                 console.error('Error al obtener datos de la API:', error);
-            });
-    }, []);
+            }
+        };
+
+        fetchData();
+    }, [selectedDays]);
 
     const data = {
         labels: Object.keys(productCounts),
@@ -176,6 +185,13 @@ export function ProductAnalysis() {
         },
     };
 
+    const handleDaysChange = (event) => {
+        const newDays = event.target.value;
+        setSelectedDays(newDays);
+    };
+
+
+
     return (
         <div className="container">
 
@@ -193,33 +209,28 @@ export function ProductAnalysis() {
             </div>
 
             <div className="row gridAnalitic">
-                <div className="col-md-6">
-                    <h3 className="mt-4 Subtitle_Analitic SubtitleAnalitic">Lista de Productos con descuento</h3>
+                <div className="col-sm-6">
+                    <h3 className="mt-4 SubtitleAnalitic">Últimos 10 Productos Agregados</h3>
                     <table className="table table-striped table-custom">
                         <thead>
                             <tr>
                                 <th>Producto ID</th>
                                 <th>Nombre</th>
-                                <th>Descuento</th>
+                                <th>Categoria</th>
+                                <th>ProductType</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {productsWithDiscount.slice(0, showAllDiscountProducts ? productsWithDiscount.length : 10).map(product => (
+                            {latestProducts.map(product => (
                                 <tr key={product.ProductId}>
                                     <td>{product.ProductId}</td>
                                     <td>{product.Name}</td>
-                                    <td>{product.Discount}%</td>
+                                    <td>{product.Category}</td>
+                                    <td>{product.ProductType}</td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
-                    <button
-                        className="toggle-button"
-                        style={{ fontWeight: 'bold', fontSize: '16px' }}
-                        onClick={() => setShowAllDiscountProducts(!showAllDiscountProducts)}
-                    >
-                        {showAllDiscountProducts ? 'Ver menos' : 'Ver más'}
-                    </button>
                 </div>
 
 
@@ -254,29 +265,7 @@ export function ProductAnalysis() {
             </div>
 
             <div className="row gridAnalitic">
-                <div className="col-sm-6">
-                    <h3 className="mt-4 SubtitleAnalitic">Últimos 10 Productos Agregados</h3>
-                    <table className="table table-striped table-custom">
-                        <thead>
-                            <tr>
-                                <th>Producto ID</th>
-                                <th>Nombre</th>
-                                <th>Categoria</th>
-                                <th>ProductType</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {latestProducts.map(product => (
-                                <tr key={product.ProductId}>
-                                    <td>{product.ProductId}</td>
-                                    <td>{product.Name}</td>
-                                    <td>{product.Category}</td>
-                                    <td>{product.ProductType}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+
 
                 <div>
                     <div className="Diagrama-torta ml-10">
@@ -290,9 +279,19 @@ export function ProductAnalysis() {
             <div className='mb-7'>
                 <h3 className="mt-4 SubtitleAnalitic">Los 10 productos con mas Likes</h3>
                 <div style={{ width: '80%' }}>
+                    <label htmlFor="selectedDays">Seleccionar días:</label>
+                    <input className='Ingresar-Numero'
+                        type="number"
+                        id="selectedDays"
+                        name="selectedDays"
+                        value={selectedDays}
+                        onChange={handleDaysChange}
+                        min="1"
+                    />
                     <Bar data={data} options={options} />
                 </div>
             </div>
+
 
         </div>
     );

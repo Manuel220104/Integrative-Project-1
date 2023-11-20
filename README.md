@@ -16,15 +16,17 @@ For all the nitty-gritty details, usability magic, and performance goals, take a
 
 1. Check if your computer has a version of Python greater than or equal to 3.6. This is accomplished by typing in Terminal: python --version. If not, you can download and install Python from https://www.python.org/.
 
-2.	Verify that pip (a tool to install, reinstall, and uninstall Python packages) is installed. This is accomplished by typing in Terminal: "pip".
+2.  Install Node.js: Installation 'https://nodejs.org/en'
 
-3.	Install Django, by running in the terminal: "pip install django".
+3.	Verify that pip (a tool to install, reinstall, and uninstall Python packages) is installed. This is accomplished by typing in Terminal: "pip".
 
-4.	Verify that Django was installed correctly by running in Terminal: "python -m django".
+4.	Install Django, by running in the terminal: "pip install django".
 
-5.  Clone the project that is in github https://github.com/Manuel220104/Integrative-Project-1.
+5.	Verify that Django was installed correctly by running in Terminal: "python -m django".
 
-6.  Access the project folder you just cloned, where you should run the following commands in order:
+6.  Clone the project that is in github https://github.com/Manuel220104/Integrative-Project-1.
+
+7.  Access the project folder you just cloned, where you should run the following commands in order:
     -   Run command "pip install -r requirements.txt" (This command will install all the dependencies needed by the backend of the project).
     -   Use the "cd frontend" command to navigate to the frontend folder.
     -   Inside the frontend folder execute the command: "npm install" (This command will install all the dependencies that the frontend of the project needs).
@@ -52,7 +54,7 @@ For all the nitty-gritty details, usability magic, and performance goals, take a
 
 1. Install Backend Dependecies:
     -    cd Integrative-Project-1\Backend
-    -    pip install -r requirements.txt 
+    -    pip install -r requirements.txt
 2. Run the Backend:
     -   python manage.py makemigrations
     -   python manage.py migrate  (Apply database migrations)

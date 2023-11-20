@@ -370,6 +370,21 @@ a:hover {
   padding: 5px;
 }
 
+.Ingresar-Numero{
+  background-color: rgb(255, 255, 255); 
+  border-radius: 10px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  color: #000000;
+  width: 70px;
+  height: 30px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid #5ABCF4; 
+  border-radius: 9px;
+  padding: 5px;
+  text-align: center;
+}
+
 .Ingresar-Descripcion {
   background-color: rgb(255, 255, 255); 
   border-radius: 10px;
