@@ -51,11 +51,14 @@ For all the nitty-gritty details, usability magic, and performance goals, take a
 2. Clone the Repository 'git clone https://github.com/Manuel220104/Integrative-Project-1'
 
 ### Backend Configuration
-
 1. Install Backend Dependecies:
     -    cd Integrative-Project-1\Backend
     -    pip install -r requirements.txt
-2. Run the Backend:
+2. Creat and activate the virtual enviroment
+    -    python3 -m venv nombre_del_entorno
+    -    nombre_del_entorno\Scripts\activate
+
+4. Run the Backend:
     -   python manage.py makemigrations
     -   python manage.py migrate  (Apply database migrations)
     -   python manage.py runserver  (Start the Django server)
@@ -69,6 +72,8 @@ For all the nitty-gritty details, usability magic, and performance goals, take a
 2. Build and Run the frontend Container:
     -    sudo docker build -t front .
     -    sudo docker run -d -p 4000:3000 front
+   
+## Web Server Configuration
 
 
  
