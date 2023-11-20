@@ -76,7 +76,7 @@ For all the nitty-gritty details, usability magic, and performance goals, take a
 ## Web Server Configuration (nginx)
 
 1. Nginx
-    -    Install Nginx
+    -    Install Nginx 'sudo apt-get install nginx'
     -    Configurate Nginx
            Like this:
          
