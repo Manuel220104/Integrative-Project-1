@@ -5,13 +5,14 @@ from django.apps import apps
 from django.contrib import admin
 
 class Category(models.Model):
-    Name = models.CharField(max_length=200, unique=True, primary_key=True)
+    CategoryId = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
+    Name = models.CharField(max_length=200, unique=True)
 
     class Meta:
         verbose_name_plural = "Categories"
 
     def __str__(self):
-        return self.Name
+        return str(self.CategoryId)
     
 @receiver(pre_delete, sender=Category)
 def category_pre_delete(sender, instance, **kwargs):
