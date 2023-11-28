@@ -50,7 +50,7 @@ export function MyAccount() {
     return (
         <div className='container MyAccountContainer'>
             <div className="row ">
-                <div className="col-md-4 text-left">
+                <div className="col-md-5 text-left">
                     <div className="row">
                         {/* Left Column */}
                         <div className="col-sm-12" style={{ display: 'flex', alignItems: 'center' }}>
@@ -63,7 +63,7 @@ export function MyAccount() {
                     </div>
                 </div>
 
-                <div className="col-md-8">
+                <div className="col-md-5">
                     <div className="px-4 sm:px-0">
                         <h3 className="Title">Tu Cuenta</h3>
                     </div>
@@ -156,7 +156,7 @@ export function MyAccount() {
                                 )}
                             </div>
                             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                <label>Direccion: </label>
+                                <label>Dirección: </label>
                                 {isEditing ? (
                                     <input
                                         className="borderInput"
@@ -170,7 +170,7 @@ export function MyAccount() {
                                 )}
                             </div>
                             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                <label>Detalles de direccion: </label>
+                                <label>Detalles de dirección: </label>
                                 {isEditing ? (
                                     <input
                                         className="borderInput"

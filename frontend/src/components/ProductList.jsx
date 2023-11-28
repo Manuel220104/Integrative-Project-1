@@ -400,7 +400,7 @@ export function ProductList() {
             
             <main className="mx-auto px-4 sm:px-6 lg:px-8 diseño">
                 <div className="texto flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
-                <h1 className="titulo text-4xl font-bold tracking-tight text-gray-900">FILTRA TU BUSQUEDA</h1>
+                <h1 className="titulo text-4xl font-bold tracking-tight text-gray-900">FILTRA TU BÚSQUEDA</h1>
 
                 <div className="flex items-center">
                     <Menu as="div" className="relative inline-block text-left">

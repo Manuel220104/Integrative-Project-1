@@ -9,9 +9,12 @@
   --fuenteSecundaria: 'Open Sans';
 }
 
-.h1, h2, p, span, label{
+.h1, h2,h3, p, span, label{
     text-transform: capitalize;
   
+}
+.Page-About h1, .Page-About h2, .Page-About h3 {
+  text-transform: none; /* o puedes usar 'initial' */
 }
 
 

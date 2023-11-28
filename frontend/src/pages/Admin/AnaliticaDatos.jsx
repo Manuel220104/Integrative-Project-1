@@ -23,7 +23,7 @@ export function ProductAnalysis() {
                 // Calcula el número total de productos
                 setTotalProducts(data.length);
                 // Filtra los productos con Category igual a "general"
-                const generalCategoryProducts = data.filter(product => product.Category === "General");
+                const generalCategoryProducts = data.filter(product => product.Category === 6);
                 setGeneralCategoryProducts(generalCategoryProducts);
                 // Filtra los productos con Discount diferente de 0
                 const productsWithDiscount = data.filter(product => product.Discount !== 0);
@@ -209,14 +209,13 @@ export function ProductAnalysis() {
             </div>
 
             <div className="row gridAnalitic">
-                <div className="col-sm-6">
-                    <h3 className="mt-4 SubtitleAnalitic">Últimos 10 Productos Agregados</h3>
+                <div className="col-md-6">
+                    <h3 className="mt-4 SubtitleAnalitic Subtitle_Analitic">Últimos 10 Productos Agregados</h3>
                     <table className="table table-striped table-custom">
                         <thead>
                             <tr>
                                 <th>Producto ID</th>
                                 <th>Nombre</th>
-                                <th>Categoria</th>
                                 <th>ProductType</th>
                             </tr>
                         </thead>
@@ -225,7 +224,6 @@ export function ProductAnalysis() {
                                 <tr key={product.ProductId}>
                                     <td>{product.ProductId}</td>
                                     <td>{product.Name}</td>
-                                    <td>{product.Category}</td>
                                     <td>{product.ProductType}</td>
                                 </tr>
                             ))}
@@ -266,8 +264,29 @@ export function ProductAnalysis() {
 
             <div className="row gridAnalitic">
 
-
-                <div>
+                <div className="col-md-6 col-12">
+                    <h3 className="mt-4 SubtitleAnalitic">Productos con Categoría "General"</h3>
+                    <table className="table table-striped table-custom">
+                        <thead>
+                            <tr>
+                                <th>Producto ID</th>
+                                <th>Nombre</th>
+                                <th>Categoria</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {generalCategoryProducts.map(product => (
+                                <tr key={product.ProductId}>
+                                    <td>{product.ProductId}</td>
+                                    <td>{product.Name}</td>
+                                    <td>General</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+                <div className="col-md-6 col-12">
+                    <h3 className="mt-4 SubtitleAnalitic">Número De Productos Por Categoría</h3>
                     <div className="Diagrama-torta ml-10">
                         <canvas id="categoryPieChart"></canvas>
                     </div>
