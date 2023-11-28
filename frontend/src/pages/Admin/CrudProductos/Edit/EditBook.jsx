@@ -11,12 +11,13 @@ export function EditBook() {
     const location = useLocation();
     const product = location.state ? location.state.Product : null;
     console.log(product)
-    const idbook = product.book.ISBN
+    const idbook = product.book.BookId
     const idproduct = product.ProductId
-
+    const { register, handleSubmit, formState: { errors }, setValue, } = useForm();
+    
     const [Categories, setCategories] = useState([]);
-    const [categoryName, setCategoryName] = useState('Desconocido');
-    const [subcategoryName, setSubcategoryName] = useState('Desconocido');
+    const [categoryName, setCategoryName] = useState('Ninguna');
+    const [subcategoryName, setSubcategoryName] = useState('Ninguna');
 
 
 
@@ -25,7 +26,7 @@ export function EditBook() {
         setCategories(res.data);
         console.log(res.data)
         const category = res.data.find((cat) => cat.CategoryId === product.Category);
-        const name = category ? category.Name : 'Desconocido';
+        const name = category ? category.Name : 'Ninguna';
         setCategoryName(name);
     }, []);
 
@@ -36,7 +37,7 @@ export function EditBook() {
         setSubcategories(res.data);
         console.log(res.data)
         const subcategory = res.data.find((sub) => sub.SubcategoryId === product.Subcategory);
-        const name = subcategory ? subcategory.Name : 'Desconocido';
+        const name = subcategory ? subcategory.Name : 'Ninguna';
         setSubcategoryName(name)
     }, []);
 
@@ -50,7 +51,6 @@ export function EditBook() {
         fetchData();
     }, [location]);
 
-    const { register, handleSubmit, formState: { errors }, setValue, } = useForm();
 
     function GetDataOfProduct(data) {
         const formData = new FormData();
@@ -124,7 +124,7 @@ export function EditBook() {
 
     const [selectedCategoryid, setSelectedCategory] = useState(product.Category);
     const handleCategoryChange = (e) => {
-        const selectedCategoryInt = e.target.value;
+        const selectedCategoryInt = parseInt(e.target.value);
         setSelectedCategory(selectedCategoryInt);
     }
 
@@ -351,7 +351,7 @@ export function EditBook() {
                                 <option value={product.Category}>Seleccione una Categoría</option>
                                 {Categories.map((Category, index) => {
                                     return (
-                                        <option key={index} value={Category.Name}>
+                                        <option key={index} value={Category.CategoryId}>
                                             {Category.Name}
                                         </option>
                                     );
@@ -367,7 +367,7 @@ export function EditBook() {
                                     Subcategories.map((Subcategory, index) => {
                                         if (Subcategory.Category === selectedCategoryid) {
                                             return (
-                                                <option key={index} value={Subcategory.Name}>
+                                                <option key={index} value={Subcategory.SubcategoryId}>
                                                     {Subcategory.Name}
                                                 </option>
                                             );

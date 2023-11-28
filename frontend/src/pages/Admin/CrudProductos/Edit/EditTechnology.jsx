@@ -15,12 +15,18 @@ export function EditTechnology() {
     const idtech = product.technology.TechnologyId
     const idproduct = product.ProductId
     const { register, handleSubmit, formState: { errors }, setValue, } = useForm();
+
     const [Categories, setCategories] = useState([]);
+    const [categoryName, setCategoryName] = useState('Ninguna');
+    const [subcategoryName, setSubcategoryName] = useState('Ninguna');
 
     const loadCategories = useCallback(async () => {
         const res = await getAllCategories();
         setCategories(res.data);
         console.log(res.data)
+        const category = res.data.find((cat) => cat.CategoryId === product.Category);
+        const name = category ? category.Name : 'Ninguna';
+        setCategoryName(name);
     }, []);
 
     const [Subcategories, setSubcategories] = useState([]);
@@ -29,6 +35,9 @@ export function EditTechnology() {
         const res = await getAllSubcategory();
         setSubcategories(res.data);
         console.log(res.data)
+        const subcategory = res.data.find((sub) => sub.SubcategoryId === product.Subcategory);
+        const name = subcategory ? subcategory.Name : 'Ninguna';
+        setSubcategoryName(name)
     }, []);
 
 
@@ -117,7 +126,7 @@ export function EditTechnology() {
 
     const [selectedCategoryid, setSelectedCategory] = useState('');
     const handleCategoryChange = (e) => {
-        const selectedCategoryInt = e.target.value;
+        const selectedCategoryInt = parseInt(e.target.value);
         setSelectedCategory(selectedCategoryInt);
     }
 
@@ -261,7 +270,6 @@ export function EditTechnology() {
                             )}
                         </div>
 
-
                         <div>
                             <label className="atributo" htmlFor="Discount">Descuento:</label>
                             <input className="Ingresar-Dato" type="number" min="0" max="100" defaultValue={product.Discount} {...register("Discount", { required: true })} />
@@ -269,7 +277,7 @@ export function EditTechnology() {
                         </div>
 
                         <div className='flex items-center'>
-                            <div>Categoría: {product.Category} <br /> Subcategoría: {product.Subcategory}</div>
+                            <div>Categoría: {categoryName} <br /> Subcategoría: {subcategoryName}</div>
                         </div>
 
                         <div className="selector">
@@ -284,7 +292,7 @@ export function EditTechnology() {
                                 <option value={product.Category}>Seleccione una Categoría</option>
                                 {Categories.map((Category, index) => {
                                     return (
-                                        <option key={index} value={Category.Name}>
+                                        <option key={index} value={Category.CategoryId}>
                                             {Category.Name}
                                         </option>
                                     );
@@ -300,7 +308,7 @@ export function EditTechnology() {
                                     Subcategories.map((Subcategory, index) => {
                                         if (Subcategory.Category === selectedCategoryid) {
                                             return (
-                                                <option key={index} value={Subcategory.Name}>
+                                                <option key={index} value={Subcategory.SubcategoryId}>
                                                     {Subcategory.Name}
                                                 </option>
                                             );
