@@ -115,6 +115,8 @@ export function CreateBook() {
                 BookData.Product = id;
                 console.log(BookData)
                 await createBooks(BookData);
+
+                reset();
                 setIsCreated(true);
                 setMessage('Producto creado con éxito.')
                 // reset()
@@ -376,7 +378,7 @@ export function CreateBook() {
                 <button className="Boton-Guardar mb-5">Crear Libro</button>
 
                 {isCreated && (
-                    <div className="confirmation-message mb-5 to-blue-600" onClick={() => reset()}>
+                    <div className="success-message confirmation-message mb-5 to-blue-600" onClick={() => reset()}>
                         {message}
                     </div>
                 )}

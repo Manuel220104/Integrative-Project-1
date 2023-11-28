@@ -9,12 +9,18 @@ import { useLocation } from 'react-router-dom';
 
 export function CreateCategories() {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
-    const { register: registerSubCategory, handleSubmit: handleSubmitSubCategory, formState: { errors: errorsSubCategory}, reset: resetSubCategory} = useForm();
+    const { register: registerSubCategory, handleSubmit: handleSubmitSubCategory, formState: { errors: errorsSubCategory }, reset: resetSubCategory } = useForm();
     const { register: registerChaSubCategory, handleSubmit: handleChaSubmitSubCategory, formState: { errors: errorsChaSubCategory } } = useForm();
     const { register: registerChaCategory, handleSubmit: handleChaSubmitCategory, formState: { errors: errorsChaCategory } } = useForm();
-    const [successMessage, setSuccessMessage] = useState('');
+    const [successMessageCategory, setSuccessMessageCategory] = useState('');
+    const [errorMessageCategory, setErrorMessageCategory] = useState('');
+    const [successMessageSubCategory, setSuccessMessageSubCategory] = useState('');
+    const [errorMessageSubCategory, setErrorMessageSubCategory] = useState('');
+    const [successMessageDeleteCategory, setSuccessMessageDeleteCategory] = useState('');
+    const [errorMessageDeleteCategory, setErrorMessageDeleteCategory] = useState('');
+    const [successMessageDeleteSubCategory, setSuccessMessageDeleteSubCategory] = useState('');
+    const [errorMessageDeleteSubCategory, setErrorMessageDeleteSubCategory] = useState('');
 
-    
     const [Categories, setCategories] = useState([]);
 
     const loadCategories = useCallback(async () => {
@@ -45,9 +51,19 @@ export function CreateCategories() {
             await createCategory(data);
             await loadCategories();
             reset();
+            setSuccessMessageCategory('Categoría creada correctamente');
+            setErrorMessageCategory('');
+            setTimeout(() => {
+                setSuccessMessageCategory('');
+            }, 5000);
         } catch (error) {
             console.error('Error al crear el categoria:', error);
             console.log('Respuesta del servidor:', error.response);
+            setSuccessMessageCategory('');
+            setErrorMessageCategory('Error al crear la categoría');
+            setTimeout(() => {
+                setErrorMessageCategory('');
+            }, 5000);
         }
     });
 
@@ -57,9 +73,19 @@ export function CreateCategories() {
             try {
                 await deleteCategory(data.Category);
                 await loadCategories();
+                setSuccessMessageDeleteCategory('Categoría eliminada correctamente');
+                setErrorMessageDeleteCategory('');
+                setTimeout(() => {
+                    setSuccessMessageDeleteCategory('');
+                }, 5000);
             } catch (error) {
-                console.error('Error al actualizar la categoria:', error);
-                console.log('Respuesta del servidor:', error.response);
+                console.error('Error al eliminar la categoría:', error);
+                setSuccessMessageDeleteCategory('');
+                setErrorMessageDeleteCategory('Error al eliminar la categoría');
+                setTimeout(() => {
+                    setErrorMessageDeleteCategory('');
+                }, 5000);
+
             }
         }
     });
@@ -69,9 +95,18 @@ export function CreateCategories() {
             await createSubcategory(data);
             await loadSubcategories();
             resetSubCategory();
+            setSuccessMessageSubCategory('Subcategoria creada correctamente');
+            setErrorMessageSubCategory('');
+            setTimeout(() => {
+                setSuccessMessageSubCategory('');
+            }, 5000);
         } catch (error) {
-            console.error('Error al crear la subcategoría:', error);
-            console.log('Respuesta del servidor:', error.response);
+            console.error('Error al crear el categoria:', error);
+            setSuccessMessageSubCategory('');
+            setErrorMessageSubCategory('Error al crear la subcategoría');
+            setTimeout(() => {
+                setErrorMessageSubCategory('');
+            }, 5000);
         }
     });
 
@@ -81,9 +116,18 @@ export function CreateCategories() {
             try {
                 await deleteSubcategory(data.Subcategory);
                 await loadSubcategories();
+                setSuccessMessageDeleteSubCategory('Subcategoría eliminada correctamente');
+                setErrorMessageDeleteSubCategory('');
+                setTimeout(() => {
+                    setSuccessMessageDeleteSubCategory('');
+                }, 5000);
             } catch (error) {
                 console.error('Error al crear la subcategoría:', error);
-                console.log('Respuesta del servidor:', error.response);
+                setSuccessMessageDeleteSubCategory('');
+                setErrorMessageDeleteSubCategory('Error al eliminar la Subcategoría');
+                setTimeout(() => {
+                    setErrorMessageDeleteSubCategory('');
+                }, 5000);
             }
         }
     });
@@ -107,6 +151,7 @@ export function CreateCategories() {
         <div className="FormCategory">
             <div>
 
+
                 <form onSubmit={onSubmitCategory}>
                     <div>
                         <label className="Seleccionar" htmlFor="Name">Crear Categoría:</label>
@@ -114,10 +159,13 @@ export function CreateCategories() {
                         <input className="Ingresar-Dato mr-5" type="text" {...register("Name", { required: true })} />
                         <button className="Boton B-cat" type="submit">Crear Categoría</button>
                     </div>
-                    <div >
-                        {errors.Name && <span className="error ecat">Nombre es requerido</span>}
-                    </div>
                 </form>
+
+                <div>
+                    {successMessageCategory && <div className="success-message confirmation-message">{successMessageCategory}</div>}
+                    {errors.Name && <span className="error ecat">Nombre es requerido</span>}
+                    {errorMessageCategory && <div className="fail-message error-message">{errorMessageCategory}</div>}
+                </div>
 
                 <form onSubmit={onSubmitSubCategory} className="flex flex-wrap">
                     <div>
@@ -144,9 +192,12 @@ export function CreateCategories() {
                             <input className="Ingresar-Dato mr-5" type="text" {...registerSubCategory("Name", { required: true })} />
                             <button className="Boton B-sub" type="submit">Crear Subcategoría</button>
                         </div>
-                        <div >
-                            {errorsSubCategory.Name && <span className="error">Nombre es requerido</span>}
+                        <div>
+                            {successMessageSubCategory && <div className="success-message confirmation-message">{successMessageSubCategory}</div>}
+                            {errors.Name && <span className="error ecat">Nombre es requerido</span>}
+                            {errorMessageSubCategory && <div className="fail-message error-message">{errorMessageSubCategory}</div>}
                         </div>
+
                     </div>
                 </form>
 
@@ -175,8 +226,16 @@ export function CreateCategories() {
                         </div>
 
                         <button className="Boton-Eliminar B-sub mb-5" type="submit">Eliminar Categoría</button>
+                        <div>
+                            {successMessageDeleteCategory && <div className="success-message confirmation-message">{successMessageDeleteCategory}</div>}
+                            {errors.Name && <span className="error ecat">Nombre es requerido</span>}
+                            {errorMessageDeleteCategory && <div className="fail-message error-message">{errorMessageDeleteCategory}</div>}
+                        </div>
                     </div>
+
+
                 </form>
+
 
                 <form onSubmit={deleteSubCategoryf} className="flex flex-wrap">
                     <div>
@@ -220,6 +279,11 @@ export function CreateCategories() {
                         </div>
 
                         <button className="Boton-Eliminar B-sub mb-5" type="submit">Eliminar Subcategoría</button>
+                        <div>
+                            {successMessageDeleteSubCategory && <div className="success-message confirmation-message">{successMessageDeleteSubCategory}</div>}
+                            {errors.Name && <span className="error ecat">Nombre es requerido</span>}
+                            {errorMessageDeleteSubCategory && <div className="fail-message error-message">{errorMessageDeleteSubCategory}</div>}
+                        </div>
                     </div>
                 </form>
 

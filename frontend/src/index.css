@@ -13,7 +13,7 @@
     text-transform: capitalize;
   
 }
-.Page-About h1, .Page-About h2, .Page-About h3 {
+.Page-About h1, .Page-About h2, .Page-About h3, .Page-About p {
   text-transform: none; /* o puedes usar 'initial' */
 }
 
@@ -435,6 +435,7 @@ a:hover {
   padding: 5px; 
   cursor: pointer;
   border-radius: 9px;
+
 }
 
 
@@ -1124,4 +1125,17 @@ button.navbar-item:focus {
 
 .space{
   margin-bottom: 20px;
+}
+
+
+.success-message {
+  color: green;
+  margin-bottom: 10px;
+  margin-top:-10px;
+}
+
+.fail-message {
+  color: red;
+  margin-bottom: 10px;
+  margin-top:-10px;
 }

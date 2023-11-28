@@ -318,7 +318,7 @@ export function CreateTechnology() {
                 <button className="Boton-Guardar mb-5">Crear Artículo Tecnológico</button>
 
                 {isCreated && (
-                    <div className="confirmation-message mb-5 to-blue-600" onClick={() => reset()}>
+                    <div className="success-message confirmation-message mb-5 to-blue-600" onClick={() => reset()}>
                         {message}
                     </div>
                 )}

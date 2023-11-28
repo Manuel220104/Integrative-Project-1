@@ -13,7 +13,8 @@ export function ProductAnalysis() {
     const [productCounts, setProductCounts] = useState({});
     const [showAllDiscountProducts, setShowAllDiscountProducts] = useState(false);
     const [selectedDays, setSelectedDays] = useState(7);
-
+    const [showAllGeneralCategoryProducts, setShowAllGeneralCategoryProducts] = useState(false);
+    const [generalCategoryTableSize, setGeneralCategoryTableSize] = useState(10);
 
     useEffect(() => {
         // Utiliza la función getAllProducts para obtener los datos de la API
@@ -47,6 +48,9 @@ export function ProductAnalysis() {
                     const count = data.filter(product => product.Category === category).length;
                     return count;
                 });
+
+
+
 
                 // Crear un nuevo gráfico de pastel
                 const ctx = document.getElementById('categoryPieChart').getContext('2d');
@@ -271,11 +275,11 @@ export function ProductAnalysis() {
                             <tr>
                                 <th>Producto ID</th>
                                 <th>Nombre</th>
-                                <th>Categoria</th>
+                                <th>Categoría</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {generalCategoryProducts.map(product => (
+                            {generalCategoryProducts.slice(0, showAllGeneralCategoryProducts ? generalCategoryProducts.length : generalCategoryTableSize).map(product => (
                                 <tr key={product.ProductId}>
                                     <td>{product.ProductId}</td>
                                     <td>{product.Name}</td>
@@ -284,7 +288,17 @@ export function ProductAnalysis() {
                             ))}
                         </tbody>
                     </table>
+                    {generalCategoryProducts.length > generalCategoryTableSize && (
+                        <button
+                            className="toggle-button"
+                            style={{ fontWeight: 'bold', fontSize: '16px' }}
+                            onClick={() => setShowAllGeneralCategoryProducts(!showAllGeneralCategoryProducts)}
+                        >
+                            {showAllGeneralCategoryProducts ? 'Ver menos' : 'Ver más'}
+                        </button>
+                    )}
                 </div>
+
                 <div className="col-md-6 col-12">
                     <h3 className="mt-4 SubtitleAnalitic">Número De Productos Por Categoría</h3>
                     <div className="Diagrama-torta ml-10">
