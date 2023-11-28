@@ -91,7 +91,7 @@ export function ProductList() {
         { name: 'Libros', href: '/Productos/Libros' },
         { name: 'Instrumentos Musicales', href: '/Productos/InstrumentosMusicales' },
         { name: 'Juegos De Mesa', href: '/Productos/JuegosDeMesa' },
-        { name: 'Tecnologia', href: '/Productos/Tecnologia' },
+        { name: 'Tecnología', href: '/Productos/Tecnologia' },
     ]
 
 

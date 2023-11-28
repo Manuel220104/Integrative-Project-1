@@ -52,9 +52,11 @@ export function CreateTechnology() {
         formData.append("Discount", data.Discount);
         formData.append("ProductType", data.ProductType);
 
-        formData.append("Category", data.Category);
+        if (data.Category !== 'General') {
+            formData.append("Category", data.Category);
+        }
 
-        if (data.Subcategory != 'General') {
+        if (data.Subcategory !== 'General') {
             formData.append("Subcategory", data.Subcategory);
         }
 
@@ -125,7 +127,7 @@ export function CreateTechnology() {
 
     const [selectedCategoryid, setSelectedCategory] = useState('');
     const handleCategoryChange = (e) => {
-        const selectedCategoryInt = e.target.value;
+        const selectedCategoryInt = parseInt(e.target.value);
         setSelectedCategory(selectedCategoryInt);
     }
 
@@ -282,7 +284,7 @@ export function CreateTechnology() {
                             <option value="General">Seleccione una Categoría</option>
                             {Categories.map((Category, index) => {
                                 return (
-                                    <option key={index} value={Category.Name}>
+                                    <option key={index} value={Category.CategoryId}>
                                         {Category.Name}
                                     </option>
                                 );
@@ -298,7 +300,7 @@ export function CreateTechnology() {
                                 Subcategories.map((Subcategory, index) => {
                                     if (Subcategory.Category === selectedCategoryid) {
                                         return (
-                                            <option key={index} value={Subcategory.Name}>
+                                            <option key={index} value={Subcategory.SubcategoryId}>
                                                 {Subcategory.Name}
                                             </option>
                                         );

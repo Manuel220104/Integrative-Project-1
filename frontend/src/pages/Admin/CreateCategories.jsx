@@ -8,8 +8,8 @@ import { useLocation } from 'react-router-dom';
 
 
 export function CreateCategories() {
-    const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm();
-    const { register: registerSubCategory, handleSubmit: handleSubmitSubCategory, formState: { errors: errorsSubCategory } } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const { register: registerSubCategory, handleSubmit: handleSubmitSubCategory, formState: { errors: errorsSubCategory}, reset: resetSubCategory} = useForm();
     const { register: registerChaSubCategory, handleSubmit: handleChaSubmitSubCategory, formState: { errors: errorsChaSubCategory } } = useForm();
     const { register: registerChaCategory, handleSubmit: handleChaSubmitCategory, formState: { errors: errorsChaCategory } } = useForm();
     const [successMessage, setSuccessMessage] = useState('');
@@ -44,9 +44,7 @@ export function CreateCategories() {
         try {
             await createCategory(data);
             await loadCategories();
-            Object.keys(data).forEach((key) => {
-                setValue(key, ''); // Reset each field to an empty string
-            });
+            reset();
         } catch (error) {
             console.error('Error al crear el categoria:', error);
             console.log('Respuesta del servidor:', error.response);
@@ -59,7 +57,6 @@ export function CreateCategories() {
             try {
                 await deleteCategory(data.Category);
                 await loadCategories();
-
             } catch (error) {
                 console.error('Error al actualizar la categoria:', error);
                 console.log('Respuesta del servidor:', error.response);
@@ -71,9 +68,7 @@ export function CreateCategories() {
         try {
             await createSubcategory(data);
             await loadSubcategories();
-            Object.keys(data).forEach((key) => {
-                setValue(key, ''); // Reset each field to an empty string
-            });
+            resetSubCategory();
         } catch (error) {
             console.error('Error al crear la subcategoría:', error);
             console.log('Respuesta del servidor:', error.response);
@@ -95,20 +90,17 @@ export function CreateCategories() {
 
     const [selectedCategoryid, setSelectedCategory] = useState('');
     const handleCategoryChange = (e) => {
-        const selectedCategoryInt = e.target.value;
+        const selectedCategoryInt = parseInt(e.target.value);
         console.log(selectedCategoryInt)
         setSelectedCategory(selectedCategoryInt);
     }
 
     const [selectedSubCategoryid, setSubCategory] = useState('');
     const handleSubCategoryChange = (e) => {
-        const selected = e.target.value;
+        const selected = parseInt(e.target.value);;
         console.log(selected)
         setSubCategory(selected);
     }
-
-
-
 
 
     return (
@@ -158,7 +150,6 @@ export function CreateCategories() {
                     </div>
                 </form>
 
-
                 <form onSubmit={deleteCategoryf} className="flex flex-wrap">
                     <div>
                         <label className="Seleccionar" htmlFor="Name">Eliminar Categoría:</label>
@@ -175,7 +166,7 @@ export function CreateCategories() {
 
                                 {Categories.map((Category, index) => {
                                     return (
-                                        <option key={index} value={Category.Name}>
+                                        <option key={index} value={Category.CategoryId}>
                                             {Category.Name}
                                         </option>
                                     );
@@ -201,7 +192,7 @@ export function CreateCategories() {
                             >
                                 {Categories.map((Category, index) => {
                                     return (
-                                        <option key={index} value={Category.Name}>
+                                        <option key={index} value={Category.CategoryId}>
                                             {Category.Name}
                                         </option>
                                     );
@@ -217,7 +208,7 @@ export function CreateCategories() {
                                     Subcategories.map((Subcategory, index) => {
                                         if (Subcategory.Category === selectedCategoryid) {
                                             return (
-                                                <option key={index} value={Subcategory.Name}>
+                                                <option key={index} value={Subcategory.SubcategoryId}>
                                                     {Subcategory.Name}
                                                 </option>
                                             );

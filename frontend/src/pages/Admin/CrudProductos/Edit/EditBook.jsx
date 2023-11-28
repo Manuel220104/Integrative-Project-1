@@ -15,11 +15,18 @@ export function EditBook() {
     const idproduct = product.ProductId
 
     const [Categories, setCategories] = useState([]);
+    const [categoryName, setCategoryName] = useState('Desconocido');
+    const [subcategoryName, setSubcategoryName] = useState('Desconocido');
+
+
 
     const loadCategories = useCallback(async () => {
         const res = await getAllCategories();
         setCategories(res.data);
         console.log(res.data)
+        const category = res.data.find((cat) => cat.CategoryId === product.Category);
+        const name = category ? category.Name : 'Desconocido';
+        setCategoryName(name);
     }, []);
 
     const [Subcategories, setSubcategories] = useState([]);
@@ -28,6 +35,9 @@ export function EditBook() {
         const res = await getAllSubcategory();
         setSubcategories(res.data);
         console.log(res.data)
+        const subcategory = res.data.find((sub) => sub.SubcategoryId === product.Subcategory);
+        const name = subcategory ? subcategory.Name : 'Desconocido';
+        setSubcategoryName(name)
     }, []);
 
 
@@ -118,6 +128,8 @@ export function EditBook() {
         setSelectedCategory(selectedCategoryInt);
     }
 
+    
+    
     return (
         <div className="CreateProductPage">
 
@@ -324,7 +336,7 @@ export function EditBook() {
                         </div>
 
                         <div className='flex items-center'>
-                            <div>Categoría: {product.Category} <br /> Subcategoría: {product.Subcategory}</div>
+                            <div>Categoría: {categoryName} <br /> Subcategoría: {subcategoryName}</div>
                         </div>
 
                         <div className="selector">

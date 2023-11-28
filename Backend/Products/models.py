@@ -4,6 +4,8 @@ from django.dispatch import receiver
 import os
 from Categories.models import Category
 from Subcategories.models import Subcategory
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
 class Product(models.Model):
     ProductId = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
@@ -37,5 +39,13 @@ def delete_product_image(sender, instance, **kwargs):
         image_path = instance.Image.path
         if os.path.isfile(image_path):
             os.remove(image_path)
+
+@receiver(pre_save, sender=Product)
+def set_default_category(sender, instance, **kwargs):
+    # Verifica si la categoría no se ha establecido
+    if not instance.Category:
+        # Si no se ha establecido, establece la categoría como "General"
+        general_category, created = Category.objects.get_or_create(Name='General')
+        instance.Category = general_category
 
 

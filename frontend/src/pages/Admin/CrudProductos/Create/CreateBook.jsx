@@ -20,7 +20,7 @@ export function CreateBook() {
     const loadCategories = useCallback(async () => {
         const res = await getAllCategories();
         setCategories(res.data);
-        // console.log(res.data)
+        console.log(res.data)
     }, []);
 
     const [Subcategories, setSubcategories] = useState([]);
@@ -28,7 +28,7 @@ export function CreateBook() {
     const loadSubcategories = useCallback(async () => {
         const res = await getAllSubcategory();
         setSubcategories(res.data);
-        // console.log(res.data)
+        console.log(res.data)
     }, []);
 
 
@@ -55,9 +55,11 @@ export function CreateBook() {
         formData.append("Discount", data.Discount);
         formData.append("ProductType", data.ProductType);
 
-        formData.append("Category", data.Category);
+        if (data.Category !== 'General') {
+            formData.append("Category", data.Category);
+        }
 
-        if (data.Subcategory != 'General') {
+        if (data.Subcategory !== 'General') {
             formData.append("Subcategory", data.Subcategory);
         }
 
@@ -128,7 +130,7 @@ export function CreateBook() {
 
     const [selectedCategoryid, setSelectedCategory] = useState('');
     const handleCategoryChange = (e) => {
-        const selectedCategoryInt = e.target.value;
+        const selectedCategoryInt = parseInt(e.target.value);
         setSelectedCategory(selectedCategoryInt);
     }
 
@@ -341,7 +343,7 @@ export function CreateBook() {
                             <option value="General">Seleccione una Categoría</option>
                             {Categories.map((Category, index) => {
                                 return (
-                                    <option key={index} value={Category.Name}>
+                                    <option key={index} value={Category.CategoryId}>
                                         {Category.Name}
                                     </option>
                                 );
@@ -357,7 +359,7 @@ export function CreateBook() {
                                 Subcategories.map((Subcategory, index) => {
                                     if (Subcategory.Category === selectedCategoryid) {
                                         return (
-                                            <option key={index} value={Subcategory.Name}>
+                                            <option key={index} value={Subcategory.SubcategoryId}>
                                                 {Subcategory.Name}
                                             </option>
                                         );
@@ -367,7 +369,6 @@ export function CreateBook() {
                             }
                         </select>
                     </div>
-
                 </div>
 
                 <input type="hidden" name="ProductType" value="Libro" {...register("ProductType")} />
