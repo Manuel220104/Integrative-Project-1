@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-// const urlBack = "https://acentosapi.dis.eafit.edu.co/"
-const urlBack = "http://localhost:8000/"
+const urlBack = "https://acentosapi.dis.eafit.edu.co/"
+// const urlBack = "http://localhost:8000/"
 
 const Subcategories = axios.create({
     baseURL: urlBack+'Subcategories/api/v1/Subcategory/'

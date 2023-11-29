@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-//const urlBack = "https://acentosapi.dis.eafit.edu.co/"
-const urlBack = "http://localhost:8000/"
+const urlBack = "https://acentosapi.dis.eafit.edu.co/"
+// const urlBack = "http://localhost:8000/"
 
 const GamesApi = axios.create({
     baseURL: urlBack+'Table_Games/api/v1/Table_Game/'
