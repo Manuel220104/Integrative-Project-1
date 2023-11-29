@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 export function CreateCarouselInfo() {
     const location = useLocation();
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [novedades, setNovedades] = useState([]);
 
     const loadnovedades = useCallback(async () => {
@@ -28,6 +28,7 @@ export function CreateCarouselInfo() {
         try {
             await CreateInformationCarousel(formData);
             await loadnovedades();
+            reset();
         } catch (error) {
             console.error('Error al crear la información del carrusel:', error);
             console.log('Respuesta del servidor:', error.response);
