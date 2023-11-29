@@ -24,7 +24,7 @@ export function ProductAnalysis() {
                 // Calcula el número total de productos
                 setTotalProducts(data.length);
                 // Filtra los productos con Category igual a "general"
-                const generalCategoryProducts = data.filter(product => product.Category === 6);
+                const generalCategoryProducts = data.filter(product => product.Category === 34);
                 setGeneralCategoryProducts(generalCategoryProducts);
                 // Filtra los productos con Discount diferente de 0
                 const productsWithDiscount = data.filter(product => product.Discount !== 0);
