@@ -28,11 +28,13 @@ export function ProductList() {
     const loadCategories = useCallback(async () => {
         const res = await getAllCategories();
         setCategories(res.data);
+        console.log(res.data)
     }, []);
     
     const loadSubcategories = useCallback(async () => {
         const res = await getAllSubcategory();
         setSubcategories(res.data);
+        console.log(res.data)
     }, []);
     
     const loadFilters = useCallback(() => {
@@ -41,7 +43,7 @@ export function ProductList() {
     
         const filtersData = filteredCategories.map((cat) => {
             return {
-                id: cat.Name,
+                id: cat.CategoryId,
                 name: cat.Name,
                 options: [
                     {
@@ -50,9 +52,9 @@ export function ProductList() {
                         checked: false,
                     },
                     ...Subcategories
-                        .filter((subcat) => subcat.Category === cat.Name)
+                        .filter((subcat) => subcat.Category === cat.CategoryId)
                         .map((subcat) => ({
-                            value: subcat.Name,
+                            value: subcat.SubcategoryId,
                             label: subcat.Name,
                             checked: false,
                         })),
@@ -141,13 +143,14 @@ export function ProductList() {
         handlePageChange(1);
         const filterstoapply = []
         var flag = false
+        console.log(localFilters)
         localFilters.map((filter)=>{
             flag = false
             filter.options.map((subcat)=>{
                 if(subcat.checked === true && flag === false){
                     const dict = {
                         Category: filter.id, 
-                        Subcategory: subcat.label
+                        Subcategory: subcat.value
                     }
                     filterstoapply.push(dict)
                     if(subcat.label === 'Todas'){
@@ -186,6 +189,7 @@ export function ProductList() {
         // categoria y Subcategories
         var show = true
        
+        console.log(localFiltersToApply)
         if (localFiltersToApply.length != 0) {
             show = false
             localFiltersToApply.map((filter) => {

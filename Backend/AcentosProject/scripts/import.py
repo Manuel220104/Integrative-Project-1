@@ -22,14 +22,6 @@ for index, row in df.iterrows():
     # Verificar si el ISBN ya existe en la base de datos
     existing_book = Book.objects.filter(ISBN=row['ISBN']).first()
     
-    #Verificar si la subcategoria existe
-    existing_subcategory = Subcategory.objects.filter(Name=row['Subcategory']).first()
-    if existing_subcategory:
-        category_of_subcategory = existing_subcategory.Category
-        if category_of_subcategory.Name != row['Category']:
-            print(f"No se puede crear el producto {row['Name']} porque la subcategoria '{row['Subcategory']}' ya esta creada en la categoria '{category_of_subcategory.Name}' \n")
-            create = False
-
     if existing_book:
         # El ISBN ya existe, mostrar un mensaje o manejar la lógica correspondiente
         print(f"El ISBN {row['ISBN']} ya esta registrado con el nombre del producto {existing_book.Product.Name} \n")
