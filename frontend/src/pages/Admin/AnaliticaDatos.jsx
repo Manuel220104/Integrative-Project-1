@@ -3,6 +3,8 @@ import { getAllProducts } from '../../api/Product.api';
 import Chart from 'chart.js/auto';
 import { getAllLikes } from '../../api/Likes.api';
 import { Bar } from 'react-chartjs-2';
+import { getAllCategories } from '../../api/Categories.api'
+import { getAllAccounts } from '../../api/Accounts.api';
 
 export function ProductAnalysis() {
     const [totalProducts, setTotalProducts] = useState(0);
@@ -15,6 +17,10 @@ export function ProductAnalysis() {
     const [selectedDays, setSelectedDays] = useState(7);
     const [showAllGeneralCategoryProducts, setShowAllGeneralCategoryProducts] = useState(false);
     const [generalCategoryTableSize, setGeneralCategoryTableSize] = useState(10);
+    const [categories, setCategories] = useState([]);
+    const [users, setUsers] = useState([]);
+    const [filteredUsers, setFilteredUsers] = useState([]);
+    const [searchInput, setSearchInput] = useState('');
 
     useEffect(() => {
         // Utiliza la función getAllProducts para obtener los datos de la API
@@ -98,9 +104,40 @@ export function ProductAnalysis() {
 
         getAllProducts()
 
+        getAllCategories()
+            .then(response => {
+                const categoriesData = response.data;
+                setCategories(categoriesData);
+            })
+            .catch(error => {
+                console.error('Error al cargar datos de categorías:', error);
+            });
+
 
     }, []);
 
+
+    useEffect(() => {
+        // Fetch user data on component mount
+        getAllAccounts()
+            .then(response => {
+                setUsers(response.data);
+                setFilteredUsers(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching user data:', error);
+            });
+    }, []);
+
+    useEffect(() => {
+        // Filter users based on search input
+        const filtered = users.filter(
+            user =>
+                user.username.toLowerCase().includes(searchInput.toLowerCase()) ||
+                user.email.toLowerCase().includes(searchInput.toLowerCase())
+        );
+        setFilteredUsers(filtered);
+    }, [searchInput, users]);
 
     // Función para generar colores aleatorios
     const generateRandomColors = (count) => {
@@ -266,9 +303,39 @@ export function ProductAnalysis() {
                 </div>
             </div>
 
+
+
+            <div className="row gridAnalitic">
+                <div className="col-md-6 col-12">
+                    <h3 className="mt-4 SubtitleAnalitic">Categorías</h3>
+                    <table className="table table-striped table-custom">
+                        <thead>
+                            <tr>
+                                <th>Categoría ID</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {categories.map(category => (
+                                <tr key={category.CategoryId}>
+                                    <td>{category.CategoryId}</td>
+                                    <td>{category.Name}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+                <div className="col-md-6 col-12">
+                    <h3 className="mt-4 SubtitleAnalitic">Número De Productos Por Categoría</h3>
+                    <div className="Diagrama-torta ml-10">
+                        <canvas id="categoryPieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
             <div className="row gridAnalitic">
 
-                <div className="col-md-6 col-12">
+                <div className="col-md-6 col-5">
                     <h3 className="mt-4 SubtitleAnalitic">Productos con Categoría "General"</h3>
                     <table className="table table-striped table-custom">
                         <thead>
@@ -298,14 +365,42 @@ export function ProductAnalysis() {
                         </button>
                     )}
                 </div>
+            </div>
 
-                <div className="col-md-6 col-12">
-                    <h3 className="mt-4 SubtitleAnalitic">Número De Productos Por Categoría</h3>
-                    <div className="Diagrama-torta ml-10">
-                        <canvas id="categoryPieChart"></canvas>
-                    </div>
+            <div className="row gridAnalitic">
+                <div className="col-md-12">
+                    <h3 className="mt-4 SubtitleAnalitic">Informacion de usuarios</h3>
+                    <input
+                        type="text"
+                        placeholder="Buscar usuario o correo "
+                        value={searchInput}
+                        onChange={e => setSearchInput(e.target.value)}
+                    />
+                    <table className="table table-striped table-custom">
+                        <thead>
+                            <tr>
+                                <th>Nombre De Usuario</th>
+                                <th>Correo Electronico</th>
+                                <th>Departamento</th>
+                                <th>Ciudad</th>
+                                <th>Direccion</th>
+                                <th>Detalles</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {filteredUsers.map(user => (
+                                <tr key={user.id}>
+                                    <td>{user.username}</td>
+                                    <td>{user.email}</td>
+                                    <td>{user.department}</td>
+                                    <td>{user.city}</td>
+                                    <td>{user.address}</td>
+                                    <td>{user.details}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
-
             </div>
 
 
