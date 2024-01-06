@@ -1,7 +1,6 @@
 import axios from 'axios'
 
-const urlBack = "https://acentosapi.dis.eafit.edu.co/"
-// const urlBack = "http://localhost:8000/"
+import { urlBack } from './url';
 
 const MusicApi = axios.create({
     baseURL: urlBack+'Musical_Instruments/api/v1/Musical_Instrument/'
