@@ -1,7 +1,6 @@
 import axios from 'axios'
 
-const urlBack = "https://acentosapi.dis.eafit.edu.co/"
-// const urlBack = "http://localhost:8000/"
+import { urlBack } from './url';
 
 const TechApi = axios.create({
     baseURL: urlBack+'Technologys/api/v1/Technology/'
