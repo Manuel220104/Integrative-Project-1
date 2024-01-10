@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - DJANGO_SETTINGS_MODULE=AcentosProject.settings
+      - PYTHONUNBUFFERED=1
+    command: python manage.py runserver 0.0.0.0:8000
